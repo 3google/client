@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div className="body-box">
-      <h3 className="body-title">
+      <h3 className="board-title">
         나의 처방전을 모두와 함께 보고 다른 사람들의 처방전도 볼 수 있어요!
       </h3>
       {posts.map((posts, index) => {

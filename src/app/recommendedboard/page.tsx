@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div className="body-box">
-      <h3 className="body-title">
+      <h3 className="board-title">
         직접 컨텐츠를 추천하는 글을 쓸 수 있어요!
         <button className="button">새 글 쓰기</button>
       </h3>
