@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  /* background: #497ea3; */
+  color: white;
+
+  background-image: url(/back.png);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.button {
+  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
+  padding: 5px 20px 5px 20px;
+}
+.button:hover {
+  background-color: white;
+  color: #3f4499;
+  transition: 0.7s;
+}
+
+.mainbody-box {
+  text-align: center;
+}
+.body-box {
+  text-align: center;
+  background-color: white;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  padding: 20px;
+  height: 700px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
+}
+.posts {
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.body-title {
+  margin: 50px;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.home {
+  margin-left: 30px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+}
+.menu li {
+  margin-right: 30px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
