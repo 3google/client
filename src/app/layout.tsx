@@ -18,7 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <h1 className="title">마음 처방전</h1>
           <p className="title-sub"> 사이트 명을 중간에 할지 왼쪽에 할지</p>
         </div> */}
-        <div className="wrapper">
+        <div className="nav-wrapper">
           <Link href="/" className="home">
             마음 처방전
           </Link>
