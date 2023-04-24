@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Register() {
   // const validateForm = ({
   //   name,
   //   nickname,
@@ -25,37 +25,39 @@ export default function Home() {
   // };
 
   return (
-    <div className="form-box">
+    <div className="register-form-box">
       <h3>회원가입</h3>
-      <form className="login_sign_form">
-        <input
-          type="text"
-          name="nickname"
-          placeholder="닉네임"
-          // value={inputs.nickname}
-          // onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="이메일"
-          // value={inputs.email}
-          // onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="비밀번호"
-          // value={inputs.password}
-          // onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="비밀번호 확인"
-          // value={inputs.confirmPassword}
-          // onChange={handleChange}
-        />
+      <form className="login-sign-form">
+        <div>
+          <input
+            type="text"
+            name="nickname"
+            placeholder="닉네임"
+            // value={inputs.nickname}
+            // onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            // value={inputs.email}
+            // onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            // value={inputs.password}
+            // onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="비밀번호 확인"
+            // value={inputs.confirmPassword}
+            // onChange={handleChange}
+          />
+        </div>
         <button type="submit" className="button">
           회원가입
         </button>

@@ -1,8 +1,8 @@
-export default function Home() {
+export default function Login() {
   return (
-    <div className="form-box">
+    <div className="login-form-box">
       <h3>로그인</h3>
-      <form className="login_sign_form">
+      <form className="login-sign-form">
         <input
           type="email"
           name="email"
@@ -20,10 +20,14 @@ export default function Home() {
           required
         />
         <button type="submit" className="button">
-          로그인 하기
+          ♦️ 로그인 하기 ♦️
         </button>
+
         <a href="">
-          <button className="button">카카오 로그인하기</button>
+          <button className="button">카카오 로그인</button>
+        </a>
+        <a href="/register">
+          <button className="button">회원가입 하기</button>
         </a>
       </form>
     </div>

@@ -90,34 +90,45 @@ a {
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>로그인 회원가입 부분 */
-.form-box {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-
+.login-form-box {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
-
+  margin-top: 80px;
+  background-color: white;
+  margin-bottom: 100px;
+  padding: 20px;
+  height: 350px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
+}
+.register-form-box {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
   background-color: white;
   margin-left: 100px;
   margin-right: 100px;
   margin-bottom: 100px;
   padding: 20px;
-  height: 550px;
-  width: 500px;
+  height: 400px;
+  width: 300px;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 40px;
 }
 
-.login_sign_form {
+.login-sign-form {
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* align-content: space-around; */
+  /* flex-wrap: wrap; */
   padding: 20px;
 }
 
-.login_sign_form input {
+.login-sign-form input {
   margin: 15px 0;
   padding: 10px;
   width: 250px;
