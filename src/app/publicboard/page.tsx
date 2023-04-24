@@ -1,6 +1,6 @@
 export default function Home() {
   //더미데이터
-  let posts = [
+  const posts = [
     {
       author: "지원",
       title: "지원님의 처방전 입니다!",

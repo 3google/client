@@ -1,6 +1,6 @@
 export default function Home() {
   //더미데이터
-  let posts = [
+  const posts = [
     {
       author: "지원",
       title: "드라이브할 떄 듣기 좋은 노래 추천할게요!",
