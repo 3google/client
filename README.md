@@ -30,3 +30,5 @@
     "arrowParens": "always",		// 함수에서 인자에 괄호 사용 여부 (ex: (x) => y)
     "endOfLine": "lf"			// 라인 엔딩 지정
   }
+
+  //수정테스트
