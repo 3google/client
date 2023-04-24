@@ -1,5 +1,5 @@
 //더미데이터
-let posts = [
+const posts = [
   {
     id: 3,
     author: "지원",
