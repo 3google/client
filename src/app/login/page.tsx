@@ -1,18 +1,22 @@
+// import { signIn } from "next-auth/react";
+import { KAKAO_AUTH_URL } from "../components/OAuth";
+import { LoginBox, LoginContainer } from "./login.styled";
+
 export default function Login() {
   return (
-    <div className="login-form-box">
+    <LoginContainer>
       <h3>로그인</h3>
-      <form className="login-sign-form">
-        <a href="/">
-          <button className="button">카카오 로그인</button>
+      <LoginBox>
+        <a
+          href={KAKAO_AUTH_URL}
+          // onClick={() => signIn("kakao")}
+        >
+          <img src="/kakao_login.png"></img>
         </a>
         <a href="/">
-          <button className="button">네이버 로그인</button>
+          <img src="/naver_login.png" style={{ height: "45px" }}></img>
         </a>
-        <a href="/register">
-          <button className="button">회원 가입 하기</button>
-        </a>
-      </form>
-    </div>
+      </LoginBox>
+    </LoginContainer>
   );
 }

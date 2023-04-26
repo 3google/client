@@ -1,8 +1,7 @@
-import LoginBtn from "./LoginBtn";
+// import { SessionProvider } from "next-auth/react";
+
+import { Navigation } from "./components/navbar/Navigation";
 import "./globals.css";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
-// import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 export const metadata = {
   title: "마음 처방전",
@@ -13,49 +12,17 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
-  //현재 로그인된 유저 이름, 메일 등이 정보로 남는다
-  // let session = await getServerSession(authOptions);
-  // console.log(session);
-
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
+    // <SessionProvider session={pageProps.session}>
     <html lang="en">
       <body>
         <header>
-          <nav className="nav-wrapper">
-            <Link href="/" className="home">
-              마음 처방전
-            </Link>
-
-            {/* 로그인 후 메뉴 */}
-            {/* <ul className="menu">
-              <Link href="/public-board">
-                <li>공유게시판</li>
-              </Link>
-              <Link href="/recommend-board">
-                <li>추천게시판</li>
-              </Link>
-              <Link href="/mypage">
-                <li>마이페이지</li>
-              </Link>
-            </ul> */}
-
-            {/* 로그인 전 메뉴 */}
-            <ul className="menu">
-              <Link href="/login">
-                <li>로그인</li>
-              </Link>
-              <Link href="/register">
-                <li>회원가입</li>
-              </Link>
-            </ul>
-          </nav>
+          <Navigation />
         </header>
-        <main>
-          {/* page.js들어가는 부분이 아래 children */}
-          {children}
-        </main>
+        <main>{children}</main>
       </body>
     </html>
+    // </SessionProvider>
   );
 }
