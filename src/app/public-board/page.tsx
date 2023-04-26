@@ -1,5 +1,5 @@
 //더미데이터
-let posts = [
+const posts = [
   {
     id: 1,
     author: "지원",
@@ -26,12 +26,12 @@ export default function PublicBoard() {
       <h3 className="board-title">
         나의 처방전을 모두와 함께 보고 다른 사람들의 처방전도 볼 수 있어요!
       </h3>
-      {posts.map((posts) => {
+      {posts.map((post) => {
         return (
-          <div className="posts" key={posts.id}>
-            <div>{posts.title}</div>
-            <div>💬{posts.comment}</div>
-            <div>📌{posts.bookmark}</div>
+          <div className="posts" key={post.id}>
+            <div>{post.title}</div>
+            <div>💬{post.comment}</div>
+            <div>📌{post.bookmark}</div>
           </div>
         );
       })}
