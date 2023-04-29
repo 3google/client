@@ -49,6 +49,7 @@ a {
   border-radius: 40px;
   padding: 5px 20px 5px 20px;
   margin: 10px;
+  cursor: pointer;
 }
 .button:hover {
   background-color: white;
@@ -98,7 +99,7 @@ a {
   background-color: white;
   margin-bottom: 100px;
   padding: 20px;
-  height: 350px;
+  height: 300px;
   width: 300px;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 40px;
@@ -113,7 +114,7 @@ a {
   margin-right: 100px;
   margin-bottom: 100px;
   padding: 20px;
-  height: 400px;
+  height: 300px;
   width: 300px;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 40px;

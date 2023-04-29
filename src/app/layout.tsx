@@ -1,5 +1,8 @@
+import LoginBtn from './LoginBtn';
 import './globals.css';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+// import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 export const metadata = {
   title: '마음 처방전',
@@ -10,7 +13,11 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  //현재 로그인된 유저 이름, 메일 등이 정보로 남는다
+  // let session = await getServerSession(authOptions);
+  // console.log(session);
+
   return (
     <html lang="en">
       <body>
@@ -19,7 +26,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Link href="/" className="home">
               마음 처방전
             </Link>
-            <ul className="menu">
+
+            {/* 로그인 후 메뉴 */}
+            {/* <ul className="menu">
               <Link href="/public-board">
                 <li>공유게시판</li>
               </Link>
@@ -28,6 +37,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </Link>
               <Link href="/my-page">
                 <li>마이페이지</li>
+              </Link>
+            </ul> */}
+
+            {/* 로그인 전 메뉴 */}
+            <ul className="menu">
+              <Link href="/login">
+                <li>로그인</li>
+              </Link>
+              <Link href="/register">
+                <li>회원가입</li>
               </Link>
             </ul>
           </nav>
