@@ -11,6 +11,9 @@ import {
   TablePagination,
   TableContainer,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import styled from '@emotion/styled';
 
 interface Post {
@@ -92,16 +95,18 @@ export default function PulblicBoard() {
                     <TitleText>{post.title}</TitleText>
                   </TableCell>
                   <TableCell align="right">
-                    <Button
-                      variant="contained"
+                    <Tooltip
+                      title="작성글 삭제"
                       color="error"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeletePost(post.id);
                       }}
                     >
-                      Del
-                    </Button>
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}

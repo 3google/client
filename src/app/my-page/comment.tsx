@@ -13,6 +13,10 @@ import {
 } from '@mui/material';
 import styled from '@emotion/styled';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
 interface Post {
   id: number;
   title: string;
@@ -92,16 +96,18 @@ export default function Comment() {
                     <TitleText>{post.title}</TitleText>
                   </TableCell>
                   <TableCell align="right">
-                    <Button
-                      variant="contained"
+                    <Tooltip
+                      title="댓글 삭제"
                       color="error"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeletePost(post.id);
                       }}
                     >
-                      Del
-                    </Button>
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}

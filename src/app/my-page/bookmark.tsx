@@ -11,6 +11,9 @@ import {
   TablePagination,
   TableContainer,
 } from '@mui/material';
+import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import styled from '@emotion/styled';
 
 interface Post {
@@ -92,16 +95,18 @@ export default function Bookmark() {
                     <TitleText>{post.title}</TitleText>
                   </TableCell>
                   <TableCell align="right">
-                    <Button
-                      variant="contained"
+                    <Tooltip
+                      title="북마크 해제"
                       color="error"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeletePost(post.id);
                       }}
                     >
-                      해제
-                    </Button>
+                      <IconButton>
+                        <BookmarkRemoveIcon />
+                      </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}
