@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { UserInfoContainer, Avatar, UserInfoText } from './mypage.styled';
 import Accountdelete from './account-delete';
-
+//
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
