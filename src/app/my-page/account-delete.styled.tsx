@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-//
+
 export const IconDiv = styled.div`
   text-align: center;
 `;
@@ -19,7 +19,7 @@ export const BottomButton = styled.button`
   border: none;
   font-weight: bold;
   border-radius: 64px;
-  background-color: #81c6e8;
+  background-color: red;
   color: white;
   margin-bottom: 16px;
   cursor: pointer;

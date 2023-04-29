@@ -6,7 +6,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { UserInfoContainer, Avatar, UserInfoText } from './mypage.styled';
 import Accountdelete from './account-delete';
-//
+import PublicBoard from './public-board';
+import Comment from './comment';
+import Bookmark from './bookmark';
+import Contents from './contents';
+import OverView from './overview';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -74,27 +79,27 @@ export default function Mypage() {
             centered
           >
             <Tab label="OverView" {...a11yProps(0)} />
-            <Tab label="작성 글 조회" {...a11yProps(1)} />
-            <Tab label="댓글 조회" {...a11yProps(2)} />
-            <Tab label="북마크" {...a11yProps(3)} />
-            <Tab label="저장 컨텐츠" {...a11yProps(4)} />
+            <Tab label="Public Board" {...a11yProps(1)} />
+            <Tab label="Comment" {...a11yProps(2)} />
+            <Tab label="Bookmark" {...a11yProps(3)} />
+            <Tab label="Content" {...a11yProps(4)} />
             <Tab label="회원탈퇴" {...a11yProps(5)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          Item One
+          <OverView />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <PublicBoard />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <Comment />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Item Four
+          <Bookmark />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          Item Five
+          <Contents />
         </TabPanel>
         <TabPanel value={value} index={5}>
           <Accountdelete />
