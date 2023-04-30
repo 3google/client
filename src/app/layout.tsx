@@ -1,5 +1,6 @@
 // import { SessionProvider } from "next-auth/react";
 
+import ReactQueryProvider from "./components/ReactQueryProvider";
 import { Navigation } from "./components/navbar/Navigation";
 import "./globals.css";
 
@@ -17,10 +18,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
     // <SessionProvider session={pageProps.session}>
     <html lang="en">
       <body>
-        <header>
-          <Navigation />
-        </header>
-        <main>{children}</main>
+        <ReactQueryProvider>
+          <header>
+            <Navigation />
+          </header>
+
+          <main>{children}</main>
+        </ReactQueryProvider>
       </body>
     </html>
     // </SessionProvider>

@@ -1,3 +1,5 @@
+import React from "react";
+
 //더미데이터
 const posts = [
   {
@@ -21,6 +23,21 @@ const posts = [
 ];
 
 export default function PublicBoard() {
+  // 서버에서 불러오기
+  // const [posts, setPosts] = React.useState([]);
+  // next에서는 useEffect안에서가 아니라 getStaticPaths등등으로 가져옴
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3009/posts");
+  //       setPosts(response.data);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
   return (
     <div className="body-box">
       <h3 className="board-title">
