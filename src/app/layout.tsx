@@ -1,8 +1,8 @@
 // import { SessionProvider } from "next-auth/react";
-import React from "react";
-import ReactQueryProvider from "./components/ReactQueryProvider";
-import { Navigation } from "./components/navbar/Navigation";
-import "./globals.css";
+import React from 'react';
+import ReactQueryProvider from './components/ReactQueryProvider';
+import { Navigation } from './components/navbar/Navigation';
+import './globals.css';
 
 export const metadata = {
   title: '마음 처방전',
@@ -15,7 +15,6 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    // <SessionProvider session={pageProps.session}>
     <html lang="en">
       <body>
         <ReactQueryProvider>
@@ -27,6 +26,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </ReactQueryProvider>
       </body>
     </html>
-    // </SessionProvider>
   );
 }

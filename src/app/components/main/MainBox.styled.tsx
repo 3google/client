@@ -14,25 +14,36 @@ export const Mainbox = styled.div`
 
 export const Box1 = styled.div`
   height: 700px;
-  .box1 {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
+  margin: auto;
+  text-align: center;
 `;
 export const Box2 = styled.div`
   height: 700px;
-  align-items: center;
-  flex-direction: row;
+  margin: auto;
+  text-align: center;
+  .img {
+    height: 300px;
+  }
 `;
 export const Box3 = styled.div`
   height: 700px;
-  align-items: center;
-  flex-direction: row;
+  margin: auto;
+  text-align: center;
+  .img {
+    height: 300px;
+  }
 `;
 export const Box4 = styled.div`
   height: 700px;
-  align-items: center;
-  flex-direction: row;
+  margin: auto;
+  text-align: center;
 `;
-export const Box5 = styled.div``;
+export const Box5 = styled.div`
+  height: 600px;
+  margin: auto;
+  text-align: center;
+  .button {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+`;
