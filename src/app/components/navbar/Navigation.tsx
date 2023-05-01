@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useUser } from '@/hooks/useUser';
+import { Nav } from './Navigation.styled';
 // import { useSession, signOut } from "next-auth/react";
 
 //임시 Dto
@@ -24,7 +25,7 @@ export const Navigation = () => {
 
   if (!user) {
     return (
-      <nav className="nav-wrapper">
+      <Nav className="nav-wrapper">
         <Link href="/" className="home">
           마음 처방전
         </Link>
@@ -34,12 +35,12 @@ export const Navigation = () => {
             <img src="user.png" className="nav-user-profile" />
           </Link>
         </ul>
-      </nav>
+      </Nav>
     );
   }
 
   return (
-    <nav className="nav-wrapper">
+    <Nav className="nav-wrapper">
       <Link href="/" className="home">
         마음 처방전
       </Link>
@@ -50,11 +51,15 @@ export const Navigation = () => {
         <Link href="/recommend-board">
           <li>추천게시판</li>
         </Link>
-        <Link href="/my-page">
-          <li>마이 페이지</li>
-        </Link>
-        <button>로그아웃</button>
+        <div className="dropdown">
+          {/* TODO: 서버에 저장된 프사 이미지 보여줌, 드롭다운 */}
+          <img src="user.png" className="nav-user-profile-dropbtn" />
+          <div className="dropdown-content">
+            <Link href="/my-page">마이페이지</Link>
+            <Link href="#">로그아웃</Link>
+          </div>
+        </div>
       </ul>
-    </nav>
+    </Nav>
   );
 };

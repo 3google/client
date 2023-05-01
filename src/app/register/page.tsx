@@ -30,7 +30,7 @@ export default function Register() {
     <RegisterContainer>
       <h3>회원가입 진행</h3>
       <RegisterBox>
-        <form>
+        <form action="/서버주소">
           <div className="profile-img-box">
             {profileImage && <img className="pre-img" src={profileImage.toString()} />}
           </div>
@@ -58,9 +58,7 @@ export default function Register() {
             <input type="text" id="nick-input" className="nick-input" placeholder="닉네임을 입력하세요" />
           </div>
           {/* TODO: 클릭시 폼 서버에 제출 */}
-          <button type="submit" className="button">
-            ✨회원가입 완료!✨
-          </button>
+          <input type="submit" className="button" value="✨회원가입 완료!✨" />
         </form>
       </RegisterBox>
     </RegisterContainer>
