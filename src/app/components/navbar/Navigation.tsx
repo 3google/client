@@ -3,6 +3,9 @@ import Link from 'next/link';
 import React from 'react';
 import { useUser } from '@/hooks/useUser';
 import { Nav } from './Navigation.styled';
+import axios from 'axios';
+import { SERVER_URL } from '@/common/constants';
+import { Navigate } from 'react-router';
 // import { useSession, signOut } from "next-auth/react";
 
 //임시 Dto
@@ -12,8 +15,18 @@ export interface TempUserDto {
 }
 
 export const Navigation = () => {
-  const { user, isLoading, error } = useUser();
+  const logoutHandler = () => {
+    axios.get(`${SERVER_URL}/logout`).then((res) => {
+      if (res.data) {
+        alert('로그아웃 완료');
+        // Navigate('/');
+      } else {
+        console.log('로그아웃 실패');
+      }
+    });
+  };
 
+  const { user, isLoading, error } = useUser();
   if (isLoading) {
     return <h1>Loading</h1>;
   }
@@ -55,8 +68,10 @@ export const Navigation = () => {
           {/* TODO: 서버에 저장된 프사 이미지 보여줌 */}
           <img src="user.png" className="nav-user-profile-dropbtn" />
           <div className="dropdown-content">
-            <Link href="/my-page">마이페이지</Link>
-            <Link href="#">로그아웃</Link>
+            <button className="button">{user.name}님</button>
+            <button className="button" onClick={logoutHandler}>
+              logout
+            </button>
           </div>
         </div>
       </ul>

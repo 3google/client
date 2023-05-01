@@ -46,8 +46,6 @@ export const Nav = styled.div`
     position: absolute;
     z-index: 1; /*다른 요소들보다 앞에 배치*/
     font-size: 15px;
-    background-color: rgba(255, 255, 255, 0.45);
-    // margin-right: 10px;
   }
 
   .dropdown-content a {
@@ -64,6 +62,5 @@ export const Nav = styled.div`
 
   .dropdown:hover .dropdown-content {
     display: block;
-    background-color: rgba(255, 255, 255, 0.45);
   }
 `;
