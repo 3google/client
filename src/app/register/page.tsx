@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import { RegisterBox, RegisterContainer } from './register.styled';
+import { RegisterBox, RegisterContainer, ProfileImgBox, PreImg, NicknameInput } from './register.styled';
 
 export default function Register() {
-  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/profile.jpeg');
+  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/user.png');
   const imageRef = React.useRef<HTMLInputElement>(null);
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export default function Register() {
     e.preventDefault();
     if (imageRef.current) {
       imageRef.current.value = '';
-      setProfileImage('/profile.jpeg');
+      setProfileImage('/user.png');
     }
   };
 
@@ -31,25 +31,36 @@ export default function Register() {
       <h3>회원가입 진행</h3>
       <RegisterBox>
         <form>
-          {profileImage && <img src={profileImage.toString()} className="pre-img" />}
-          <label className="button" for="input-file">
-            프로필 사진 추가
-          </label>
-          <input
-            type="file"
-            ref={imageRef}
-            className="profile-img-input"
-            id="input-file"
-            accept="image*"
-            name="profile_img"
-            style={{ display: 'none' }} //TODO:스타일 빼기
-            onChange={handleChangeFile}
-          ></input>
+          <div className="profile-img-box">
+            {profileImage && <img className="pre-img" src={profileImage.toString()} />}
+          </div>
+          <div className="upload-img">
+            <label className="button" for="input-file">
+              프로필 사진 추가
+            </label>
+            <input
+              type="file"
+              ref={imageRef}
+              className="profile-img-input"
+              id="input-file"
+              accept="image*"
+              name="profile_img"
+              style={{ display: 'none' }} //TODO:스타일 빼기
+              onChange={handleChangeFile}
+            ></input>
+          </div>
+
           {/* TODO 중복확인 */}
-          <label>닉네임</label>
-          <input placeholder="nickname" />
+          <div>
+            <label for="nick-input" class="label">
+              닉네임
+            </label>
+            <input type="text" id="nick-input" className="nick-input" placeholder="닉네임을 입력하세요" />
+          </div>
           {/* TODO: 클릭시 폼 서버에 제출 */}
-          <button className="button">회원가입 완료!</button>
+          <button type="submit" className="button">
+            ✨회원가입 완료!✨
+          </button>
         </form>
       </RegisterBox>
     </RegisterContainer>

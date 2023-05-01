@@ -31,7 +31,7 @@ export const Navigation = () => {
 
         <ul className="menu">
           <Link href="/login">
-            <li>간편 로그인</li>
+            <img src="user.png" className="nav-user-profile" />
           </Link>
         </ul>
       </nav>
