@@ -1,7 +1,7 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import { useUser } from "@/hooks/useUser";
+'use client';
+import Link from 'next/link';
+import React from 'react';
+import { useUser } from '@/hooks/useUser';
 // import { useSession, signOut } from "next-auth/react";
 
 //임시 Dto
@@ -50,7 +50,7 @@ export const Navigation = () => {
         <Link href="/recommend-board">
           <li>추천게시판</li>
         </Link>
-        <Link href="/mypage">
+        <Link href="/my-page">
           <li>마이 페이지</li>
         </Link>
         <button>로그아웃</button>

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const RegisterContainer = styled.div`
   display: inline-block;
@@ -23,4 +23,12 @@ export const RegisterBox = styled.div`
   /* align-content: space-around; */
   /* flex-wrap: wrap; */
   padding: 20px;
+
+  .pre-img {
+    width: 80px;
+    height: 80px;
+  }
+  .form {
+    flex-direction: column;
+  }
 `;

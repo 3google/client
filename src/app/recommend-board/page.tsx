@@ -2,21 +2,21 @@
 const posts = [
   {
     id: 3,
-    author: "지원",
-    title: "드라이브할 떄 듣기 좋은 노래 추천할게요!",
-    emotion: "기쁨",
-    createdAt: "2023-04-19",
-    comment: "2",
-    bookmark: "3",
+    author: '지원',
+    title: '드라이브할 떄 듣기 좋은 노래 추천할게요!',
+    emotion: '기쁨',
+    createdAt: '2023-04-19',
+    comment: '2',
+    bookmark: '3',
   },
   {
     id: 4,
-    author: "진희",
-    title: "우울하고 힘들 때 이런 영화 어떠세요?",
-    emotion: "슬픔",
-    createdAt: "2023-04-21",
-    comment: "5",
-    bookmark: "2",
+    author: '진희',
+    title: '우울하고 힘들 때 이런 영화 어떠세요?',
+    emotion: '슬픔',
+    createdAt: '2023-04-21',
+    comment: '5',
+    bookmark: '2',
   },
 ];
 

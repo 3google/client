@@ -1,34 +1,51 @@
-"use client";
-import React from "react";
-import { RegisterBox, RegisterContainer } from "./register.styled";
+'use client';
+import React from 'react';
+import { RegisterBox, RegisterContainer } from './register.styled';
 
 export default function Register() {
-  const onChange = (e) => {
-    const img = e.target.files[0];
-    const formData = new FormData();
-    formData.append("file", img); //key/value 쌍을 추가
+  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/profile.jpeg');
+  const imageRef = React.useRef<HTMLInputElement>(null);
+
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        setProfileImage(reader.result);
+      };
+    }
+  };
+
+  const handleDeletePreviewFile = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (imageRef.current) {
+      imageRef.current.value = '';
+      setProfileImage('/profile.jpeg');
+    }
   };
 
   return (
     <RegisterContainer>
-      <h3>회원가입</h3>
+      <h3>회원가입 진행</h3>
       <RegisterBox>
         <form>
-          <div>
-            {/* TODO: 이미지 미리보기 */}
-            <label className="button" for="input-file">
-              프로필 사진 추가
-            </label>
-            <input
-              type="file"
-              className="profile-img-input"
-              id="input-file"
-              accept="image/jpg,impge/png,image/jpeg,image/gif"
-              name="profile_img"
-              style={{ display: "none" }} //TODO:스타일 빼기
-              onChange={onChange}
-            ></input>
-          </div>
+          {profileImage && <img src={profileImage.toString()} className="pre-img" />}
+          <label className="button" for="input-file">
+            프로필 사진 추가
+          </label>
+          <input
+            type="file"
+            ref={imageRef}
+            className="profile-img-input"
+            id="input-file"
+            accept="image*"
+            name="profile_img"
+            style={{ display: 'none' }} //TODO:스타일 빼기
+            onChange={handleChangeFile}
+          ></input>
+          {/* TODO 중복확인 */}
           <label>닉네임</label>
           <input placeholder="nickname" />
           {/* TODO: 클릭시 폼 서버에 제출 */}
