@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
-import { LoginBox, LoginContainer } from "./login.styled";
-import Link from "next/link";
-import { SERVER_URL } from "@/common/constants";
+'use client';
+import React from 'react';
+import { LoginBox, LoginContainer } from './login.styled';
+import Link from 'next/link';
+import { SERVER_URL } from '@/common/constants';
 
 export default function Login() {
   return (
@@ -15,12 +15,11 @@ export default function Login() {
           <img src="/kakao_login.png"></img>
         </Link> */}
 
-        {/* 일단 임시로 여기로 보낸다고 가정 */}
         <Link href="/register">
           <img src="/kakao_login.png"></img>
         </Link>
         <a href="/">
-          <img src="/naver_login.png" style={{ height: "45px" }}></img>
+          <img src="/naver_login.png" style={{ width: '183px' }}></img>
         </a>
       </LoginBox>
     </LoginContainer>

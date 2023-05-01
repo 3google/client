@@ -52,7 +52,7 @@ export const Navigation = () => {
           <li>추천게시판</li>
         </Link>
         <div className="dropdown">
-          {/* TODO: 서버에 저장된 프사 이미지 보여줌, 드롭다운 */}
+          {/* TODO: 서버에 저장된 프사 이미지 보여줌 */}
           <img src="user.png" className="nav-user-profile-dropbtn" />
           <div className="dropdown-content">
             <Link href="/my-page">마이페이지</Link>

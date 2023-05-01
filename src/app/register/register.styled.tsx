@@ -6,11 +6,11 @@ export const RegisterContainer = styled.div`
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 80px;
+  margin-top: 50px;
   background-color: white;
   margin-bottom: 100px;
   padding: 20px;
-  height: 350px;
+  height: 450px;
   width: 300px;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 40px;
@@ -37,7 +37,7 @@ export const RegisterBox = styled.div`
     overflow: hidden;
     margin-bottom: 10px;
     // TODO: 사진을 가운데 두고싶은데 잘 안됨,,
-    margin: 10px 25%;
+    margin: 10px 30%;
   }
   .pre-img {
     width: 100%;
@@ -50,5 +50,14 @@ export const RegisterBox = styled.div`
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+  }
+  .nick-box {
+    // background: red;
+  }
+  .agree-title {
+    font-size: 14px;
+  }
+  .agree-content {
+    font-size: 10px;
   }
 `;

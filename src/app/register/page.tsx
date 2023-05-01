@@ -1,10 +1,54 @@
 'use client';
 import React from 'react';
-import { RegisterBox, RegisterContainer, ProfileImgBox, PreImg, NicknameInput } from './register.styled';
+import { RegisterBox, RegisterContainer } from './register.styled';
+import { Checkbox } from '../components/checkbox/Checkbox';
+import axios from 'axios';
 
 export default function Register() {
   const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/user.png');
+  const [service, setService] = React.useState(false);
+
   const imageRef = React.useRef<HTMLInputElement>(null);
+
+  // const [nickname, setNickname] = React.useState('');
+  const [nicknameError, setNicknameError] = React.useState(false);
+
+  // const onChangeNickame = (e) => {
+  //   setNicknameError(false);
+  //   setNickname(e.target.value);
+  // };
+
+  // const validation = () => {
+  //   if (!nickname) setNicknameError(true);
+
+  //   if (nickname) return true;
+  //   else return false;
+  // };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log('회원가입');
+    // if (validation()) {
+    //   (async () => {
+    //     await axios
+    //       .post(
+    //         ' /서버주소',
+    //         {
+    //           nickname: nickname,
+    //         },
+    //         { withCredentials: true },
+    //       )
+    //       .then((response) => {
+    //         if (response.data.message == '회원가입 성공') {
+    //           // navigate('/');
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         console.log(err.message);
+    //       });
+    //   })();
+    // }
+  };
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -18,24 +62,24 @@ export default function Register() {
     }
   };
 
-  const handleDeletePreviewFile = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (imageRef.current) {
-      imageRef.current.value = '';
-      setProfileImage('/user.png');
-    }
-  };
+  // const handleDeletePreviewFile = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   if (imageRef.current) {
+  //     imageRef.current.value = '';
+  //     setProfileImage('/user.png');
+  //   }
+  // };
 
   return (
     <RegisterContainer>
       <h3>회원가입 진행</h3>
       <RegisterBox>
-        <form action="/서버주소">
+        <form>
           <div className="profile-img-box">
             {profileImage && <img className="pre-img" src={profileImage.toString()} />}
           </div>
           <div className="upload-img">
-            <label className="button" for="input-file">
+            <label className="button" htmlFor="input-file">
               프로필 사진 추가
             </label>
             <input
@@ -51,14 +95,24 @@ export default function Register() {
           </div>
 
           {/* TODO 중복확인 */}
-          <div>
-            <label for="nick-input" class="label">
+          <div className="nick-box">
+            <label htmlFor="nick-input" className="label">
               닉네임
             </label>
             <input type="text" id="nick-input" className="nick-input" placeholder="닉네임을 입력하세요" />
+            {nicknameError && <div className="invalid-input">닉네임을 다시 입력하세요!</div>}
           </div>
-          {/* TODO: 클릭시 폼 서버에 제출 */}
-          <input type="submit" className="button" value="✨회원가입 완료!✨" />
+
+          <Checkbox checked={service} onChange={setService}>
+            (필수) 개인정보 수집과 이용에 동의합니다. 동의를 거부 할 권리가 있지만 동의 거절 시 서비스 이용에 제한이 될
+            수 있습니다. (회원가입 불가)
+          </Checkbox>
+          <footer>
+            {/* TODO: 클릭시 폼 서버에 제출 */}
+            <button type="submit" disabled={!service} className="button" onClick={onSubmit}>
+              ✨회원가입 완료!✨
+            </button>
+          </footer>
         </form>
       </RegisterBox>
     </RegisterContainer>
