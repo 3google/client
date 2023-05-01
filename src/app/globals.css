@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  /* background: #497ea3; */
   color: white;
   text-align: center;
   background-image: url(/back.png);
@@ -8,36 +7,6 @@ body {
   background-position: top center;
   background-size: cover;
   background-attachment: fixed;
-}
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>헤더메뉴 */
-.nav-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* font-weight: bold; */
-  font-size: 20px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-
-/* 마음처방전 */
-.home {
-  margin-left: 30px;
-}
-
-/* 메뉴들 */
-.menu {
-  list-style: none;
-  display: flex;
-}
-.menu li {
-  margin-right: 30px;
-}
-a {
-  text-decoration: none;
-  color: white;
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>공통 */
@@ -55,12 +24,6 @@ a {
   background-color: white;
   color: #3f4499;
   transition: 0.7s;
-}
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>홈 */
-/* 랜딩페이지 본문부분 */
-.mainbody-box {
-  text-align: center;
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>다른 페이지 */
@@ -88,52 +51,4 @@ a {
 
 .board-title {
   margin: 50px;
-}
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>로그인 회원가입 부분 */
-.login-form-box {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 80px;
-  background-color: white;
-  margin-bottom: 100px;
-  padding: 20px;
-  height: 300px;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 40px;
-}
-.register-form-box {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  background-color: white;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 100px;
-  padding: 20px;
-  height: 300px;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 40px;
-}
-
-.login-sign-form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* align-content: space-around; */
-  /* flex-wrap: wrap; */
-  padding: 20px;
-}
-
-.login-sign-form input {
-  margin: 15px 0;
-  padding: 10px;
-  width: 250px;
-  border: 0;
-  outline: none;
-  border-radius: 10px;
 }

@@ -25,8 +25,7 @@
 - `Feat: Add Login page`
 - `"커밋 유형" : "작업한 내역"`
 
-#### Prettier
-
+.prettier
 {
 "printWidth": 80, // 한 줄의 라인 수
 "tabWidth": 2, // tab의 너비
@@ -40,5 +39,4 @@
 "endOfLine": "lf" // 라인 엔딩 지정
 }
 
-9팀 프론트엔드입니다잉
-수정해봐유
+//수정테스트222222
