@@ -1,8 +1,7 @@
 body {
   margin: 0;
-  /* background: #497ea3; */
   color: white;
-  text-align: center;
+  /* text-align: center; */
   background-image: url(/back.png);
   background-repeat: no-repeat;
   background-position: top center;
@@ -25,12 +24,6 @@ body {
   background-color: white;
   color: #3f4499;
   transition: 0.7s;
-}
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>홈 */
-/* 랜딩페이지 본문부분 */
-.mainbody-box {
-  text-align: center;
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>다른 페이지 */
