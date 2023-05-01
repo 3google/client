@@ -3,51 +3,56 @@ import React from 'react';
 import { RegisterBox, RegisterContainer } from './register.styled';
 import { Checkbox } from '../components/checkbox/Checkbox';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+// import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/user.png');
-  const [service, setService] = React.useState(false);
-
-  const imageRef = React.useRef<HTMLInputElement>(null);
-
-  // const [nickname, setNickname] = React.useState('');
+  const [nickname, setNickname] = React.useState('');
   const [nicknameError, setNicknameError] = React.useState(false);
+  // const navigate = useNavigate();
+  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/user.png');
+  const imageRef = React.useRef<HTMLInputElement>(null);
+  const [agree, setAgree] = React.useState(false);
 
   // const onChangeNickame = (e) => {
   //   setNicknameError(false);
   //   setNickname(e.target.value);
   // };
 
-  // const validation = () => {
-  //   if (!nickname) setNicknameError(true);
+  const validation = () => {
+    if (!nickname) setNicknameError(true);
 
-  //   if (nickname) return true;
-  //   else return false;
-  // };
+    if (nickname) return true;
+    else return false;
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log('회원가입');
-    // if (validation()) {
-    //   (async () => {
-    //     await axios
-    //       .post(
-    //         ' /서버주소',
-    //         {
-    //           nickname: nickname,
-    //         },
-    //         { withCredentials: true },
-    //       )
-    //       .then((response) => {
-    //         if (response.data.message == '회원가입 성공') {
-    //           // navigate('/');
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         console.log(err.message);
-    //       });
-    //   })();
-    // }
+
+    if (validation()) {
+      (async () => {
+        await axios
+          .post(
+            ' /서버주소',
+            {
+              // 프로필이미지
+              nickname,
+            },
+            { withCredentials: true },
+          )
+          .then((response) => {
+            if (response.data.message == '회원가입 성공') {
+              alert('환영합니다!');
+              navigate('/', { replace: true });
+            }
+          })
+          .catch((err) => {
+            console.log(err.message);
+            alert('회원가입에 실패하였습니다');
+          });
+      })();
+    }
   };
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,16 +108,15 @@ export default function Register() {
             {nicknameError && <div className="invalid-input">닉네임을 다시 입력하세요!</div>}
           </div>
 
-          <Checkbox checked={service} onChange={setService}>
+          <Checkbox checked={agree} onChange={setAgree}>
             (필수) 개인정보 수집과 이용에 동의합니다. 동의를 거부 할 권리가 있지만 동의 거절 시 서비스 이용에 제한이 될
             수 있습니다. (회원가입 불가)
           </Checkbox>
-          <footer>
-            {/* TODO: 클릭시 폼 서버에 제출 */}
-            <button type="submit" disabled={!service} className="button" onClick={onSubmit}>
-              ✨회원가입 완료!✨
-            </button>
-          </footer>
+
+          {/* TODO: 클릭시 폼 서버에 제출 */}
+          <button type="submit" disabled={!agree} className="button" onClick={onSubmit}>
+            ✨회원가입 완료!✨
+          </button>
         </form>
       </RegisterBox>
     </RegisterContainer>
