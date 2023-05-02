@@ -27,14 +27,14 @@ export default function RecommendBoard() {
         직접 컨텐츠를 추천하는 글을 쓸 수 있어요!
         <button className="button">새 글 쓰기</button>
       </h3>
-      {posts.map((posts) => {
+      {posts.map((post) => {
         return (
-          <div className="posts" key={posts.id}>
-            <div>{posts.title}</div>
-            <div>{posts.author}</div>
-            <div>{posts.emotion}</div>
-            <div>💬{posts.comment}</div>
-            <div>📌{posts.bookmark}</div>
+          <div className="posts" key={post.id}>
+            <div>{post.title}</div>
+            <div>{post.author}</div>
+            <div>{post.emotion}</div>
+            <div>💬{post.comment}</div>
+            <div>📌{post.bookmark}</div>
           </div>
         );
       })}
