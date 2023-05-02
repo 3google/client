@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-  TablePagination,
-  TableContainer,
-} from '@mui/material';
+import { Container, Table, TableBody, TableCell, TableHead, TableRow, Paper, Button, TablePagination, TableContainer } from '@mui/material';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -44,7 +33,7 @@ const TitleText = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 350px; // 적절한 너비로 조정
+  max-width: 500px; // 적절한 너비로 조정
 `;
 
 export default function Bookmark() {
@@ -74,7 +63,7 @@ export default function Bookmark() {
   const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <StyledTableContainer>
         <TableContainer style={{ maxHeight: visibleRows < 6 ? 'auto' : 'calc(53px * 5)' }}>
           {/* 높이 동적 계산 */}
@@ -82,9 +71,11 @@ export default function Bookmark() {
             {/* stickyHeader 속성 추가 */}
             <TableHead>
               <TableRow>
-                <TableCell>No.</TableCell>
-                <TableCell align="center">북마크</TableCell>
-                <TableCell align="center">해제</TableCell>
+                <TableCell style={{ fontWeight: 'bold' }}>No.</TableCell>
+                <TableCell align="center" style={{ fontWeight: 'bold' }}>
+                  북마크
+                </TableCell>
+                <TableCell align="right" style={{ fontWeight: 'bold' }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
