@@ -3,6 +3,7 @@ import React from 'react';
 import ReactQueryProvider from './components/ReactQueryProvider';
 import { Navigation } from './components/navbar/Navigation';
 import './globals.css';
+import { Router } from 'react-router';
 
 export const metadata = {
   title: '마음 처방전',
@@ -18,11 +19,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <ReactQueryProvider>
+          {/* <Router> */}
           <header>
             <Navigation />
           </header>
 
           <main>{children}</main>
+          {/* </Router> */}
         </ReactQueryProvider>
       </body>
     </html>

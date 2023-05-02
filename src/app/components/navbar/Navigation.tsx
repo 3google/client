@@ -5,16 +5,17 @@ import { useUser } from '@/hooks/useUser';
 import { Nav } from './Navigation.styled';
 import axios from 'axios';
 import { SERVER_URL } from '@/common/constants';
-import { Navigate } from 'react-router';
-// import { useSession, signOut } from "next-auth/react";
-
-//임시 Dto
-export interface TempUserDto {
-  email: string;
-  name: string;
-}
+import { Navigate, useNavigate } from 'react-router';
 
 export const Navigation = () => {
+  //TODO: 페이지이동!!(오피스아워질문)
+  // const navigate = useNavigate();
+
+  const mypageHandler = () => {
+    // navigate('/my-page');
+    // Navigate('/my-page');
+  };
+
   const logoutHandler = () => {
     axios.get(`${SERVER_URL}/logout`).then((res) => {
       if (res.data) {
@@ -68,7 +69,9 @@ export const Navigation = () => {
           {/* TODO: 서버에 저장된 프사 이미지 보여줌 */}
           <img src="user.png" className="nav-user-profile-dropbtn" />
           <div className="dropdown-content">
-            <button className="button">{user.name}님</button>
+            <button className="button" onClick={mypageHandler}>
+              {user.name}님
+            </button>
             <button className="button" onClick={logoutHandler}>
               logout
             </button>

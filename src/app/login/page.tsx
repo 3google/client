@@ -7,7 +7,6 @@ import axios from 'axios';
 import { Navigate } from 'react-router';
 
 export default function Login() {
-  //TODO:카카오 로그인 시 서버에서 사용자 정보 가져오기
   const onKakaoLogin = () => {
     axios
       .get(`${SERVER_URL}/auth/login/kakao`)
