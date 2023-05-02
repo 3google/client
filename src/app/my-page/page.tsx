@@ -12,6 +12,7 @@ import Bookmark from './bookmark';
 import Contents from './contents';
 import OverView from './overview';
 
+//todo 이미지 파일, 닉네임 수정
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -22,13 +23,7 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
@@ -50,6 +45,8 @@ interface UserInfo {
 }
 export default function Mypage() {
   const [value, setValue] = React.useState(0);
+  const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/profile-img.png');
+  const imageRef = React.useRef<HTMLInputElement>(null);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -59,25 +56,37 @@ export default function Mypage() {
     name: '홍길동',
   };
 
+  // 프로필 이미지 수정
+  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        setProfileImage(reader.result);
+      };
+    }
+  };
+  const handleAvatarClick = () => {
+    if (imageRef.current) {
+      imageRef.current.click();
+    }
+  };
+
   return (
     <div className="body-box">
       <UserInfoContainer>
-        <Avatar type="file" alt="프로필 이미지" />
+        <input type="file" ref={imageRef} accept="image/*" style={{ display: 'none' }} onChange={handleChangeFile} />
+        <Avatar src={profileImage as string} onClick={handleAvatarClick} />
         <UserInfoText>
           <h2>{userInfo.name}</h2>
-          <p>댓글</p>
+          {/* <div>댓글</div> */}
         </UserInfoText>
       </UserInfoContainer>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            textColor="secondary"
-            indicatorColor="secondary"
-            aria-label="basic tabs example"
-            centered
-          >
+          <Tabs value={value} onChange={handleChange} textColor="secondary" indicatorColor="secondary" aria-label="basic tabs example" centered>
             <Tab label="OverView" {...a11yProps(0)} />
             <Tab label="Public Board" {...a11yProps(1)} />
             <Tab label="Comment" {...a11yProps(2)} />

@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-  TablePagination,
-  TableContainer,
-} from '@mui/material';
+import { Container, Table, TableBody, TableCell, TableHead, TableRow, Paper, Button, TablePagination, TableContainer } from '@mui/material';
 import styled from '@emotion/styled';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -45,7 +33,7 @@ const TitleText = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 300px; // 적절한 너비로 조정
+  max-width: 500px; // 적절한 너비로 조정
 `;
 
 export default function Comment() {
@@ -75,7 +63,7 @@ export default function Comment() {
   const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <StyledTableContainer>
         <TableContainer style={{ maxHeight: visibleRows < 6 ? 'auto' : 'calc(53px * 5)' }}>
           {/* 높이 동적 계산 */}
@@ -83,9 +71,11 @@ export default function Comment() {
             {/* stickyHeader 속성 추가 */}
             <TableHead>
               <TableRow>
-                <TableCell>No.</TableCell>
-                <TableCell align="center">내 댓글</TableCell>
-                <TableCell align="center">Delete</TableCell>
+                <TableCell style={{ fontWeight: 'bold' }}>No.</TableCell>
+                <TableCell align="center" style={{ fontWeight: 'bold' }}>
+                  내 댓글
+                </TableCell>
+                <TableCell align="right" style={{ fontWeight: 'bold' }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
