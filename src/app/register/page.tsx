@@ -3,8 +3,8 @@ import React from 'react';
 import { RegisterBox, RegisterContainer } from './register.styled';
 import { Checkbox } from '../components/checkbox/Checkbox';
 import axios from 'axios';
+import { Navigate } from 'react-router';
 axios.defaults.withCredentials = true;
-// import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [nickname, setNickname] = React.useState('');
@@ -44,7 +44,7 @@ export default function Register() {
           .then((response) => {
             if (response.data.message == '회원가입 성공') {
               alert('환영합니다!');
-              navigate('/', { replace: true });
+              Navigate('/');
             }
           })
           .catch((err) => {
