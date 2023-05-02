@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  /* background: #497ea3; */
   color: white;
   text-align: center;
   background-image: url(/back.png);
@@ -57,12 +56,6 @@ a {
   transition: 0.7s;
 }
 
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>홈 */
-/* 랜딩페이지 본문부분 */
-.mainbody-box {
-  text-align: center;
-}
-
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>다른 페이지 */
 
 /* 다른 페이지들 본문 부분, 투명상자*/
@@ -88,52 +81,4 @@ a {
 
 .board-title {
   margin: 50px;
-}
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>로그인 회원가입 부분 */
-.login-form-box {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 80px;
-  background-color: white;
-  margin-bottom: 100px;
-  padding: 20px;
-  height: 300px;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 40px;
-}
-.register-form-box {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  background-color: white;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 100px;
-  padding: 20px;
-  height: 300px;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 40px;
-}
-
-.login-sign-form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* align-content: space-around; */
-  /* flex-wrap: wrap; */
-  padding: 20px;
-}
-
-.login-sign-form input {
-  margin: 15px 0;
-  padding: 10px;
-  width: 250px;
-  border: 0;
-  outline: none;
-  border-radius: 10px;
 }
