@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { RegisterBox, RegisterContainer } from './register.styled';
-import { Checkbox } from '../components/checkbox/Checkbox';
+import { Checkbox } from '../../components/checkbox/Checkbox';
 import axios from 'axios';
 import { Navigate } from 'react-router';
 axios.defaults.withCredentials = true;
@@ -80,9 +80,7 @@ export default function Register() {
       <h3>회원가입 진행</h3>
       <RegisterBox>
         <form>
-          <div className="profile-img-box">
-            {profileImage && <img className="pre-img" src={profileImage.toString()} />}
-          </div>
+          <div className="profile-img-box">{profileImage && <img className="pre-img" src={profileImage.toString()} />}</div>
           <div className="upload-img">
             <label className="button" htmlFor="input-file">
               프로필 사진 추가
@@ -109,8 +107,7 @@ export default function Register() {
           </div>
 
           <Checkbox checked={agree} onChange={setAgree}>
-            (필수) 개인정보 수집과 이용에 동의합니다. 동의를 거부 할 권리가 있지만 동의 거절 시 서비스 이용에 제한이 될
-            수 있습니다. (회원가입 불가)
+            (필수) 개인정보 수집과 이용에 동의합니다. 동의를 거부 할 권리가 있지만 동의 거절 시 서비스 이용에 제한이 될 수 있습니다. (회원가입 불가)
           </Checkbox>
 
           {/* TODO: 클릭시 폼 서버에 제출 */}

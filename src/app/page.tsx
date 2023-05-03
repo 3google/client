@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import MainBox from './components/main/MainBox';
+import MainBox from '../components/main/MainBox';
 
 export default function Home() {
   return (
