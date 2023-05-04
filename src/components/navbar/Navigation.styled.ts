@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 
-export const Nav = styled.div`
+export const Nav = styled.nav`
   width: 100%;
   display: flex;
   justify-content: space-between;
