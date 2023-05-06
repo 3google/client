@@ -1,7 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { createContext } from 'vm';
+
+interface CheckboxProps {
+  children: ReactNode;
+  disabled: boolean;
+  isChecked: boolean;
+  onChange: () => void;
+}
 
 export function Checkbox({ children, disabled, value, checked, onChange }) {
   const CheckboxContext = createContext();
@@ -10,12 +17,7 @@ export function Checkbox({ children, disabled, value, checked, onChange }) {
   if (!context) {
     return (
       <label>
-        <input
-          type="checkbox"
-          disabled={disabled}
-          checked={checked}
-          onChange={({ target: { checked } }) => onChange(checked)}
-        />
+        <input type="checkbox" disabled={disabled} checked={checked} onChange={({ target: { checked } }) => onChange(checked)} />
         {children}
       </label>
     );
@@ -25,12 +27,7 @@ export function Checkbox({ children, disabled, value, checked, onChange }) {
 
   return (
     <label>
-      <input
-        type="checkbox"
-        disabled={isDisabled(disabled)}
-        checked={isChecked(value)}
-        onChange={({ target: { checked } }) => toggleValue({ checked, value })}
-      />
+      <input type="checkbox" disabled={isDisabled(disabled)} checked={isChecked(value)} onChange={({ target: { checked } }) => toggleValue({ checked, value })} />
       {children}
     </label>
   );
