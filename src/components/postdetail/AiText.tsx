@@ -1,4 +1,4 @@
-import { Text } from './postdetail.styled';
+import { Text } from '../../styles/postdetail.styled';
 
 export default function AiText() {
   return (

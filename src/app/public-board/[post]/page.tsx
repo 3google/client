@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { PostContainer } from './post.styled';
 import Image from 'next/image';
 import UserText from '@/components/postdetail/UserText';
 import AiText from '@/components/postdetail/AiText';
 import CommentsBox from '@/components/postdetail/CommentsBox';
+import { PostContainer } from '@/styles/postdetail.styled';
 
 export default function Post(props: any) {
   const router = useRouter();

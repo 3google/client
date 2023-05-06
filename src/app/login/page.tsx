@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { LoginBox, LoginContainer } from './login.styled';
+import { LoginBox, LoginContainer } from '../../styles/login.styled';
 import Link from 'next/link';
 import { SERVER_URL } from '@/common/constants';
 

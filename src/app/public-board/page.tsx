@@ -2,7 +2,7 @@
 import { usePost } from '@/hooks/usePost';
 import React from 'react';
 import Link from 'next/link';
-import { Table } from './public-board.styled';
+import { Table } from '../../styles/public-board.styled';
 
 export default function PublicBoard() {
   const { posts } = usePost();

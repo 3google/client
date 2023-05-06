@@ -1,4 +1,4 @@
-import { Text, CommentList } from './postdetail.styled';
+import { Text, CommentList } from '../../styles/postdetail.styled';
 
 export default function CommentsBox() {
   return (

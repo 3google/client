@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Mainbox, BoxStyled } from './MainBox.styled';
+import { Mainbox, BoxStyled } from '../../styles/MainBox.styled';
 
 export default function MainBox({ height }: { height: number }) {
   return (

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useUser } from '@/hooks/useUser';
-import { Nav } from './Navigation.styled';
+import { Nav } from '../../styles/Navigation.styled';
 import axios from 'axios';
 import { SERVER_URL } from '@/common/constants';
 import { useRouter } from 'next/navigation';
