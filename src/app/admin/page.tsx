@@ -1,42 +1,16 @@
 'use client';
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { AdminInfoContainer, Avatar, AdminInfoText } from './admin.styled';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    'id': `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+import Tabs from '@mui/base/Tabs';
+import { AdminInfoContainer, Avatar, AdminInfoText, StyledTabsList, StyledTab, StyledTabPanel } from '../../styles/admin.styled';
+import Users from '../../components/admin/users';
+import Contents from '../../components/admin/contents';
+import Comments from '../../components/admin/comments';
 
 interface AdminInfo {
   name: string;
 }
-export default function Admin() {
+
+export default function adminPage() {
   const [value, setValue] = React.useState(0);
   const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/admin.png');
   const imageRef = React.useRef<HTMLInputElement>(null);
@@ -66,7 +40,6 @@ export default function Admin() {
       imageRef.current.click();
     }
   };
-
   return (
     <div className="body-box">
       <AdminInfoContainer>
@@ -76,36 +49,24 @@ export default function Admin() {
           <h2>{userInfo.name}</h2>
         </AdminInfoText>
       </AdminInfoContainer>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} textColor="secondary" indicatorColor="secondary" aria-label="basic tabs example" centered>
-            <Tab label="사용자 관리" {...a11yProps(0)} />
-            <Tab label="공유 게시글 조회" {...a11yProps(1)} />
-            <Tab label="컨텐츠 추천 게시글 조회" {...a11yProps(2)} />
-            <Tab label="댓글 조회" {...a11yProps(3)} />
-            <Tab label="" {...a11yProps(4)} />
-            <Tab label="" {...a11yProps(5)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          0
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          1
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          2
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          3
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          4
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          5
-        </TabPanel>
-      </Box>
+      <Tabs defaultValue={1}>
+        <StyledTabsList>
+          <StyledTab value={1}>회원목록</StyledTab>
+          <StyledTab value={2}>게시글조회</StyledTab>
+          {/* <StyledTab value={3}>컨텐츠 추천 게시글</StyledTab> */}
+          <StyledTab value={4}>댓글 조회</StyledTab>
+        </StyledTabsList>
+        <StyledTabPanel value={1}>
+          <Users />
+        </StyledTabPanel>
+        <StyledTabPanel value={2}>
+          <Contents />
+        </StyledTabPanel>
+        <StyledTabPanel value={3}>Third page</StyledTabPanel>
+        <StyledTabPanel value={4}>
+          <Comments />
+        </StyledTabPanel>
+      </Tabs>
     </div>
   );
 }

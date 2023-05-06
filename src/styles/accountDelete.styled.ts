@@ -1,9 +1,5 @@
 import styled from '@emotion/styled';
 
-export const IconDiv = styled.div`
-  text-align: center;
-`;
-
 export const Title = styled.div`
   text-align: center;
   margin-top: 10px;
@@ -14,7 +10,7 @@ export const Title = styled.div`
 `;
 
 export const BottomButton = styled.button`
-  width: 100%;
+  width: 90%;
   height: 48px;
   border: none;
   font-weight: bold;
@@ -32,5 +28,20 @@ export const ContentWrap = styled.div`
 
 export const P = styled.div`
   font-size: 14px;
+  font-weight: bold;
   color: #262626;
+`;
+
+export const Input = styled.input`
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  outline: none;
+  margin-right: 10px;
+
+  &:focus {
+    border-color: red;
+  }
 `;

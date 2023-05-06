@@ -13,7 +13,7 @@ import {
   ButtonsContainer,
   StyledTextField,
   SendButton,
-} from './write.styled';
+} from '../../styles/write.styled';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
