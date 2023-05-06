@@ -1,6 +1,6 @@
 // import { SessionProvider } from "next-auth/react";
 import React from 'react';
-import ReactQueryProvider from '../components/ReactQueryProvider';
+import ReactQueryProvider from './ReactQueryProvider';
 import { Navigation } from '../components/navbar/Navigation';
 import './globals.css';
 import { Router } from 'react-router';
@@ -19,13 +19,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <ReactQueryProvider>
-          {/* <Router> */}
-          <header>
-            <Navigation />
-          </header>
-
+          <Navigation />
           <main>{children}</main>
-          {/* </Router> */}
         </ReactQueryProvider>
       </body>
     </html>
