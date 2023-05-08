@@ -47,7 +47,7 @@ export default function AccountDelete({ open, handleClose }: AccountDeleteProps)
             <P style={{ marginTop: '30px' }}>✓ 사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</P>
             <P style={{ marginTop: '30px' }}>✓ 탈퇴하신 아이디로는 다시 회원가입을 하실 수 없습니다. (다른 아이디로 가입)</P>
             <P style={{ marginTop: '70px' }}> ✓ 다음을 입력해주세요 : </P>
-            <P style={{ marginTop: '10px', color: 'red' }}> {correctWord}</P>
+            <P style={{ marginTop: '10px', color: 'red' }}>{correctWord}</P>
             <Input style={{ marginTop: '20px', fontSize: '14px', textAlign: 'center' }} value={inputValue} onChange={handleInputChange} />
             {showValidationMessage && <P style={{ marginTop: '10px' }}>{showValidationMessage}</P>}
           </ContentWrap>
