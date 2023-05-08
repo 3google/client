@@ -15,7 +15,10 @@ export default function Post(props: any) {
     <div>
       <PostContainer>
         <Image src="/red-cross.png" alt="빨간십자가처방전" width={100} height={100} />
-        <h2>지원님의 처방전</h2>
+        <div>
+          <h2>지원님의 처방전</h2>
+          <button className="button">북마크 하기</button>
+        </div>
         <UserText />
         <AiText />
         <CommentsBox />

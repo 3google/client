@@ -3,6 +3,7 @@ import React from 'react';
 import { LoginBox, LoginContainer } from '../../styles/login.styled';
 import Link from 'next/link';
 import { SERVER_URL } from '@/common/constants';
+import Image from 'next/image';
 
 export default function Login() {
   // axios.get('a', {
@@ -13,11 +14,11 @@ export default function Login() {
       <h3>로그인</h3>
       <LoginBox>
         <Link href={`${SERVER_URL}/auth/login/kakao`}>
-          <img src="/kakao_login.png"></img>
+          <Image src="/kakao_login.png" alt="kakao" width={200} height={50} />
         </Link>
-        <a href="/">
-          <img src="/naver_login.png" style={{ width: '183px' }}></img>
-        </a>
+        <Link href="/">
+          <Image src="/naver_login.png" alt="naver" width={200} height={50} />
+        </Link>
       </LoginBox>
     </LoginContainer>
   );
