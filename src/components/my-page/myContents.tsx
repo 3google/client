@@ -60,7 +60,7 @@ export default function MyContents() {
 
   return (
     <div style={{ marginTop: '2%' }}>
-      <TableContainer sx={{ width: '100%', margin: 'auto', maxHeight: visibleRows < 6 ? 'auto' : 'calc(53px * 5)' }}>
+      <TableContainer sx={{ width: '100%', margin: 'auto', maxHeight: visibleRows < 6 ? 'auto' : 'calc(73px * 6)' }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -98,7 +98,7 @@ export default function MyContents() {
         </Table>
       </TableContainer>
       <StyledTablePagination
-        component="div"
+        // component="div"
         count={posts.length}
         page={page}
         onPageChange={handleChangePage}

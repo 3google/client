@@ -10,7 +10,7 @@ interface AdminInfo {
   name: string;
 }
 
-export default function adminPage() {
+export default function AdminPage() {
   const [value, setValue] = React.useState(0);
   const [profileImage, setProfileImage] = React.useState<string | ArrayBuffer | null>('/admin.png');
   const imageRef = React.useRef<HTMLInputElement>(null);

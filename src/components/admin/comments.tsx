@@ -56,7 +56,7 @@ export default function Comments() {
 
   return (
     <div style={{ marginTop: '2%' }}>
-      <TableContainer sx={{ width: '100%', margin: 'auto', maxHeight: visibleRows < 6 ? 'auto' : 'calc(53px * 5)' }}>
+      <TableContainer sx={{ width: '100%', margin: 'auto', maxHeight: visibleRows < 6 ? 'auto' : 'calc(73px * 6)' }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
