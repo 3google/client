@@ -25,6 +25,7 @@ export const Text = styled.div<{ height: string }>(({ height }) => {
     border-radius: 30px;
     height: ${height};
     margin-bottom: 10px;
+    padding-bottom: 10px;
     text-align: left;
 
     h3 {

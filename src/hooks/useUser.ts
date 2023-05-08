@@ -1,13 +1,26 @@
-import { fetchUser } from "@/http/users";
-import { useQuery } from "@tanstack/react-query";
+import { fetchUser } from '@/http/users';
+import { useQuery } from '@tanstack/react-query';
 
-// component -> state -> http
+async function _fetchUser() {
+  try {
+    const user = await fetchUser();
+    console.log(user);
+    return user;
+  } catch (error) {
+    console.log('로그인 안됨,, ㅜ ');
+    return null; // undefined 나면 에러ㅡㅡ
+  }
+}
+
+// component -> state(hook) -> http
 export function useUser() {
-  const { data: user, isLoading, error } = useQuery(["users", "current"], fetchUser);
-  //   useState()
-  //   useEffect()
+  const { data: user } = useQuery(['users', 'current'], _fetchUser, {
+    retry: 0,
+    suspense: true,
+    useErrorBoundary: true,
+  });
 
-  return { user, isLoading, error };
+  return { user };
 }
 
 // queriesMap = {

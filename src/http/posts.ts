@@ -13,12 +13,41 @@ export interface TempPostDto {
 }
 
 export async function fetchPost() {
-  try {
-    console.log(`[fetchPost]post 정보를 가져왔습니다 !!`);
-    const { data: posts } = await apiClient.get<TempPostDto[]>('/posts');
-    console.log(posts);
-    return posts;
-  } catch (error) {
-    console.log('error가 fetchPost에서 잡힘');
-  }
+  console.log(`[fetchPost]post 정보를 가져왔습니다 !!`);
+  const { data: posts } = await apiClient.get<TempPostDto[]>('/posts');
+  console.log(posts);
+  return posts;
+}
+
+// 게시판 글 조회
+// export async function fetchPost(postId: any) {
+//   let path = '/post';
+//   if (typeof postId === 'string') path += postId;
+
+//   const { data } = await apiClient.get(path);
+//   return data;
+// }
+
+// // 게시글 작성
+export async function createPost(title: string, content: string) {
+  const { data } = await apiClient.post<TempPostDto>('/post', {
+    title,
+    content,
+  });
+  return data;
+}
+
+// // 게시글 수정
+export async function updatePost(title: string, content: string) {
+  const { data } = await apiClient.put<TempPostDto>('/post', {
+    title,
+    content,
+  });
+  return data;
+}
+
+// // 게시글 삭제
+export async function deletePost(postId: any) {
+  await apiClient.delete(`/post/${postId}`);
+  return null;
 }

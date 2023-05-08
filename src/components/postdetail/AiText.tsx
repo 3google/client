@@ -2,7 +2,7 @@ import { ContBox, Text } from '../../styles/postdetail.styled';
 
 export default function AiText() {
   return (
-    <Text height={'400px'}>
+    <Text height={'auto'}>
       <h3>ai분석 결과</h3>
       <ContBox>
         <div className="cont-box">
