@@ -20,6 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <ReactQueryProvider>
+          <Layout />
           <main>{children}</main>
         </ReactQueryProvider>
       </body>

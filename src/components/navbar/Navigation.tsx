@@ -47,14 +47,14 @@ export const Navigation = () => {
             <li>추천게시판</li>
           </Link>
           <div className="dropdown">
-            {/* TODO: 서버에 저장된 프사 이미지 보여줌 */}
+            {/* TODO:(쏘쏘) 오류나는데 동작은 함 */}
             <Image src={user.profileImg} className="nav-user-profile-dropbtn" width={50} height={50} alt="유저 기본 이미지" />
             <div className="dropdown-content">
               <button className="button" onClick={mypageHandler}>
                 {user.nickname}
               </button>
 
-              {/* 쿠키면 로그아웃도 그냥 링크로 보내면 됨 */}
+              {/* 로그아웃도 그냥 링크로 연결하면 됨 */}
               <Link href={`${SERVER_URL}/auth/logout`}>
                 <button className="button">logout</button>
               </Link>

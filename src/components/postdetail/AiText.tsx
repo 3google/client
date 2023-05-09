@@ -18,8 +18,8 @@ export default function AiText() {
           <div>영화 이름 어쩌구</div>
         </div>
         <div className="cont-box">
-          <h4 className="cont-title">처방 드라마</h4>
-          <div> 드라마 이름 어쩌구</div>
+          <h4 className="cont-title">처방 도서</h4>
+          <div> 책 이름 어쩌구</div>
         </div>
       </ContBox>
     </Text>

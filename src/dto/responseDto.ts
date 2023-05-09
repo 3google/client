@@ -6,7 +6,10 @@ export interface ResponseDto<T> {
   message: string;
 }
 
-export type UserResponseDto = ResponseDto<UserDto>;
+//일단 주석,,
+// export type UserResponseDto = ResponseDto<UserDto>;
+//
+//
 // 위에 꺼랑 같음 !
 // export interface ResponseDto<UserDto> {
 //     data: UserDto;
@@ -20,14 +23,14 @@ export type UserResponseDto = ResponseDto<UserDto>;
 // ResponseDto<PostDto>
 // ResponseDto<CommentDto>
 
-// export interface UserResponseDto<T> {
-//   data: {
-//     nickname: string;
-//     profileImg: string;
-//   };
-//   statusCode: number;
-//   message: string;
-// }
+export interface UserResponseDto {
+  data: {
+    nickname: string;
+    profileImg: string;
+  };
+  statusCode: number;
+  message: string;
+}
 
 // export interface PostResponseDto<T> {
 //   data: {

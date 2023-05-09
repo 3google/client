@@ -1,6 +1,8 @@
+import { usePost } from '@/hooks/usePost';
 import { Text } from '../../styles/postdetail.styled';
 
 export default function UserText() {
+  // const { post } = usePost(id);
   return (
     <Text height={'200px'}>
       <h3>사용자가 쓴 글을 보여주는 부분</h3>

@@ -92,12 +92,12 @@
 //               id="input-file"
 //               accept="image*"
 //               name="profile_img"
-//               style={{ display: 'none' }} //TODO:스타일 빼기
+//               style={{ display: 'none' }}
 //               onChange={handleChangeFile}
 //             ></input>
 //           </div>
 
-//           {/* TODO 중복확인 */}
+//
 //           <div className="nick-box">
 //             <label htmlFor="nick-input" className="label">
 //               닉네임
@@ -110,7 +110,7 @@
 //             (필수) 개인정보 수집과 이용에 동의합니다. 동의를 거부 할 권리가 있지만 동의 거절 시 서비스 이용에 제한이 될 수 있습니다. (회원가입 불가)
 //           </Checkbox>
 
-//           {/* TODO: 클릭시 폼 서버에 제출 */}
+//
 //           <button type="submit" disabled={!agree} className="button" onClick={onSubmit}>
 //             ✨회원가입 완료!✨
 //           </button>

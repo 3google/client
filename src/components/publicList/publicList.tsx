@@ -4,11 +4,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { StyledTablePagination } from '../../styles/users.styled';
-import { usePost } from '@/hooks/usePost';
+import { usePosts } from '@/hooks/usePost';
 import Link from 'next/link';
 
 export default function PublicList() {
-  const { posts } = usePost();
+  const { posts } = usePosts();
   return (
     <div style={{ marginTop: '2%' }}>
       <TableContainer sx={{ width: '100%', margin: 'auto' }}>

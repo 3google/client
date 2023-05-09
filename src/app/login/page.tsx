@@ -16,7 +16,7 @@ export default function Login() {
         <Link href={`${SERVER_URL}/auth/login/kakao`}>
           <Image src="/kakao_login.png" alt="kakao" width={200} height={50} />
         </Link>
-        <Link href="/">
+        <Link href={`${SERVER_URL}/`}>
           <Image src="/naver_login.png" alt="naver" width={200} height={50} />
         </Link>
       </LoginBox>
