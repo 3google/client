@@ -33,7 +33,6 @@ export const Nav = styled.nav`
     margin-right: 30px;
   }
   .nav-user-profile-dropbtn {
-    width: 50px;
     margin-right: 30px;
   }
   .dropdown {

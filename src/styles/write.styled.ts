@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Box, Typography, TextField, Button, Dialog } from '@mui/material';
 
 // 불투명 박스
 export const BodyBox = styled(Box)`
@@ -94,8 +94,11 @@ export const StyledTextField = styled(TextField)`
   }
 `;
 
-//send 버튼 색상
-export const SendButton = styled(Button)`
+//Enter 버튼
+export const EnterButton = styled(Button)`
   background-color: ${({ disabled }) => (disabled ? '#BDBDBD' : '#673AB7')};
   color: #ffffff;
+  &:hover {
+    background-color: ${({ disabled }) => (disabled ? '#BDBDBD' : '#673AB7')};
+  }
 `;

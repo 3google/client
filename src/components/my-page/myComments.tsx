@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { StyledTablePagination } from '@styles/users.styled';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { StyledTablePagination } from '../../styles/users.styled';
 
+// TODO 댓글 내용이 화면에 보이는게 좋겠다
 interface Row {
   id: number;
   date: string;

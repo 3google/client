@@ -1,9 +1,10 @@
-import { fetchUser } from "@/http/users";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from 'react';
+import { fetchUser } from '../http/users';
+import { useQuery } from '@tanstack/react-query';
 
 // component -> state -> http
 export function useUser() {
-  const { data: user, isLoading, error } = useQuery(["users", "current"], fetchUser);
+  const { data: user, isLoading, error } = useQuery(['users', 'current'], fetchUser);
   //   useState()
   //   useEffect()
 
