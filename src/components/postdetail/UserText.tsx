@@ -1,4 +1,4 @@
-import { usePost } from '@/hooks/usePost';
+import { usePost } from '@hooks/usePost';
 import { Text } from '../../styles/postdetail.styled';
 
 export default function UserText() {

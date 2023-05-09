@@ -26,7 +26,7 @@ export async function fetchPost({ id }: any) {
   return data;
 }
 
-// TODO: 게시판 글 조회(한꺼번에 가능한지??)
+// TODO:📍 게시판 글 조회(한꺼번에 가능한지??)
 // export async function fetchPost(id: any) {
 //   let path = '/api/posts';
 //   if (typeof id === 'string') path += id;

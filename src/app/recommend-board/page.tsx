@@ -1,5 +1,5 @@
 'use client';
-import RecommendList from '@/components/recommendList/recommendList';
+import RecommendList from '@components/recommendList/recommendList';
 import Link from 'next/link';
 import React from 'react';
 
