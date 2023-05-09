@@ -18,7 +18,7 @@ import { SaveModal } from '@components/titleModal/saveModal';
 import { ShareModal } from '@components/titleModal/shareModal';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-
+//
 export default function Write() {
   const [messages, setMessages] = useState([{ id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' }]);
   const [inputValue, setInputValue] = useState('');

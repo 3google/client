@@ -13,7 +13,7 @@ export const ModalStyledDialog = styled(Dialog)`
     }
   }
 `;
-// input 값 입력시 라인 색상
+/// input 값 입력시 라인 색상
 export const ModalStyledTextField = styled(TextField)`
   & .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
     border-color: #673ab7;

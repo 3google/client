@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { apiClient } from './apiClient';
 
-//임시 Dto
+///임시 Dto
 export interface TempUserDto {
   email: string;
   name: string;
