@@ -4,6 +4,7 @@ import TabPanel from '@mui/base/TabPanel';
 import Tab, { tabClasses } from '@mui/base/Tab';
 import { buttonClasses } from '@mui/base/Button';
 import { createTheme } from '@mui/material/styles';
+import { TablePagination } from '@mui/material';
 
 const blue = {
   50: '#F5F0FF',
@@ -108,4 +109,34 @@ export const AdminInfoText = styled.div`
   line-height: 1.1;
   text-align: left;
   margin-left: 40px; // 원하는 간격으로 조절
+`;
+
+export const StyledTablePagination = styled(TablePagination)`
+  && {
+    display: flex;
+    justify-content: flex-end;
+
+    .MuiTypography-root {
+      font-size: 1rem;
+      /* font-weight: bold; */
+      /* color: red; */
+    }
+
+    .MuiSelect-select {
+      font-size: 1rem;
+      /* font-weight: bold; */
+      /* color: red; */
+    }
+
+    .MuiMenuItem-root {
+      font-size: 1rem;
+      /* font-weight: bold; */
+    }
+
+    .MuiButtonBase-root {
+      font-size: 1rem;
+      /* font-weight: bold; */
+      /* color: red; */
+    }
+  }
 `;

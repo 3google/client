@@ -3,8 +3,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { StyledTablePagination } from '../../styles/users.styled';
+import { StyledTablePagination } from '@styles/users.styled';
 
+//TODO 게시판 내용 ... 으로 나오게
 interface Row {
   id: number;
   date: string;
