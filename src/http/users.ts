@@ -1,17 +1,28 @@
 import axios from 'axios';
 import { apiClient } from './apiClient';
-
-///임시 Dto
-export interface TempUserDto {
-  email: string;
-  name: string;
-}
+import { UserResponseDto } from '@dto/responseDto';
 
 export async function fetchUser() {
+  //진짜 백엔드 서버
+  // const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
+  // return data.data;
+  //
+  //
+  //프론트 임시 서버
   console.log(`[fetchUser]user 정보를 가져왔습니다 !!`);
-  const { data: user } = await apiClient.get<TempUserDto>('/users');
-  return user;
+  const { data } = await apiClient.get<UserResponseDto>('/api/users');
+  console.log(data);
+  return data;
 }
+
+//로그아웃은 그냥 서버 링크로 연결만 하면 됨
+
+//TODO: (상의)회원 탈퇴
+// export async function deleteUser(): Promise<null> {
+//   await apiClient.delete('/api/users/account');
+//   console.log('회원탈퇴완료');
+//   return null;
+// }
 //
 // HERE 회원탈퇴
 export const deleteUser = async () => {

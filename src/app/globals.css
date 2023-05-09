@@ -44,15 +44,15 @@ a {
 .button {
   border: none;
   color: white;
-  background: rgba(255, 255, 255, 0.45);
+  background: #3f4499;
   border-radius: 40px;
   padding: 5px 20px 5px 20px;
   margin: 10px;
   cursor: pointer;
 }
 .button:hover {
-  background-color: white;
-  color: #3f4499;
+  background-color: rgb(135, 101, 236);
+  color: white;
   transition: 0.7s;
 }
 
@@ -65,8 +65,8 @@ a {
   margin-left: 100px;
   margin-right: 100px;
   margin-bottom: 100px;
-  padding: 20px;
-  height: 750px;
+  padding: 20px 20px 50px 20px;
+  height: auto;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 40px;
 }

@@ -4,6 +4,7 @@ import ReactQueryProvider from './ReactQueryProvider';
 import { Navigation } from '../components/navbar/Navigation';
 import './globals.css';
 import { Router } from 'react-router';
+import { Layout } from '@/components/Layout';
 
 export const metadata = {
   title: '마음 처방전',
@@ -19,10 +20,37 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <ReactQueryProvider>
-          <Navigation />
+          <Layout />
           <main>{children}</main>
         </ReactQueryProvider>
       </body>
     </html>
   );
 }
+
+// 1.
+// const { loading, data, error } = useXXX();
+// if (loading) return <Loading/>
+// if (error) return <Error/>
+// return <Comp/>
+//
+// 2.
+// return (
+//   <ErrorBoundary fallback={<Error/>}>
+//     <Suspense fallback={<Loading/>}>
+//       <Comp/> throw Error! 아래서 발생한 애러가 catch가 안 된 경우 ErrorBoundary에서 잡아줌
+//     </Suspense>
+//   </ErrorBoundary>
+// )
+
+// layout.tsx loading.tsx, page.tsx, error.tsx
+// <ErrorBoundary fallback={global-error.tsx}> -> 동작이 버그가 있는듯?
+// <layout.tsx>
+//   <ErrorBoundary fallback={error.tsx}>
+//     <Suspense fallback={loading.tsx}>
+//       <page.tsx/>
+//     </Suspense>
+//   </ErrorBoundary>
+// </layout.tsx>
+// </ErrorBoundary>
+//

@@ -8,7 +8,7 @@ interface CustomAxiosInstance extends AxiosInstance {
 }
 
 export const apiClient = axios.create({
-  baseURL: `${SERVER_URL}/api`,
+  baseURL: `${SERVER_URL}/`,
   withCredentials: true,
 }) as CustomAxiosInstance;
 

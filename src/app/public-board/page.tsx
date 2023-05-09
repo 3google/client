@@ -1,17 +1,15 @@
 'use client';
-import { usePost } from '@/hooks/usePost';
 import React from 'react';
-import Link from 'next/link';
-import { Table } from '../../styles/public-board.styled';
+import PublicList from '@components/publicList/publicList';
 
 export default function PublicBoard() {
-  const { posts } = usePost();
-
   return (
     <div className="body-box">
-      <h3 className="board-title">나의 처방전을 모두와 함께 보고 다른 사람들의 처방전도 볼 수 있어요!</h3>
+      <h3 className="board-title">나의 처방전을 모두와 함께 보고 다른 사람들의 처방전도 볼 수 있습니다</h3>
 
-      <Table>
+      <PublicList />
+
+      {/* <Table>
         <thead>
           <tr className="table-header">
             <td>작성자</td>
@@ -23,7 +21,6 @@ export default function PublicBoard() {
           </tr>
         </thead>
         <tbody>
-          {/* 이 부분에서 테이블 열이 안맞는 에러가 발생,, 근데 새로고침 할다보면 될때도 있음,, 이유 모르겠음 */}
           {posts &&
             posts.map(({ id, author, title, commentsCnt, bookmarksCnt, emotion, created_at }) => {
               return (
@@ -40,7 +37,7 @@ export default function PublicBoard() {
               );
             })}
         </tbody>
-      </Table>
+      </Table> */}
     </div>
   );
 }

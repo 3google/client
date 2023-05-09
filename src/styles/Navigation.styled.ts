@@ -55,7 +55,6 @@ export const Nav = styled.nav`
     padding: 5px;
   }
   .dropdown-content a:hover {
-    background-color: white;
     color: #3f4499;
   }
 
