@@ -1,4 +1,4 @@
-import { fetchUser } from '@/http/users';
+import { fetchUser } from '@http/users';
 import { useQuery } from '@tanstack/react-query';
 
 async function _fetchUser() {

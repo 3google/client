@@ -2,17 +2,15 @@
 import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import UserText from '@/components/postdetail/UserText';
-import AiText from '@/components/postdetail/AiText';
-import CommentsBox from '@/components/postdetail/CommentsBox';
-import { PostContainer } from '@/styles/postdetail.styled';
+import UserText from '@components/postdetail/UserText';
+import AiText from '@components/postdetail/AiText';
+import CommentsBox from '@components/postdetail/CommentsBox';
+import { PostContainer } from '@styles/postdetail.styled';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { usePost } from '@/hooks/usePost';
+import { usePost } from '@hooks/usePost';
 
 export default function Post({ params, searchParams }: { params: { id: number }; searchParams?: { [key: string]: string | string[] | undefined } }) {
   console.log(params); //=================={id: '4'}이런식으로 찍힘

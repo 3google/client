@@ -2,15 +2,16 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import CommentsBox from '@/components/postdetail/CommentsBox';
-import { PostContainer } from '@/styles/postdetail.styled';
-import RecommendText from '@/components/postdetail/RecommendText';
+import CommentsBox from '@components/postdetail/CommentsBox';
+import { PostContainer } from '@styles/postdetail.styled';
+import RecommendText from '@components/postdetail/RecommendText';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+
 export default function Post(props: any) {
   const router = useRouter();
   // const { id } = router.query;

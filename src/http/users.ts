@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiClient } from './apiClient';
-import { UserResponseDto } from '@/dto/responseDto';
+import { UserResponseDto } from '@dto/responseDto';
 
 export async function fetchUser() {
   //진짜 백엔드 서버
@@ -18,8 +18,19 @@ export async function fetchUser() {
 //로그아웃은 그냥 서버 링크로 연결만 하면 됨
 
 //TODO: (상의)회원 탈퇴
-export async function deleteUser(): Promise<null> {
-  await apiClient.delete('/api/users/account');
-  console.log('회원탈퇴완료');
-  return null;
-}
+// export async function deleteUser(): Promise<null> {
+//   await apiClient.delete('/api/users/account');
+//   console.log('회원탈퇴완료');
+//   return null;
+// }
+//
+// HERE 회원탈퇴
+export const deleteUser = async () => {
+  try {
+    const response = await apiClient.delete('/api/users/account');
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error;
+  }
+};

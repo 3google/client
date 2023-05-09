@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { StyledTablePagination } from '@styles/users.styled';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { StyledTablePagination } from '../../styles/users.styled';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 
 interface Row {

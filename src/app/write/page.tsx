@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { Avatar, Button, Tooltip } from '@mui/material';
 import {
   BodyBox,
@@ -12,21 +12,43 @@ import {
   ChatInputContainer,
   ButtonsContainer,
   StyledTextField,
-  SendButton,
-} from '../../styles/write.styled';
+  EnterButton,
+} from '@styles/write.styled';
+import { SaveModal } from '@components/titleModal/saveModal';
+import { ShareModal } from '@components/titleModal/shareModal';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-
+//
 export default function Write() {
-  const [messages, setMessages] = useState([
-    // { id: 1, isUser: true, text: '안녕하세요!' },
-    { id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' },
-  ]);
-
+  const [messages, setMessages] = useState([{ id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' }]);
   const [inputValue, setInputValue] = useState('');
   const userAvatar = '/img.png';
   const chatAvatar = '/heart.png';
+
+  /// 모달 상태 관리
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [saveModalInputValue, setSaveModalInputValue] = useState('');
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareModalInputValue, setShareModalInputValue] = useState('');
+  // 모달 열기/닫기 핸들러
+  const handleSaveModalOpen = () => {
+    setSaveModalOpen(true);
+  };
+  const handleSaveModalClose = () => {
+    setSaveModalOpen(false);
+  };
+  const handleSaveModalInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSaveModalInputValue(e.target.value);
+  };
+  const handleShareModalOpen = () => {
+    setShareModalOpen(true);
+  };
+  const handleShareModalClose = () => {
+    setShareModalOpen(false);
+  };
+  const handleShareModalInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setShareModalInputValue(e.target.value);
+  };
 
   const handleSend = () => {
     setMessages((prevMessages) => [...prevMessages, { id: Date.now(), isUser: true, text: inputValue }]);
@@ -57,18 +79,13 @@ export default function Write() {
                   {!message.isUser && (
                     <ButtonsContainer>
                       <Tooltip title="저장하기">
-                        <Button size="small">
+                        <Button size="small" onClick={handleSaveModalOpen}>
                           <SaveAltIcon color="action" />
                         </Button>
                       </Tooltip>
                       <Tooltip title="공유하기">
-                        <Button size="small" title="공유하기">
+                        <Button size="small" onClick={handleShareModalOpen}>
                           <ShareIcon color="action" />
-                        </Button>
-                      </Tooltip>
-                      <Tooltip title="북마크">
-                        <Button size="small" title="북마크">
-                          <BookmarkAddIcon color="action" />
                         </Button>
                       </Tooltip>
                     </ButtonsContainer>
@@ -81,11 +98,14 @@ export default function Write() {
         </MessagesContainer>
         <ChatInputContainer color="action">
           <StyledTextField variant="outlined" size="small" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="당신의 기분을 표현해주세요." fullWidth />
-          <SendButton variant="contained" onClick={handleSend} disabled={!inputValue}>
-            Send
-          </SendButton>
+          <EnterButton variant="contained" onClick={handleSend} disabled={!inputValue}>
+            Enter
+          </EnterButton>
         </ChatInputContainer>
       </ChatContainer>
+      {/* Modal */}
+      <SaveModal open={saveModalOpen} onClose={handleSaveModalClose} value={saveModalInputValue} onChange={handleSaveModalInputChange} />
+      <ShareModal open={shareModalOpen} onClose={handleShareModalClose} value={shareModalInputValue} onChange={handleShareModalInputChange} />
     </BodyBox>
   );
 }
