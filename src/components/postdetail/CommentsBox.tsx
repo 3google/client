@@ -10,7 +10,9 @@ export default function CommentsBox() {
         <div className="text">댓글 3</div>
       </CommentList>
       <input type="text" placeholder="댓글 작성" className="comment-input" />
-      <button className="button">댓글 작성</button>
+      <div className="button-container">
+        <button className="button">댓글 작성</button>
+      </div>
     </Text>
   );
 }

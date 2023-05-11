@@ -4,15 +4,8 @@ import { UserResponseDto } from '@dto/responseDto';
 
 export async function fetchUser() {
   //진짜 백엔드 서버
-  // const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
-  // return data.data;
-  //
-  //
-  //프론트 임시 서버
-  console.log(`[fetchUser]user 정보를 가져왔습니다 !!`);
-  const { data } = await apiClient.get<UserResponseDto>('/api/users');
-  console.log(data);
-  return data;
+  const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
+  return data.data;
 }
 
 //로그아웃은 그냥 서버 링크로 연결만 하면 됨

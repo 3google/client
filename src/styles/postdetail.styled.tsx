@@ -14,9 +14,23 @@ export const PostContainer = styled.div`
   height: auto;
   width: 700px;
   border: 10px double #3f4499;
-  // outline: 10px solid rgba(255, 255, 255, 0.45);
   outline: 10px solid white;
   border-radius: 40px;
+
+  .button-container {
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .title-input {
+    width: 600px;
+    height: 30px;
+  }
+  //TODO: 🎨 input 크기에 맞게 글 작성되게
+  .content-input {
+    width: 600px;
+    height: 200px;
+  }
 `;
 
 export const Text = styled.div<{ height: string }>(({ height }) => {
@@ -41,9 +55,10 @@ export const Text = styled.div<{ height: string }>(({ height }) => {
       width: 645px;
       margin: 10px 20px;
     }
-    //TODO: 북마크, 댓글 버튼 둘다 오른쪽으로 붙이기
-    button {
+
+    .button-container {
       text-align: right;
+      margin-right: 10px;
     }
   `;
 });
