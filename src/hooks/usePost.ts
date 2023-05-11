@@ -2,7 +2,6 @@ import { TempPostDto, fetchPost, fetchPosts } from '@http/posts';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-//TODO :📍 여기도 한번에 가능한지
 //전체 게시물 조회
 export function usePosts() {
   const { data: posts, isLoading, error } = useQuery(['posts', 'current'], fetchPosts);

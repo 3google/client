@@ -46,7 +46,6 @@ export const Navigation = () => {
             <li>추천게시판</li>
           </Link>
           <div className="dropdown">
-            {/* TODO:(쏘쏘) 오류나는데 동작은 함 */}
             <Image src={user.profileImg} className="nav-user-profile-dropbtn" width={50} height={50} alt="유저 기본 이미지" />
             <div className="dropdown-content">
               <button className="button" onClick={mypageHandler}>

@@ -10,7 +10,7 @@ export default function ReccommendBoard() {
 
       <RecommendList />
       <button className="button">
-        <Link href="/recommend-board/write">새로운 글 쓰기</Link>
+        <Link href="/recommend-board/create-post">새로운 글 쓰기</Link>
       </button>
     </div>
   );

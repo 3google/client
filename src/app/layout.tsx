@@ -4,7 +4,7 @@ import ReactQueryProvider from './ReactQueryProvider';
 import { Navigation } from '../components/navbar/Navigation';
 import './globals.css';
 import { Router } from 'react-router';
-import { Layout } from '@/components/Layout';
+import { Layout } from '@components/Layout';
 
 export const metadata = {
   title: '마음 처방전',
