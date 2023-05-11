@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { fetchUser } from '../http/users';
 import { useQuery } from '@tanstack/react-query';
 
+//TODO 마이 컨텐츠
+// import { fetchMyContents } from '../http/users';
+
 // component -> state -> http
 export function useUser() {
   const { data: user, isLoading, error } = useQuery(['users', 'current'], fetchUser);
@@ -10,6 +13,12 @@ export function useUser() {
 
   return { user, isLoading, error };
 }
+//TODO 마이 컨텐츠
+// export function useMyContents() {
+//   const { data: myContents, isLoading, error } = useQuery(['myContents'], fetchMyContents);
+
+//   return { myContents, isLoading, error };
+// }
 
 // queriesMap = {
 //     `["users", "current"]`: {email:'a@qa.a',name:'a'},

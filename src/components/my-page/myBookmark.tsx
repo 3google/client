@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyledTablePagination } from '@styles/users.styled';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -9,7 +8,7 @@ interface Row {
   id: number;
   date: string;
   emotion: string;
-  content: string;
+  title: string;
 }
 
 const rows: Row[] = [
@@ -17,19 +16,8 @@ const rows: Row[] = [
     id: 1,
     date: '2023-01-01',
     emotion: '슬픔',
-    content: '게시글게시글게시글게시글게시글게시글게시글게시글게',
+    title: '게시글제목',
   },
-  { id: 2, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 3, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 4, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 5, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 6, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 7, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 8, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 9, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 10, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 11, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 12, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
 ];
 
 export default function Bookmark() {
@@ -68,7 +56,7 @@ export default function Bookmark() {
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>작성일자</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>감정</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'center' }}>게시글</TableCell>
-              <TableCell style={{ fontWeight: 'bold', textAlign: 'right' }}></TableCell>
+              <TableCell style={{ fontWeight: 'bold', textAlign: 'right' }}>북마크</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -77,7 +65,9 @@ export default function Bookmark() {
                 <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>
+                  {row.title.length > 40 ? row.title.slice(0, 40) + '...' : row.title}
+                </TableCell>
                 <TableCell align="right">
                   <Tooltip
                     title="북마크 해제"
@@ -97,7 +87,7 @@ export default function Bookmark() {
           </TableBody>
         </Table>
       </TableContainer>
-      <StyledTablePagination
+      <TablePagination
         // component="div"
         count={posts.length}
         page={page}
@@ -112,11 +102,9 @@ export default function Bookmark() {
           'justifyContent': 'flex-end',
           '& .MuiSelect-select': {
             fontSize: '1rem',
-            // fontWeight: 'bold',
           },
           '& .MuiTablePagination-actions button': {
             fontSize: '1rem',
-            // fontWeight: 'bold',
           },
         }}
       />

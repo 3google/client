@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyledTablePagination } from '@styles/users.styled';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -98,7 +97,7 @@ export default function MyComments() {
           </TableBody>
         </Table>
       </TableContainer>
-      <StyledTablePagination
+      <TablePagination
         // component="div"
         count={posts.length}
         page={page}

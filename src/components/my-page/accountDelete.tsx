@@ -6,7 +6,7 @@ import { Title, P, ContentWrap, BottomButton, Input } from '@styles/accountDelet
 import { deleteUser } from '@http/users';
 import { useRouter } from 'next/navigation';
 
-// TODO API 알아보고 다시
+// 회원탈퇴 API 완료
 
 interface AccountDeleteProps {
   open: boolean;

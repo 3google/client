@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@hooks/useUser';
 import { Nav } from '../../styles/Navigation.styled';
 import axios from 'axios';
-import { SERVER_URL } from '@/common/constants';
+import { SERVER_URL } from '@common/constants';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 

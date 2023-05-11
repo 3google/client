@@ -3,9 +3,12 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { StyledTablePagination } from '@styles/users.styled';
 
-//TODO 게시판 내용 ... 으로 나오게
+//TODO-1
+// import { useMyContents } from '../hooks/useMyContents';
+// import { deleteMyContent } from '../http/myContents';
+
+//게시판 내용 ... 으로 나오게 완성
 interface Row {
   id: number;
   date: string;
@@ -78,7 +81,9 @@ export default function MyContents() {
                 <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>
+                  {row.content.length > 20 ? row.content.slice(0, 20) + '...' : row.content}
+                </TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
                   <Tooltip
                     title="게시글 삭제"
@@ -98,7 +103,7 @@ export default function MyContents() {
           </TableBody>
         </Table>
       </TableContainer>
-      <StyledTablePagination
+      <TablePagination
         // component="div"
         count={posts.length}
         page={page}
