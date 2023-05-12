@@ -1,3 +1,4 @@
+'use Client';
 import React, { useState, useEffect } from 'react';
 import { useGetPosts } from '@hooks/useGetPost';
 import { deletePost } from '@http/mypage/myContents';
@@ -14,15 +15,21 @@ interface Row {
 }
 
 export default function MyContents() {
-  const [posts, setPosts] = useState<Row[]>([]);
+  const [contents, setContents] = useState<Row[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-  const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
-  const { data: fetchedPosts, refetch } = useGetPosts('board_type', 'emotion');
+  const visibleRows = contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
+  const { data: fetchedPosts, refetch } = useGetPosts();
 
+  // useEffect(() => {
+  //   console.log(fetchedPosts);
+  //   if (fetchedPosts) {
+  //     setContents(fetchedPosts);
+  //   }
+  // }, [fetchedPosts]);
   useEffect(() => {
-    if (fetchedPosts) {
-      setPosts(fetchedPosts);
+    if (fetchedPosts && fetchedPosts.data) {
+      setContents(fetchedPosts.data);
     }
   }, [fetchedPosts]);
 
@@ -33,17 +40,6 @@ export default function MyContents() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  // // 게시글 삭제
-  // const handleDeletePost = (id: number) => {
-  //   const updatedPosts = posts.filter((row) => row.id !== id);
-  //   setPosts(
-  //     updatedPosts.map((post, index) => ({
-  //       ...post,
-  //       id: index + 1,
-  //     })),
-  //   );
-  // };
 
   // 게시글 삭제
   const handleDeletePost = async (id: number) => {
@@ -69,7 +65,7 @@ export default function MyContents() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+            {contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>
@@ -99,7 +95,7 @@ export default function MyContents() {
         </Table>
       </TableContainer>
       <TablePagination
-        count={posts.length}
+        count={contents.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

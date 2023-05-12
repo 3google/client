@@ -4,7 +4,7 @@ import { TextField, Dialog } from '@mui/material';
 // 저장하기 버튼 클릭 시 제목 지정 모달
 export const ModalStyledDialog = styled(Dialog)`
   .MuiPaper-root {
-    width: 500px;
+    width: 800px;
     height: 250px;
 
     @media (max-width: 600px) {

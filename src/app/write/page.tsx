@@ -20,7 +20,9 @@ import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 //
 export default function Write() {
-  const [messages, setMessages] = useState([{ id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' }]);
+  const [messages, setMessages] = useState([
+    { id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' },
+  ]);
   const [inputValue, setInputValue] = useState('');
   const userAvatar = '/img.png';
   const chatAvatar = '/heart.png';
@@ -58,7 +60,11 @@ export default function Write() {
     setTimeout(() => {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { id: Date.now() + 1, isUser: false, text: '당신의 기분이 많이 우울하군요, 헤이즈- 돌아오지마 노래를 들어보세요. 더 우울해집니다 ^^' },
+        {
+          id: Date.now() + 1,
+          isUser: false,
+          text: '당신의 기분이 많이 우울하군요, 헤이즈- 돌아오지마 노래를 들어보세요. 더 우울해집니다 ^^',
+        },
       ]);
     }, 1000); // 1초 후에 답변 출력
   };
@@ -97,15 +103,32 @@ export default function Write() {
           ))}
         </MessagesContainer>
         <ChatInputContainer color="action">
-          <StyledTextField variant="outlined" size="small" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="당신의 기분을 표현해주세요." fullWidth />
+          <StyledTextField
+            variant="outlined"
+            size="small"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="당신의 기분을 표현해주세요."
+            fullWidth
+          />
           <EnterButton variant="contained" onClick={handleSend} disabled={!inputValue}>
             Enter
           </EnterButton>
         </ChatInputContainer>
       </ChatContainer>
       {/* Modal */}
-      <SaveModal open={saveModalOpen} onClose={handleSaveModalClose} value={saveModalInputValue} onChange={handleSaveModalInputChange} />
-      <ShareModal open={shareModalOpen} onClose={handleShareModalClose} value={shareModalInputValue} onChange={handleShareModalInputChange} />
+      <SaveModal
+        open={saveModalOpen}
+        onClose={handleSaveModalClose}
+        value={saveModalInputValue}
+        onChange={handleSaveModalInputChange}
+      />
+      <ShareModal
+        open={shareModalOpen}
+        onClose={handleShareModalClose}
+        value={shareModalInputValue}
+        onChange={handleShareModalInputChange}
+      />
     </BodyBox>
   );
 }
