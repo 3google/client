@@ -21,15 +21,6 @@ const rows: Row[] = [
   },
   { id: 2, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
   { id: 3, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 4, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 5, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 6, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 7, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 8, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 9, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 10, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 11, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 12, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
 ];
 
 export default function MyComments() {
@@ -77,7 +68,9 @@ export default function MyComments() {
                 <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>
+                  {row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}
+                </TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
                   <Tooltip
                     title="댓글 삭제"

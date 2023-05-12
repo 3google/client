@@ -43,6 +43,7 @@ export const Nav = styled.nav`
   .dropdown-content {
     display: none;
     position: absolute;
+    right: 5px;
     z-index: 1; /*다른 요소들보다 앞에 배치*/
     font-size: 15px;
   }
@@ -55,7 +56,6 @@ export const Nav = styled.nav`
     padding: 5px;
   }
   .dropdown-content a:hover {
-    background-color: white;
     color: #3f4499;
   }
 

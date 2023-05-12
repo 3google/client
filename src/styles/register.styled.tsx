@@ -36,7 +36,7 @@ export const RegisterBox = styled.div`
     border-radius: 70%;
     overflow: hidden;
     margin-bottom: 10px;
-    // TODO: 사진을 가운데 두고싶은데 잘 안됨,,
+    //todo취소
     margin: 10px 30%;
   }
   .pre-img {

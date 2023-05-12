@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    // 절대경로
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["./components/*"],
       "@http/*": ["./http/*"],
+      "@dto/*": ["./dto/*"],
       "@styles/*": ["./styles/*"],
       "@hooks/*": ["./hooks/*"],
       "@common/*": ["./common/*"]
@@ -28,9 +28,6 @@
         "name": "next"
       }
     ]
-    // "paths": {
-    //   "@/*": ["./src/*"]
-    // }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

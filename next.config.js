@@ -3,9 +3,20 @@ module.exports = {
   experimental: {
     appDir: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'k.kakaocdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'k.kakaocdn.net',
+      },
+    ],
+  },
 };
-
 
 // const nextConfig = {
 //   experimental: {
