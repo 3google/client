@@ -1,6 +1,19 @@
-import axios from 'axios';
 import { apiClient } from './apiClient';
 import { UserResponseDto } from '@dto/responseDto';
+// 실제로 서버에 프로필 업데이트 요청하는 코드 작성
+
+///임시 Dto
+export interface TempPostDto {
+  id: number;
+  title: string;
+  author: string;
+  emotion: number;
+  created_at: number;
+  bookmarksCnt: number;
+  commentsCnt: number;
+  content: string;
+  board_type: string;
+}
 
 export async function fetchUser() {
   //진짜 백엔드 서버
@@ -27,3 +40,25 @@ export const deleteUser = async () => {
     throw error;
   }
 };
+
+// WAIT 1-프로필 업데이트
+// nickname과 profileImage를 받아 FormData 객체를 생성하고, 이를 사용해 서버에 PUT 요청
+// Content-Type 헤더를 multipart/form-data로 설정
+export const updateProfile = async (nickname: string, profileImage: File) => {
+  const formData = new FormData();
+  formData.append('nickname', nickname);
+  formData.append('profileImage', profileImage);
+
+  const response = await apiClient.patch('/users', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+// // 마이페이지 프로필 이미지, 닉네임, 소셜 조회
+// export const getUserProfile = async () => {
+//   const response = await apiClient.get('/api/users/mypage');
+//   return response.data;
+// };
