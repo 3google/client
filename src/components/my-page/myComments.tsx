@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useGetMyComments } from '@hooks/useGetPost';
+import { deleteMyComment } from '@http/mypage/myComments';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -12,21 +14,26 @@ interface Row {
   content: string;
 }
 
-const rows: Row[] = [
-  {
-    id: 1,
-    date: '2023-01-01',
-    emotion: '슬픔',
-    content: '게시글게시글게시글게시글게시글게시글게시글게시글게',
-  },
-  { id: 2, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-  { id: 3, date: '2023-01-01', emotion: '슬픔', content: '게시글' },
-];
+// const rows: Row[] = [
+//   {
+//     id: 1,
+//     date: '2023-01-01',
+//     emotion: '슬픔',
+//     content: '게시글게시글게시글게시글게시글게시글게시글게시글게',
+//   },
+// ];
 
 export default function MyComments() {
-  const [posts, setPosts] = useState<Row[]>(rows);
+  const [comments, setComments] = useState<Row[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const { data: fetchedComments, refetch } = useGetMyComments();
+
+  useEffect(() => {
+    if (fetchedComments) {
+      setComments(fetchedComments);
+    }
+  }, [fetchedComments]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -37,17 +44,15 @@ export default function MyComments() {
     setPage(0);
   };
 
-  const handleDeletePost = (id: number) => {
-    const updatedPosts = posts.filter((row) => row.id !== id);
-    setPosts(
-      updatedPosts.map((post, index) => ({
-        ...post,
-        id: index + 1,
-      })),
-    );
+  const handleDeleteMyComment = async (id: number) => {
+    try {
+      await deleteMyComment(id);
+      refetch(); // 댓글 삭제 후 목록을 다시 불러오기
+    } catch (error) {
+      console.error('Failed to delete the comment:', error);
+    }
   };
-
-  const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
+  const visibleRows = comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -63,7 +68,7 @@ export default function MyComments() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+            {comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
                 <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
@@ -77,7 +82,7 @@ export default function MyComments() {
                     color="error"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDeletePost(row.id);
+                      handleDeleteMyComment(row.id);
                     }}
                   >
                     <IconButton>
@@ -91,8 +96,7 @@ export default function MyComments() {
         </Table>
       </TableContainer>
       <TablePagination
-        // component="div"
-        count={posts.length}
+        count={comments.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
@@ -105,11 +109,9 @@ export default function MyComments() {
           'justifyContent': 'flex-end',
           '& .MuiSelect-select': {
             fontSize: '1rem',
-            // fontWeight: 'bold',
           },
           '& .MuiTablePagination-actions button': {
             fontSize: '1rem',
-            // fontWeight: 'bold',
           },
         }}
       />
