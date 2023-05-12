@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import { ModalStyledDialog, ModalStyledTextField } from '@styles/modal.styled';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 //
 interface ShareModalProps {
   open: boolean;
@@ -50,7 +50,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
           value={value}
           onChange={onChange}
         />
-        <Select value={category} onChange={handleCategoryChange} style={{ marginTop: '1em', width: '100%' }}>
+        {/* <Select value={category} onChange={handleCategoryChange} style={{ marginTop: '1em', width: '100%' }}>
           {categories.map((category, index) => (
             <MenuItem key={index} value={category}>
               {category}
@@ -65,7 +65,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
         />
         <IconButton onClick={handleAddCategory}>
           <AddCircleOutlineIcon />
-        </IconButton>
+        </IconButton> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} style={{ backgroundColor: '#673ab7', color: 'white' }}>

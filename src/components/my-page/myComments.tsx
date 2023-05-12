@@ -14,24 +14,21 @@ interface Row {
   content: string;
 }
 
-// const rows: Row[] = [
-//   {
-//     id: 1,
-//     date: '2023-01-01',
-//     emotion: '슬픔',
-//     content: '게시글게시글게시글게시글게시글게시글게시글게시글게',
-//   },
-// ];
-
 export default function MyComments() {
   const [comments, setComments] = useState<Row[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const { data: fetchedComments, refetch } = useGetMyComments();
 
+  // useEffect(() => {
+  //   if (fetchedComments) {
+  //     setComments(fetchedComments);
+  //   }
+  // }, [fetchedComments]);
+
   useEffect(() => {
-    if (fetchedComments) {
-      setComments(fetchedComments);
+    if (fetchedComments && fetchedComments.data) {
+      setComments(fetchedComments.data);
     }
   }, [fetchedComments]);
 

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { updateProfile, fetchUser } from '@http/users';
+import { updateProfile, getUserProfile } from '@http/users';
 
 // React Query를 사용하여 custom hook 생성
 
@@ -18,8 +18,8 @@ export const useUpdateProfile = () => {
   return mutation;
 };
 
-// 카카오, 네이버 구분 이미지
-export const useUserSocial = () => {
-  const query = useQuery(['userProfile'], fetchUser);
+// 마이페이지 프로필 이미지, 닉네임, 소셜 조회
+export const useUserProfile = () => {
+  const query = useQuery(['userProfile'], getUserProfile);
   return query;
 };

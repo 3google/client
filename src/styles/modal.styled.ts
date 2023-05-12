@@ -5,7 +5,7 @@ import { TextField, Dialog } from '@mui/material';
 export const ModalStyledDialog = styled(Dialog)`
   .MuiPaper-root {
     width: 800px;
-    height: 400px;
+    height: 250px;
 
     @media (max-width: 600px) {
       width: 90%;

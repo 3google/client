@@ -17,7 +17,7 @@ import AccountDelete from '@components/my-page/accountDelete';
 import Contents from '@components/my-page/myContents';
 import Comments from '@components/my-page/myComments';
 import Bookmark from '@components/my-page/myBookmark';
-import { useUpdateProfile, useUserSocial } from '@hooks/useUserProfile';
+import { useUpdateProfile, useUserProfile } from '@hooks/useUserProfile';
 
 // TODO 코드 에러 잡기
 export default function MyPage() {
@@ -27,8 +27,8 @@ export default function MyPage() {
   const inputRef = useRef<HTMLInputElement>(null); // 입력값을 받아오기 위한 Ref
 
   // 백엔드에서 social 정보 string으로 받아옴
-  const userProfileQuery = useUserSocial();
   // 사용자 정보가 로드되면 해당 정보를 사용하여 상태를 설정
+  const userProfileQuery = useUserProfile();
   const [nickname, setNickname] = useState(userProfileQuery.data?.nickname ?? '길동?');
   const [profileImg, setProfileImg] = useState(userProfileQuery.data?.profileImg ?? '/profile-img.png');
 
