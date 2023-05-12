@@ -13,9 +13,10 @@ import {
 } from '@mui/material';
 import { usePosts } from '@hooks/usePost';
 import Link from 'next/link';
+import { BOARD_TYPE } from '@common/constants';
 
 export default function RecommendList() {
-  const [emotion, setEmotion] = useState('');
+  const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
 
   const handleEmotionChange = (e: any) => {
     const { value } = e.target;
@@ -23,8 +24,8 @@ export default function RecommendList() {
     console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
 
-  //TODO: 🍎 1. 여기에 board_type과 emotion값을 전달하는 방법
-  const { posts } = usePosts('RECOMMEND', emotion);
+  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion.emotion);
+  console.log('posts', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>

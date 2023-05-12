@@ -1,25 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from '@mui/material';
 import { usePosts } from '@hooks/usePost';
 import Link from 'next/link';
+import { BOARD_TYPE } from '@common/constants';
 
 export default function PublicList() {
-  const { posts } = usePosts();
-  const [list, setList] = useState({ emotion: '' });
+  const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
 
   const handleEmotionChange = (e: any) => {
-    const { name, value } = e.target;
-    setList((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    console.log({ name: value });
+    const { value } = e.target;
+    setEmotion(value);
+    console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
+
+  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
+  console.log('posts', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>
       <FormControl>
-        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" onChange={handleEmotionChange}>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          onChange={handleEmotionChange}
+        >
           <FormControlLabel name="emotion" value="HAPPINESS" control={<Radio />} label="HAPPINESS" />
           <FormControlLabel name="emotion" value="SADNESS" control={<Radio />} label="SADNESS" />
           <FormControlLabel name="emotion" value="ANGER" control={<Radio />} label="ANGER" />
