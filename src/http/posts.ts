@@ -1,24 +1,10 @@
+import { PostResponseDto } from '@dto/responseDto';
 import { apiClient } from './apiClient';
 
-//임시 Dto
-
-export interface TempPostDto {
-  id: number;
-  title: string;
-  author: string;
-  emotion: number;
-  created_at: number;
-  bookmarksCnt: number;
-  commentsCnt: number;
-  content: string;
-  board_type: string;
-}
-
 //게시판 전체 조회
-//공유 게시판
-export async function fetchPosts() {
-  //TODO : 🍎 쿼리스트링 사용 방법(/?board_type&emotion)
-  const { data: posts } = await apiClient.get<TempPostDto[]>(`/api/posts?board_type=${board_type}&emotion=${emotion}`);
+export async function fetchPosts({ board_type, emotion }) {
+  //TODO : 🍎 쿼리스트링(/?board_type&emotion)
+  const { data: posts } = await apiClient.get<PostResponseDto[]>(`/posts?board_type=${board_type}&emotion=${emotion}`);
   console.log(posts);
   return posts;
 }
@@ -27,13 +13,13 @@ export async function fetchPosts() {
 //특정 게시물 조회
 export async function fetchPost({ id }: any) {
   console.log(`해당 게시물을 가져옴`);
-  const { data } = await apiClient.get<TempPostDto>(`/api/posts/${id}`);
+  const { data } = await apiClient.get<PostResponseDto>(`/posts/${id}`);
   return data;
 }
 
 // // 게시글 작성
 export async function createPost(title: string, content: string, emotion: string) {
-  const { data } = await apiClient.post<TempPostDto>('/posts', {
+  const { data } = await apiClient.post<PostResponseDto>('/posts', {
     title,
     content,
     emotion,
@@ -43,7 +29,7 @@ export async function createPost(title: string, content: string, emotion: string
 
 // // 게시글 수정
 export async function updatePost(title: string, content: string, emotion: string) {
-  const { data } = await apiClient.patch<TempPostDto>(`/posts`, {
+  const { data } = await apiClient.patch<PostResponseDto>(`/posts`, {
     title,
     content,
     emotion,

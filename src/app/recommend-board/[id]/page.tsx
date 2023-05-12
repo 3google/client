@@ -70,7 +70,13 @@ function SimpleDialog(props: SimpleDialogProps) {
   );
 }
 
-export default function Post({ params, searchParams }: { params: { id: number }; searchParams?: { [key: string]: string | string[] | undefined } }) {
+export default function Post({
+  params,
+  searchParams,
+}: {
+  params: { id: number };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   // console.log('params', params);
   const { post } = usePost(params.id);
   console.log('post', post);
@@ -89,7 +95,7 @@ export default function Post({ params, searchParams }: { params: { id: number };
 
   const hadleClickDelete = async () => {
     if (window.confirm('해당 게시물을 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.')) {
-      //TODO: 📍게시글 삭제api요청
+      //TODO: 게시글 삭제api요청
       // await deletePost({post.id});
       alert('게시물이 삭제되었습니다');
       router.push('/recommend-board');
