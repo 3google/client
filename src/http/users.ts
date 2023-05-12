@@ -2,22 +2,10 @@ import { apiClient } from './apiClient';
 import { UserResponseDto } from '@dto/responseDto';
 // 실제로 서버에 프로필 업데이트 요청하는 코드 작성
 
-///임시 Dto
-export interface TempPostDto {
-  id: number;
-  title: string;
-  author: string;
-  emotion: number;
-  created_at: number;
-  bookmarksCnt: number;
-  commentsCnt: number;
-  content: string;
-  board_type: string;
-}
-
 export async function fetchUser() {
   //진짜 백엔드 서버
   const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
+  console.log('data', data);
   return data.data;
 }
 

@@ -1,3 +1,4 @@
+import { PostDto } from './postDto';
 import { UserDto } from './userDto';
 
 export interface ResponseDto<T> {
@@ -6,10 +7,9 @@ export interface ResponseDto<T> {
   message: string;
 }
 
-//일단 주석,,
-// export type UserResponseDto = ResponseDto<UserDto>;
-//
-//
+export type UserResponseDto = ResponseDto<UserDto>;
+export type PostResponseDto = ResponseDto<PostDto>;
+
 // 위에 꺼랑 같음 !
 // export interface ResponseDto<UserDto> {
 //     data: UserDto;
@@ -17,34 +17,12 @@ export interface ResponseDto<T> {
 //     message: string;
 //   }
 
-//
-
-// ResponseDto<UserDto>
-// ResponseDto<PostDto>
-// ResponseDto<CommentDto>
-
-export interface UserResponseDto {
-  data: {
-    nickname: string;
-    profileImg: string;
-  };
-  statusCode: number;
-  message: string;
-}
-
-// export interface PostResponseDto<T> {
+//=================================================
+// 위에 다 오류나면 일단 이런식으로!
+// export interface UserResponseDto {
 //   data: {
-//     title: string;
-//     okok: string;
-//   };
-//   statusCode: number;
-//   message: string;
-// }
-// export interface CommentResponseDto<T> {
-//   data: {
-//     title: string;
-//     content: string;
-//     author: string;
+//     nickname: string;
+//     profileImg: string;
 //   };
 //   statusCode: number;
 //   message: string;

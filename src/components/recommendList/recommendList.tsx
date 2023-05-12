@@ -1,27 +1,41 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from '@mui/material';
 import { usePosts } from '@hooks/usePost';
 import Link from 'next/link';
 
 export default function RecommendList() {
-  //
-  const { posts } = usePosts();
+  //TODO: 🍎 1. 여기에 값을 전달하는 방법
+  const { posts } = usePosts({}, {});
 
   const [list, setList] = useState({ emotion: '' });
 
   const handleEmotionChange = (e: any) => {
-    const { name, value } = e.target;
-    setList((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { value } = e.target;
+    setList(value);
     console.log({ name: value });
   };
 
   return (
     <div style={{ marginTop: '2%' }}>
       <FormControl>
-        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" onChange={handleEmotionChange}>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          onChange={handleEmotionChange}
+        >
           <FormControlLabel name="emotion" value="HAPPINESS" control={<Radio />} label="HAPPINESS" />
           <FormControlLabel name="emotion" value="SADNESS" control={<Radio />} label="SADNESS" />
           <FormControlLabel name="emotion" value="ANGER" control={<Radio />} label="ANGER" />
