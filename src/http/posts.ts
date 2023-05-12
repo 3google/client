@@ -17,8 +17,8 @@ export interface TempPostDto {
 
 //게시판 전체 조회
 //공유 게시판
-export async function fetchPosts() {
-  //TODO : 🍎 쿼리스트링 사용 방법(/?board_type&emotion)
+export async function fetchPosts({ board_type, emotion }) {
+  //TODO : 🍎 쿼리스트링 사용 방법?(/?board_type&emotion)
   const { data: posts } = await apiClient.get<TempPostDto[]>(`/api/posts?board_type=${board_type}&emotion=${emotion}`);
   console.log(posts);
   return posts;
@@ -28,7 +28,7 @@ export async function fetchPosts() {
 //특정 게시물 조회
 export async function fetchPost({ id }: any) {
   console.log(`해당 게시물을 가져옴`);
-  const { data } = await apiClient.get<TempPostDto>(`/api/posts/${id}`);
+  const { data } = await apiClient.get<TempPostDto>(`/posts/${id}`);
   return data;
 }
 

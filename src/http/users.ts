@@ -20,7 +20,7 @@ export async function fetchUser() {
 // HERE 회원탈퇴
 export const deleteUser = async () => {
   try {
-    const response = await apiClient.delete('/api/users/account');
+    const response = await apiClient.delete('/users/account');
     return response.data;
   } catch (error) {
     console.error('Error deleting user:', error);
