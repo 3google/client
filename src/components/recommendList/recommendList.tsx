@@ -16,16 +16,16 @@ import { usePosts } from '@hooks/usePost';
 import Link from 'next/link';
 
 export default function RecommendList() {
-  //TODO: 🍎 1. 여기에 값을 전달하는 방법
-  const { posts } = usePosts({}, {});
-
-  const [list, setList] = useState({ emotion: '' });
+  const [emotion, setEmotion] = useState('');
 
   const handleEmotionChange = (e: any) => {
     const { value } = e.target;
-    setList(value);
-    console.log({ name: value });
+    setEmotion(value);
+    console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
+
+  //TODO: 🍎 1. 여기에 board_type과 emotion값을 전달하는 방법
+  const { posts } = usePosts('recommend-board', emotion);
 
   return (
     <div style={{ marginTop: '2%' }}>

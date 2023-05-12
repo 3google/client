@@ -3,9 +3,9 @@ import { UserResponseDto } from '@dto/responseDto';
 // 실제로 서버에 프로필 업데이트 요청하는 코드 작성
 
 export async function fetchUser() {
-  //진짜 백엔드 서버
   const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
   console.log('data', data);
+  // if ()
   return data.data;
 }
 

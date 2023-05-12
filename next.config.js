@@ -14,6 +14,14 @@ module.exports = {
         protocol: 'https',
         hostname: 'k.kakaocdn.net',
       },
+      {
+        protocol: 'http',
+        hostname: 'phinf.pstatic.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'phinf.pstatic.net',
+      },
     ],
   },
 };
