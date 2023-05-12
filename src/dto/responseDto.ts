@@ -5,6 +5,8 @@ export interface ResponseDto<T> {
   data: T;
   statusCode: number;
   message: string;
+  // title: string;
+  // content: string;
 }
 
 export type UserResponseDto = ResponseDto<UserDto>;

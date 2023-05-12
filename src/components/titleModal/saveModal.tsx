@@ -26,8 +26,8 @@ export const SaveModal: React.FC<SaveModalProps> = ({
   onClose,
   value,
   onChange,
-  category,
-  handleCategoryChange,
+  // category,
+  // handleCategoryChange,
 }) => {
   const [categories, setCategories] = useState<string[]>(['카테고리1', '카테고리2', '카테고리3']);
   const [newCategory, setNewCategory] = useState<string>('');
@@ -51,7 +51,7 @@ export const SaveModal: React.FC<SaveModalProps> = ({
           value={value}
           onChange={onChange}
         />
-        <Select value={category} onChange={handleCategoryChange} style={{ marginTop: '1em', width: '100%' }}>
+        {/* <Select value={category} onChange={handleCategoryChange} style={{ marginTop: '1em', width: '100%' }}>
           {categories.map((category, index) => (
             <MenuItem key={index} value={category}>
               {category}
@@ -66,7 +66,7 @@ export const SaveModal: React.FC<SaveModalProps> = ({
         />
         <IconButton onClick={handleAddCategory}>
           <AddCircleOutlineIcon />
-        </IconButton>
+        </IconButton> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} style={{ backgroundColor: '#673ab7', color: 'white' }}>

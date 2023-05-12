@@ -1,4 +1,4 @@
-import { TempPostDto, fetchPost, fetchPosts } from '@http/posts';
+import { fetchPost, fetchPosts } from '@http/posts';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
