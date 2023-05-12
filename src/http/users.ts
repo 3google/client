@@ -9,15 +9,6 @@ export async function fetchUser() {
   return data.data;
 }
 
-//로그아웃은 그냥 서버 링크로 연결만 하면 됨
-
-//TODO: (상의)회원 탈퇴
-// export async function deleteUser(): Promise<null> {
-//   await apiClient.delete('/api/users/account');
-//   console.log('회원탈퇴완료');
-//   return null;
-// }
-//
 // HERE 회원탈퇴
 export const deleteUser = async () => {
   try {

@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   FormControl,
   RadioGroup,
   FormControlLabel,
@@ -25,7 +24,7 @@ export default function RecommendList() {
   };
 
   //TODO: 🍎 1. 여기에 board_type과 emotion값을 전달하는 방법
-  const { posts } = usePosts('recommend-board', emotion);
+  const { posts } = usePosts('RECOMMEND', emotion);
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -58,6 +57,7 @@ export default function RecommendList() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* TODO : 🍎 왜 타입 오류가 뜨는지? -> 서버 연결하고 다시 !!! */}
             {posts?.map(({ title, author, bookmarksCnt, commentsCnt, created_at, emotion, id }, index) => (
               <TableRow key={id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>

@@ -7,10 +7,11 @@ export interface ResponseDto<T> {
   message: string;
 }
 
+//Dto 모음~
 export type UserResponseDto = ResponseDto<UserDto>;
 export type PostResponseDto = ResponseDto<PostDto>;
 
-// 위에 꺼랑 같음 !
+// 위에는 이런 뜻!
 // export interface ResponseDto<UserDto> {
 //     data: UserDto;
 //     statusCode: number;
@@ -23,6 +24,22 @@ export type PostResponseDto = ResponseDto<PostDto>;
 //   data: {
 //     nickname: string;
 //     profileImg: string;
+//   };
+//   statusCode: number;
+//   message: string;
+// }
+
+// export interface PostResponseDto {
+//   data: {
+//     id: number;
+//     title: string;
+//     content: string;
+//     author: string;
+//     board_type: string;
+//     emotion: number;
+//     created_at: number;
+//     bookmarksCnt: number;
+//     commentsCnt: number;
 //   };
 //   statusCode: number;
 //   message: string;
