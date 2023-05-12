@@ -7,7 +7,7 @@ async function _fetchUser() {
     console.log(user);
     return user;
   } catch (error) {
-    console.log('로그인 안되는데 .......');
+    // console.log('로그인 안되는데 .......');
     return null; // undefined 나면 에러ㅡㅡ
   }
 }
@@ -22,3 +22,9 @@ export function useUser() {
 
   return { user };
 }
+//TODO 마이 컨텐츠
+// export function useMyContents() {
+//   const { data: myContents, isLoading, error } = useQuery(['myContents'], fetchMyContents);
+
+//   return { myContents, isLoading, error };
+// }

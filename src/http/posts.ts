@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { apiClient } from './apiClient';
 
 //임시 Dto
@@ -57,3 +56,7 @@ export async function deletePost(id: any) {
   await apiClient.delete(`/post/${id}`);
   return null;
 }
+// export async function fetchPost(): Promise<Post[]> {
+//   const { data } = await apiClient.get<Post[]>('/posts');
+//   return data;
+// }

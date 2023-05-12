@@ -1,7 +1,7 @@
 // import { SessionProvider } from "next-auth/react";
 import React from 'react';
 import ReactQueryProvider from './ReactQueryProvider';
-import { Navigation } from '../components/navbar/Navigation';
+// import { Navigation } from '../components/navbar/navigation';
 import './globals.css';
 import { Router } from 'react-router';
 import { Layout } from '@components/Layout';
