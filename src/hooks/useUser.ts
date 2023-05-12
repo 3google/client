@@ -7,7 +7,7 @@ async function _fetchUser() {
     console.log(user);
     return user;
   } catch (error) {
-    // console.log('로그인 안되는데 .......');
+    console.log('로그인 안됐어요!!!!!!!!');
     return null; // undefined 나면 에러ㅡㅡ
   }
 }
@@ -15,9 +15,9 @@ async function _fetchUser() {
 // component -> state(hook) -> http
 export function useUser() {
   const { data: user } = useQuery(['users', 'current'], _fetchUser, {
-    retry: 0,
-    suspense: true,
-    useErrorBoundary: true,
+    // retry: 0,
+    // suspense: true,
+    // useErrorBoundary: true,
   });
 
   return { user };
