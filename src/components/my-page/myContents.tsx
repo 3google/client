@@ -18,7 +18,7 @@ export default function MyContents() {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
-  const { data: fetchedPosts, refetch } = useGetPosts('board_type', 'emotion');
+  const { data: fetchedPosts, refetch } = useGetPosts();
 
   useEffect(() => {
     if (fetchedPosts) {
@@ -33,17 +33,6 @@ export default function MyContents() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  // // 게시글 삭제
-  // const handleDeletePost = (id: number) => {
-  //   const updatedPosts = posts.filter((row) => row.id !== id);
-  //   setPosts(
-  //     updatedPosts.map((post, index) => ({
-  //       ...post,
-  //       id: index + 1,
-  //     })),
-  //   );
-  // };
 
   // 게시글 삭제
   const handleDeletePost = async (id: number) => {

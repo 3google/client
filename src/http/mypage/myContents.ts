@@ -1,12 +1,13 @@
 import { apiClient } from '../apiClient';
-interface FetchMyContentsArgs {
-  board_type: string;
-  emotion: number;
-}
+// interface FetchMyContentsArgs {
+//   id: string;
+//   board_type: string;
+//   emotion: number;
+// }
 
-// 마이페이지 - 내 게시글 조회
-export async function fetchPosts({ board_type, emotion }: FetchMyContentsArgs) {
-  const { data: posts } = await apiClient.get(`/posts?board_type=${board_type}&emotion=${emotion}`);
+//TODO 마이페이지 - 내 작성글 조회
+export async function fetchMyPosts() {
+  const { data: posts } = await apiClient.get(`/posts/user`);
   return posts;
 }
 
