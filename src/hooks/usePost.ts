@@ -8,7 +8,7 @@ export function usePosts(board_type: string, emotion: string) {
     data: posts,
     isLoading,
     error,
-  } = useQuery(['posts', { board_type, emotion }], () => fetchPosts(board_type, emotion));
+  } = useQuery(['posts', { board_type, emotion }], () => fetchPosts({ board_type, emotion }));
 
   return { posts, isLoading, error };
 }

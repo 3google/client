@@ -48,5 +48,6 @@ export const updateProfile = async (nickname: string, profileImage: File) => {
 // 마이페이지 프로필 이미지, 닉네임, 소셜 조회
 export const getUserProfile = async () => {
   const response = await apiClient.get('/users/mypage');
+  console.log(response.data);
   return response.data;
 };
