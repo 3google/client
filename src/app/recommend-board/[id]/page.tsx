@@ -29,7 +29,7 @@ export interface SimpleDialogProps {
 }
 
 //TODO:나의 북마크 카테고리 api로 가져오기
-const bookmarkCategory = ['기본', '내 폴더'];
+const bookmarkCategory = ['내 북마크1', '내 북마크2'];
 
 //북마크 누르면 뜨는 모달창 컴포넌트!
 function SimpleDialog(props: SimpleDialogProps) {
@@ -46,7 +46,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>북마크 그룹 선택하기</DialogTitle>
+      <DialogTitle>나의 북마크 그룹을 선택해주세요!</DialogTitle>
       <List sx={{ pt: 0 }}>
         {bookmarkCategory.map((bookmarkCategory) => (
           <ListItem disableGutters>

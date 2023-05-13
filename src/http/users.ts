@@ -3,21 +3,12 @@ import { UserResponseDto } from '@dto/responseDto';
 // 실제로 서버에 프로필 업데이트 요청하는 코드 작성
 
 export async function fetchUser() {
-  //진짜 백엔드 서버
   const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
   console.log('data', data);
+  // if ()
   return data.data;
 }
 
-//로그아웃은 그냥 서버 링크로 연결만 하면 됨
-
-//TODO: (상의)회원 탈퇴
-// export async function deleteUser(): Promise<null> {
-//   await apiClient.delete('/api/users/account');
-//   console.log('회원탈퇴완료');
-//   return null;
-// }
-//
 // HERE 회원탈퇴
 export const deleteUser = async () => {
   try {
