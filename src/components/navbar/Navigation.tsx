@@ -6,6 +6,7 @@ import { Nav } from '../../styles/Navigation.styled';
 import { SERVER_URL } from '../../common/constants';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { apiClient } from '@http/apiClient';
 
 export const Navigation = () => {
   const router = useRouter();
@@ -14,6 +15,25 @@ export const Navigation = () => {
     router.push('/my-page');
   };
 
+  // const handleClickLogin = () => {
+  //   // axios.get
+  //   // apiClient.get({}).catch((error) => {
+  //   //   if (error.message) {
+  //   //     alert('error.message');
+  //   //   }
+  //   // });
+  // };
+
+  const handleClickLogout = () => {
+    try {
+      apiClient.post(`/auth/logout`);
+      router.push('/');
+      alert('로그아웃 완료!!!!');
+    } catch (error) {
+      console.log(error);
+      alert('로그아웃 실패!!!!');
+    }
+  };
   const { user } = useUser();
 
   if (!user) {
@@ -58,10 +78,10 @@ export const Navigation = () => {
                 {user.nickname}
               </button>
 
-              {/* 로그아웃도 그냥 링크로 연결하면 됨 */}
-              <Link href={`${SERVER_URL}/auth/logout`}>
-                <button className="button">logout</button>
-              </Link>
+              {/* 로그아웃 TODO: 온클릭으로 post! */}
+              <button className="button" onClick={handleClickLogout}>
+                logout
+              </button>
             </div>
           </div>
         </ul>

@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   FormControl,
   RadioGroup,
   FormControlLabel,
@@ -14,18 +13,19 @@ import {
 } from '@mui/material';
 import { usePosts } from '@hooks/usePost';
 import Link from 'next/link';
+import { BOARD_TYPE } from '@common/constants';
 
 export default function RecommendList() {
-  //TODO: 🍎 1. 여기에 값을 전달하는 방법
-  const { posts } = usePosts({}, {});
-
-  const [list, setList] = useState({ emotion: '' });
+  const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
 
   const handleEmotionChange = (e: any) => {
     const { value } = e.target;
-    setList(value);
-    console.log({ name: value });
+    setEmotion(value);
+    console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
+
+  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion.emotion);
+  console.log('posts', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -58,6 +58,7 @@ export default function RecommendList() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* TODO : 🍎 왜 타입 오류가 뜨는지? -> 서버 연결하고 다시 !!! */}
             {posts?.map(({ title, author, bookmarksCnt, commentsCnt, created_at, emotion, id }, index) => (
               <TableRow key={id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
