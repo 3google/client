@@ -20,12 +20,6 @@ export default function MyComments() {
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const { data: fetchedComments, refetch } = useGetMyComments();
 
-  // useEffect(() => {
-  //   if (fetchedComments) {
-  //     setComments(fetchedComments);
-  //   }
-  // }, [fetchedComments]);
-
   useEffect(() => {
     if (fetchedComments && fetchedComments.data) {
       setComments(fetchedComments.data);
@@ -60,35 +54,38 @@ export default function MyComments() {
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>No</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>작성일자</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>감정</TableCell>
-              <TableCell style={{ fontWeight: 'bold', textAlign: 'center' }}>게시글</TableCell>
+              <TableCell style={{ fontWeight: 'bold', textAlign: 'center' }}>제목</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'right' }}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-              <TableRow key={row.id} hover>
-                <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
-                <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
-                <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>
-                  {row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}
-                </TableCell>
-                <TableCell style={{ textAlign: 'right' }}>
-                  <Tooltip
-                    title="댓글 삭제"
-                    color="error"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteMyComment(row.id);
-                    }}
-                  >
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+            {comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const currentIndex = page * rowsPerPage + index + 1;
+              return (
+                <TableRow key={row.id} hover>
+                  <TableCell style={{ textAlign: 'left' }}>{currentIndex}</TableCell>
+                  <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
+                  <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
+                  <TableCell style={{ textAlign: 'center' }}>
+                    {row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}
+                  </TableCell>
+                  <TableCell style={{ textAlign: 'right' }}>
+                    <Tooltip
+                      title="댓글 삭제"
+                      color="error"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteMyComment(row.id);
+                      }}
+                    >
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

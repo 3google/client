@@ -7,7 +7,6 @@ import { updateProfile, getUserProfile } from '@http/users';
 interface UpdateProfileVariables {
   nickname: string;
   profileImg: File;
-  social: string;
 }
 
 // 입력받은 nickname과 profileImg를 가지고 updateProfile 함수를 호출

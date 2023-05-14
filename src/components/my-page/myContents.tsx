@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
+// help me! 코치님 handleDeletePost 함수를 생성하여 삭제 진행을 하려고 하는데, 삭제가 되지 않습니다. 무슨 이유일까요?
 interface Row {
   id: number;
   created_at: string;
