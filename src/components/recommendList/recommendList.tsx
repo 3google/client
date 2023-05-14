@@ -18,14 +18,17 @@ import { BOARD_TYPE } from '@common/constants';
 export default function RecommendList() {
   const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
 
+  //감정 카테고리가 바뀔 때마다
   const handleEmotionChange = (e: any) => {
     const { value } = e.target;
     setEmotion(value);
-    console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
+    return emotion;
   };
+  console.log('버튼 클릭:', emotion);
 
-  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion.emotion);
-  console.log('posts', posts);
+  //TODO: emotion 에러나는데 이렇게 해야 emotion전달되고 url에 알맞게 들어옴(왜,,)
+  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion);
+  console.log('해당 posts들이 들어오고있어요', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -58,18 +61,17 @@ export default function RecommendList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* TODO : 🍎 왜 타입 오류가 뜨는지? -> 서버 연결하고 다시 !!! */}
-            {posts?.map(({ title, author, bookmarksCnt, commentsCnt, created_at, emotion, id }, index) => (
-              <TableRow key={id} hover>
+            {posts?.map((posts, index) => (
+              <TableRow key={posts.data.id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{emotion}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.emotion}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>
-                  <Link href={`/recommend-board/${id}`}>{title}</Link>
+                  <Link href={`/recommend-board/${posts.data.id}`}>{posts.data.title}</Link>
                 </TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{author}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{commentsCnt}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{bookmarksCnt}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{created_at}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.author}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.commentsCnt}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.bookmarksCnt}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.created_at}</TableCell>
               </TableRow>
             ))}
           </TableBody>

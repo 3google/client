@@ -6,9 +6,6 @@ import Image from 'next/image';
 import { SERVER_URL } from 'common/constants';
 
 export default function Login() {
-  // axios.get('a', {
-  //   withCredentials: true -> 쿠키 보낼 때 필요
-  // });
   return (
     <LoginContainer>
       <h3>로그인</h3>
