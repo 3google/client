@@ -18,7 +18,7 @@ import Contents from '@components/my-page/myContents';
 import Comments from '@components/my-page/myComments';
 import Bookmark from '@components/my-page/myBookmark';
 import { useUpdateProfile, useUserProfile } from '@hooks/useUserProfile';
-
+import { useUser } from '@hooks/useUser';
 // TODO 코드 에러 잡기
 export default function MyPage() {
   const [value, setValue] = React.useState(0);
@@ -28,19 +28,21 @@ export default function MyPage() {
 
   // 백엔드에서 social 정보 string으로 받아옴
   // 사용자 정보가 로드되면 해당 정보를 사용하여 상태를 설정
-  const userProfileQuery = useUserProfile();
-  const [nickname, setNickname] = useState(userProfileQuery.data?.nickname ?? '길동?');
-  const [profileImg, setProfileImg] = useState(userProfileQuery.data?.profileImg ?? '/profile-img.png');
+  const { user } = useUser();
+  const [nickname, setNickname] = useState(user?.nickname ?? '길동?');
+  const [profileImg, setProfileImg] = useState(user?.profileImg ?? '/profile-img.png');
+  const [social, setSocial] = useState(user?.social ?? 'img');
 
   // WAIT 1-프로필 업데이트
   const updateProfileMutation = useUpdateProfile();
 
+  //TODO 소셜 이미지 안뜬다..
   // 소셜 로그인 이미지를 렌더링하는 함수
   const renderSocial = (social: string) => {
     if (!social) return null;
-    if (social === 'kakao') {
+    if (social === 'KAKAO') {
       return <img src="/kakao-icon.png" alt="Kakao" width="60" height="30" />;
-    } else if (social === 'naver') {
+    } else if (social === 'NAVER') {
       return <img src="/naver-icon.png" alt="Naver" width="60" height="30" />;
     } else {
       return null;
@@ -69,8 +71,13 @@ export default function MyPage() {
     if (inputRef.current && imageRef.current?.files?.length) {
       const newNickname = inputRef.current?.value ?? nickname;
       const newProfileImg = imageRef.current.files[0] ?? null;
+      const newSocial = imageRef.current.value ?? null;
       try {
-        await updateProfileMutation.mutateAsync({ nickname: newNickname, profileImg: newProfileImg });
+        await updateProfileMutation.mutateAsync({
+          nickname: newNickname,
+          profileImg: newProfileImg,
+          social: newSocial,
+        });
         setIsEditing(false);
         setNickname(newNickname);
         console.log('성공');
@@ -149,9 +156,8 @@ export default function MyPage() {
           )}
         </UserInfoText>
         {/* 로그인 이미지 */}
-        <div>{renderSocial(userProfileQuery.data?.social)}</div>
+        <div>{renderSocial(social)}</div>
       </UserInfoContainer>
-
       <Tabs value={value} onChange={handleChange}>
         <StyledTabsList>
           <StyledTab value={0}>내가 쓴 글</StyledTab>
