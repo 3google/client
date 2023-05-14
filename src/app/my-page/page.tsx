@@ -17,8 +17,12 @@ import AccountDelete from '@components/my-page/accountDelete';
 import Contents from '@components/my-page/myContents';
 import Comments from '@components/my-page/myComments';
 import Bookmark from '@components/my-page/myBookmark';
-import { useUpdateProfile, useUserProfile } from '@hooks/useUserProfile';
+import { useUpdateProfile } from '@hooks/useUserProfile';
 import { useUser } from '@hooks/useUser';
+
+// help me! 코치님, renderSocial 함수를 설정하였지만 소셜 로그인의 이미지를 받아오지 못하는것 같아요 ㅠㅠ) 도와주세욥
+// 코치님, 내가 작성한 게시판을 조회하여 클릭하게 되면 게시판의 상세페이지로 넘어가게 하려고 합니다. 마이페이지의 게시판에서 어떻게 연결해야 할까요? 감이 안옵니다 ㅠㅠ)
+
 // TODO 코드 에러 잡기
 export default function MyPage() {
   const [value, setValue] = React.useState(0);
@@ -33,11 +37,12 @@ export default function MyPage() {
   const [profileImg, setProfileImg] = useState(user?.profileImg ?? '/profile-img.png');
   const [social, setSocial] = useState(user?.social ?? 'img');
 
-  // WAIT 1-프로필 업데이트
+  // 프로필 업데이트
   const updateProfileMutation = useUpdateProfile();
 
-  //TODO 소셜 이미지 안뜬다..
-  // 소셜 로그인 이미지를 렌더링하는 함수
+  //TODO 소셜 이미지 안뜬다..왜안되지
+
+  // 소셜 로그인 이미지를 렌더링하는 함수..
   const renderSocial = (social: string) => {
     if (!social) return null;
     if (social === 'KAKAO') {
@@ -71,16 +76,14 @@ export default function MyPage() {
     if (inputRef.current && imageRef.current?.files?.length) {
       const newNickname = inputRef.current?.value ?? nickname;
       const newProfileImg = imageRef.current.files[0] ?? null;
-      const newSocial = imageRef.current.value ?? null;
       try {
         await updateProfileMutation.mutateAsync({
           nickname: newNickname,
           profileImg: newProfileImg,
-          social: newSocial,
         });
         setIsEditing(false);
         setNickname(newNickname);
-        console.log('성공');
+        console.log('수정완료');
       } catch (error) {
         console.error(error);
         alert('프로필 업데이트에 실패했습니다.');

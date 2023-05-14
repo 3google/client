@@ -4,34 +4,25 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { useUserComments } from '@hooks/useAdmin';
+import { deleteUSerComment } from '@http/admin/admin';
+import { AdminDto } from '@dto/adminDto';
 
-interface Row {
-  id: number;
-  nickname: string;
-  email: string;
-  content: string;
-  comment: string;
-}
-
-const rows: Row[] = [
-  { id: 1, nickname: 'John Smith', email: 'user1@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 2, nickname: 'Jane Doe', email: 'user2@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 3, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 4, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 5, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 6, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 7, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 8, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 9, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 10, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 11, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-  { id: 12, nickname: 'Bob Johnson', email: 'user3@gmail.com', content: '게시글', comment: '댓글' },
-];
+//TODO 댓글 내용은 어디서 불러와야 하지?
 
 export default function Comments() {
-  const [posts, setPosts] = useState<Row[]>(rows);
+  const [posts, setPosts] = useState<AdminDto[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const { comments, isLoading, error } = useUserComments('board_type_value', 'emotion_value');
+  const handleDeleteComment = async (id: string) => {
+    try {
+      await deleteUSerComment(id);
+      alert('댓글이 삭제되었습니다.');
+    } catch (error) {
+      alert('댓글 삭제에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -40,16 +31,6 @@ export default function Comments() {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleDeletePost = (id: number) => {
-    const updatedPosts = posts.filter((row) => row.id !== id);
-    setPosts(
-      updatedPosts.map((post, index) => ({
-        ...post,
-        id: index + 1,
-      })),
-    );
   };
 
   const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
@@ -70,7 +51,7 @@ export default function Comments() {
                 이메일
               </TableCell>
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
-                게시글
+                제목
               </TableCell>
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
                 댓글
@@ -81,40 +62,42 @@ export default function Comments() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-              <TableRow key={row.id} hover>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.id}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.nickname}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.email}
-                </TableCell>
-
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.content}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.comment}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  <Tooltip
-                    title="댓글 삭제"
-                    color="error"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeletePost(row.id);
-                    }}
-                  >
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const currentIndex = page * rowsPerPage + index + 1;
+              return (
+                <TableRow key={row.id} hover>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {currentIndex}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.nickname}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.email}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.title}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {/* {row.comment} */}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    <Tooltip
+                      title="댓글 삭제"
+                      color="error"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteComment(row.id);
+                      }}
+                    >
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

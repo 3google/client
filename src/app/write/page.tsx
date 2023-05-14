@@ -18,7 +18,12 @@ import { SaveModal } from '@components/titleModal/saveModal';
 import { ShareModal } from '@components/titleModal/shareModal';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-//
+
+// help me! 코치님, 다른 코드 작성으로 여기까지 진도를 못 뽑았지만.. 질문드립니다.
+// 오피스아워때 설명해주셨는데 제가 잘 이해를 못해서 다시한번 질문드려요 (무지한 저를 용서해주세요..ㅠㅠ)
+// 쳇봇 형식으로 질문 -> 답변 으로 응답을 받을건데, 답변 받은것 중에 원하는 것만 저장, 공유하기를 하려고 합니다.
+// 저장하기를 누르면 제목을 입력하고 저장을 하게 되어 있는데,, 질문-답변-제목 을 한 세트로 저장을 하려고 합니다.
+// 코드를 어떤식으로 작성해야 하는지 감조차 잡히지 않아서 질문드립니다.
 export default function Write() {
   const [messages, setMessages] = useState([
     { id: 2, isUser: false, text: '안녕하세요, 현재의 기분을 자유롭게 작성해보세요!' },
