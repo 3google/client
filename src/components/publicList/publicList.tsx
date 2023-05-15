@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   FormControl,
   RadioGroup,
   FormControlLabel,
@@ -25,8 +24,9 @@ export default function PublicList() {
     console.log('버튼 클릭:', emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
 
-  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
-  // console.log('posts', posts);
+  //TODO: 이부분도 recommendList.tsx와 같은 문제
+  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion);
+  console.log('해당 posts들이 들어오고있어요', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>
