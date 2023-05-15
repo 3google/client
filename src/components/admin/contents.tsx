@@ -1,64 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledTablePagination } from '@styles/admin.styled';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-
-interface Row {
-  id: number;
-  nickname: string;
-  email: string;
-  emotion: string;
-  content: string;
-  comment: number;
-  bookmark: number;
-}
-
-const rows: Row[] = [
-  { id: 1, nickname: 'John Smith', email: 'user1@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 2, nickname: 'Jane Doe', email: 'user2@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 3, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 4, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 5, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 6, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 7, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 8, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 9, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 10, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 11, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-  { id: 12, nickname: 'Bob Johnson', email: 'user3@gmail.com', emotion: '슬픔', content: '게시글', comment: 2, bookmark: 1 },
-];
+import { PostDto } from '@dto/postDto';
+import { deletePost } from '@http/admin/admin';
+import { useUserPosts } from '@hooks/useAdmin';
 
 export default function Board() {
-  const [posts, setPosts] = useState<Row[]>(rows);
+  const [posts, setPosts] = useState<PostDto[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+
+  //TODO 5/15~
+
+  // const { fetchedPosts, refetch } = useUserPosts();
+  //help me! 코치님, board_type와 emotion은 설정을 어떻게 해야 할까요
+  const { data: fetchedPosts, isLoading, error } = useUserPosts(board_type, emotion);
+  useEffect(() => {
+    if (fetchedPosts) {
+      setPosts(fetchedPosts);
+    }
+  }, [fetchedPosts]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-
-  // const handleChangePage = (event: unknown, newPage: number) => {
-  //   setPage(newPage);
-  //   if (newPage * rowsPerPage >= posts.length) {
-  //     setRowsPerPage(5);
-  //   }
-  // };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const handleDeletePost = (id: number) => {
-    const updatedPosts = posts.filter((row) => row.id !== id);
-    setPosts(
-      updatedPosts.map((post, index) => ({
-        ...post,
-        id: index + 1,
-      })),
-    );
+  // 게시글 삭제
+  const handleDeletePost = async (id: string) => {
+    try {
+      await deletePost(id);
+      alert('게시글이 삭제되었습니다.');
+    } catch (error) {
+      alert('게시글 삭제에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
@@ -76,15 +58,11 @@ export default function Board() {
                 작성자
               </TableCell>
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
-                이메일
-              </TableCell>
-              <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
                 감정
               </TableCell>
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
-                게시글
+                제목
               </TableCell>
-
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
                 댓글수
               </TableCell>
@@ -92,55 +70,60 @@ export default function Board() {
                 북마크수
               </TableCell>
               <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                작성일자
+              </TableCell>
+              <TableCell align="center" style={{ fontWeight: 'bold', textAlign: 'center' }}>
                 관리
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-              <TableRow key={row.id} hover>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.id}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.nickname}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.email}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.emotion}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.content}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.comment}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  {row.bookmark}
-                </TableCell>
-                <TableCell align="center" style={{ textAlign: 'center' }}>
-                  <Tooltip
-                    title="게시글 삭제"
-                    color="error"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeletePost(row.id);
-                    }}
-                  >
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const currentIndex = page * rowsPerPage + index + 1;
+              return (
+                <TableRow key={row.id} hover>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {currentIndex}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.nickname}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.emotion}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.content}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.commentsCnt}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.bookmarksCnt}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    {row.created_at}
+                  </TableCell>
+                  <TableCell align="center" style={{ textAlign: 'center' }}>
+                    <Tooltip
+                      title="게시글 삭제"
+                      color="error"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePost(row.id);
+                      }}
+                    >
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
       <StyledTablePagination
-        // component="div"
         count={posts.length}
         page={page}
         onPageChange={handleChangePage}

@@ -6,7 +6,9 @@ import { Title, P, ContentWrap, BottomButton, Input } from '@styles/accountDelet
 import { deleteUser } from '@http/users';
 import { useRouter } from 'next/navigation';
 
-// 회원탈퇴 API 완료
+// help me! 코치님! 회원탈퇴가 완료되었다는 alert 창까지 뜨는데,,회원탈퇴가 안된 상태입니다..이건 어디가 잘못된걸까요?ㅠㅠ
+
+// TODO 회원탈퇴 API 완료 -> 탈퇴 안됨 ㅠㅠ
 
 interface AccountDeleteProps {
   open: boolean;

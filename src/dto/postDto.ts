@@ -1,5 +1,6 @@
 export interface PostDto {
-  id: number;
+  id: string;
+  nickname: string;
   title: string;
   content: string;
   author: string;

@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
+// help me! 코치님 handleDeletePost 함수를 생성하여 삭제 진행을 하려고 하는데, 삭제가 되지 않습니다. 무슨 이유일까요?
 interface Row {
   id: number;
   created_at: string;
@@ -21,12 +22,6 @@ export default function MyContents() {
   const visibleRows = contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
   const { data: fetchedPosts, refetch } = useGetPosts();
 
-  // useEffect(() => {
-  //   console.log(fetchedPosts);
-  //   if (fetchedPosts) {
-  //     setContents(fetchedPosts);
-  //   }
-  // }, [fetchedPosts]);
   useEffect(() => {
     if (fetchedPosts && fetchedPosts.data) {
       setContents(fetchedPosts.data);
@@ -65,32 +60,36 @@ export default function MyContents() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-              <TableRow key={row.id} hover>
-                <TableCell style={{ textAlign: 'left' }}>{row.id}</TableCell>
-                <TableCell style={{ textAlign: 'left' }}>
-                  {new Date(row.created_at).toLocaleDateString('ko-KR')}
-                </TableCell>
-                <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>
-                  {row.content.length > 20 ? row.content.slice(0, 20) + '...' : row.content}
-                </TableCell>
-                <TableCell style={{ textAlign: 'right' }}>
-                  <Tooltip
-                    title="게시글 삭제"
-                    color="error"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeletePost(row.id);
-                    }}
-                  >
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+            {contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const currentIndex = page * rowsPerPage + index + 1;
+
+              return (
+                <TableRow key={row.id} hover>
+                  <TableCell style={{ textAlign: 'left' }}>{currentIndex}</TableCell>
+                  <TableCell style={{ textAlign: 'left' }}>
+                    {new Date(row.created_at).toLocaleDateString('ko-KR')}
+                  </TableCell>
+                  <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
+                  <TableCell style={{ textAlign: 'center' }}>
+                    {row.content.length > 20 ? row.content.slice(0, 20) + '...' : row.content}
+                  </TableCell>
+                  <TableCell style={{ textAlign: 'right' }}>
+                    <Tooltip
+                      title="게시글 삭제"
+                      color="error"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePost(row.id);
+                      }}
+                    >
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
