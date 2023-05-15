@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   FormControl,
   RadioGroup,
   FormControlLabel,
@@ -22,11 +21,12 @@ export default function PublicList() {
   const handleEmotionChange = (e: any) => {
     const { value } = e.target;
     setEmotion(value);
-    console.log(emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
+    console.log('버튼 클릭:', emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
 
-  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
-  console.log('posts', posts);
+  //TODO: 이부분도 recommendList.tsx와 같은 문제
+  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion);
+  console.log('해당 posts들이 들어오고있어요', posts);
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -59,16 +59,16 @@ export default function PublicList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts?.map(({ title, bookmarksCnt, commentsCnt, created_at, emotion, id }, index) => (
-              <TableRow key={id} hover>
+            {posts?.map((posts, index) => (
+              <TableRow key={posts.data.id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{emotion}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.emotion}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>
-                  <Link href={`/public-board/${id}`}>{title}</Link>
+                  <Link href={`/public-board/${posts.data.id}`}>{posts.data.title}</Link>
                 </TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{commentsCnt}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{bookmarksCnt}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{created_at}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.commentsCnt}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.bookmarksCnt}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{posts.data.created_at}</TableCell>
               </TableRow>
             ))}
           </TableBody>
