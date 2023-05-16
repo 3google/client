@@ -28,19 +28,19 @@ export default function CreatePost() {
 
   //폼 제출
   const handleSumbit = async (e: any) => {
-    console.log({ newPost });
+    console.log('게시글 생성버튼!', newPost); //제대로 가고있음
 
     e.preventDefault();
     if (newPost.title == '' || newPost.content == '' || newPost.emotion == '') {
       alert('모든 항목을 채워주세요!');
       return;
     }
-    //API 요청
+
+    //TODO : 🍎게시글 생성
     try {
-      //TODO : 🍎이렇게 전달하는게 맞는지
       await createPost(newPost.title, newPost.content, newPost.emotion);
       console.log('POST 요청 성공');
-      router.push('/recommend-board/');
+      router.push('/recommend-board');
     } catch (error) {
       console.log('POST 요청이 실패했습니다', error);
     }
@@ -55,13 +55,24 @@ export default function CreatePost() {
           <form onSubmit={handleSumbit}>
             <div className="title-container">
               <p>제목</p>
-              <input className="title-input" name="title" type="text" placeholder="제목을 입력해 주세요" onChange={handleValueChange} />
+              <input
+                className="title-input"
+                name="title"
+                type="text"
+                placeholder="제목을 입력해 주세요"
+                onChange={handleValueChange}
+              />
             </div>
 
             {/* 감정 카테고리 선택하기 */}
             <FormControl>
               {/* <FormLabel id="demo-row-radio-buttons-group-label">감정 카테고리</FormLabel> */}
-              <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" onChange={handleValueChange}>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                onChange={handleValueChange}
+              >
                 <FormControlLabel name="emotion" value="HAPPINESS" control={<Radio />} label="HAPPINESS" />
                 <FormControlLabel name="emotion" value="SADNESS" control={<Radio />} label="SADNESS" />
                 <FormControlLabel name="emotion" value="ANGER" control={<Radio />} label="ANGER" />
@@ -73,7 +84,13 @@ export default function CreatePost() {
 
             <div className="content-container">
               <p>내용</p>
-              <input className="content-input" name="content" type="text" placeholder="내용을 입력해 주세요" onChange={handleValueChange} />
+              <input
+                className="content-input"
+                name="content"
+                type="text"
+                placeholder="내용을 입력해 주세요"
+                onChange={handleValueChange}
+              />
             </div>
 
             <button type="submit" className="button">
