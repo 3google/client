@@ -2,16 +2,14 @@ import { PostResponseDto } from '@dto/responseDto';
 import { apiClient } from './apiClient';
 
 //게시판 전체 조회
-//TODO : 🍎 쿼리스트링(/?board_type&emotion)
 export async function fetchPosts({ board_type, emotion }: { board_type: string; emotion: string }) {
-  console.log('board_type', board_type);
-  console.log('emotion', emotion);
+  console.log('board_type:', board_type);
+  console.log('emotion:', emotion);
 
   const { data: posts } = await apiClient.get<PostResponseDto[]>(`/posts?board_type=${board_type}&emotion=${emotion}`);
-  console.log(posts);
+  // console.log(posts);
   return posts;
 }
-//추천 게시판
 
 //특정 게시물 조회
 export async function fetchPost({ id }: any) {
@@ -20,7 +18,7 @@ export async function fetchPost({ id }: any) {
   return data;
 }
 
-// // 게시글 작성
+// 게시글 작성
 export async function createPost(title: string, content: string, emotion: string) {
   const { data } = await apiClient.post<PostResponseDto>('/posts', {
     title,
@@ -30,7 +28,7 @@ export async function createPost(title: string, content: string, emotion: string
   return data;
 }
 
-// // 게시글 수정
+// 게시글 수정
 export async function updatePost(title: string, content: string, emotion: string) {
   const { data } = await apiClient.patch<PostResponseDto>(`/posts`, {
     title,
@@ -40,7 +38,7 @@ export async function updatePost(title: string, content: string, emotion: string
   return data;
 }
 
-// // 게시글 삭제
+// 게시글 삭제
 export async function deletePost(id: any) {
   await apiClient.delete(`/post/${id}`);
   return null;
