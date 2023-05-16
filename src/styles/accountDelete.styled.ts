@@ -26,7 +26,7 @@ export const ContentWrap = styled.div`
   flex: 1;
 `;
 
-export const P = styled.div`
+export const Div = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: #262626;

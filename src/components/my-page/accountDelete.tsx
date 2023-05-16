@@ -2,13 +2,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { Title, P, ContentWrap, BottomButton, Input } from '@styles/accountDelete.styled';
+import { Title, Div, ContentWrap, BottomButton, Input } from '@styles/accountDelete.styled';
 import { deleteUser } from '@http/users';
 import { useRouter } from 'next/navigation';
 
-// help me! 코치님! 회원탈퇴가 완료되었다는 alert 창까지 뜨는데,,회원탈퇴가 안된 상태입니다..이건 어디가 잘못된걸까요?ㅠㅠ
-
-// TODO 회원탈퇴 API 완료 -> 탈퇴 안됨 ㅠㅠ
+// 회원탈퇴 API 완료 -> 탈퇴 안됨 ㅠㅠ -> 탈퇴완료!
 
 interface AccountDeleteProps {
   open: boolean;
@@ -42,13 +40,11 @@ export default function AccountDelete({ open, handleClose }: AccountDeleteProps)
     if (isInputValid) {
       try {
         await deleteUser();
-        // 회원 탈퇴가 성공적으로 이루어진 후, 로그아웃 처리 및 페이지 이동 등 필요한 작업을 수행
         alert('회원 탈퇴가 완료되었습니다.');
         handleClose();
         router.replace('/');
       } catch (error) {
         alert('회원 탈퇴 중 오류가 발생했습니다.');
-        console.log('error'); // d/c
       }
     }
   };
@@ -63,19 +59,19 @@ export default function AccountDelete({ open, handleClose }: AccountDeleteProps)
         <Box sx={style}>
           <Title>회원탈퇴</Title>
           <ContentWrap>
-            <P>✓ 탈퇴시 고객 정보가 삭제됩니다.</P>
-            <P style={{ marginTop: '30px' }}>✓ 사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</P>
-            <P style={{ marginTop: '30px' }}>
+            <Div>✓ 탈퇴시 고객 정보가 삭제됩니다.</Div>
+            <Div style={{ marginTop: '30px' }}>✓ 사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</Div>
+            <Div style={{ marginTop: '30px' }}>
               ✓ 탈퇴하신 아이디로는 다시 회원가입을 하실 수 없습니다. (다른 아이디로 가입)
-            </P>
-            <P style={{ marginTop: '70px' }}> ✓ 다음을 입력해주세요 : </P>
-            <P style={{ marginTop: '10px', color: 'red' }}>{correctWord}</P>
+            </Div>
+            <Div style={{ marginTop: '70px' }}> ✓ 다음을 입력해주세요 : </Div>
+            <Div style={{ marginTop: '10px', color: 'red' }}>{correctWord}</Div>
             <Input
               style={{ marginTop: '20px', fontSize: '14px', textAlign: 'center' }}
               value={inputValue}
               onChange={handleInputChange}
             />
-            {showValidationMessage && <P style={{ marginTop: '10px' }}>{showValidationMessage}</P>}
+            {showValidationMessage && <Div style={{ marginTop: '10px' }}>{showValidationMessage}</Div>}
           </ContentWrap>
           <BottomButton
             style={{

@@ -7,7 +7,7 @@ export async function fetchMyPosts() {
 }
 
 // 마이페이지 - 내 작성글 삭제
-export async function deletePost(id: number) {
+export async function deletePost(id: string) {
   const { data } = await apiClient.delete(`/posts/${id}`);
   return data;
 }

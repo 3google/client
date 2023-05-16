@@ -6,7 +6,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-
+import Link from 'next/link';
+import { SERVER_URL } from 'common/constants';
 // help me! 코치님 handleDeletePost 함수를 생성하여 삭제 진행을 하려고 하는데, 삭제가 되지 않습니다. 무슨 이유일까요?
 interface Row {
   id: number;
@@ -22,6 +23,7 @@ export default function MyContents() {
   const visibleRows = contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
   const { data: fetchedPosts, refetch } = useGetPosts();
 
+  //코드리뷰 - 훅 제거해라,,근데 그럼 조회가 안되는디,,?
   useEffect(() => {
     if (fetchedPosts && fetchedPosts.data) {
       setContents(fetchedPosts.data);
@@ -37,10 +39,11 @@ export default function MyContents() {
   };
 
   // 게시글 삭제
-  const handleDeletePost = async (id: number) => {
+  const handleDeletePost = async (id: any) => {
     try {
       await deletePost(id);
       refetch(); // 게시물 삭제 후 목록을 다시 불러오기
+      console.log('성공'); //TODO 성공이 뜨는데 왜 안 사라지지..?
     } catch (error) {
       console.error('Failed to delete the post:', error);
     }
@@ -71,7 +74,9 @@ export default function MyContents() {
                   </TableCell>
                   <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
                   <TableCell style={{ textAlign: 'center' }}>
-                    {row.content.length > 20 ? row.content.slice(0, 20) + '...' : row.content}
+                    <Link href={`${SERVER_URL}/`}>
+                      {row.content.length > 20 ? row.content.slice(0, 20) + '...' : row.content}
+                    </Link>
                   </TableCell>
                   <TableCell style={{ textAlign: 'right' }}>
                     <Tooltip

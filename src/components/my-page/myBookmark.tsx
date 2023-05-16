@@ -1,3 +1,4 @@
+'use Client';
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import IconButton from '@mui/material/IconButton';

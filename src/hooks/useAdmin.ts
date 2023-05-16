@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchUserPosts, getUserPost, deleteUser, fetchUserComments } from '@http/admin/admin';
+import { fetchUserPosts, getUserPost, deleteUser, getUserComments, deleteUserComment } from '@http/admin/admin';
 
 export function useUserPosts(board_type: string, emotion: string) {
   return useQuery(['posts', { board_type, emotion }], () => fetchUserPosts({ board_type, emotion }));
@@ -32,12 +32,25 @@ export const useDeleteUser = () => {
   return mutation;
 };
 
+//TODO
 // 유저 댓글 조회
-export function useUserComments(board_type: string, emotion: string) {
-  const {
-    data: comments,
-    isLoading,
-    error,
-  } = useQuery(['comments', { board_type, emotion }], () => fetchUserComments({ board_type, emotion }));
-  return { comments, isLoading, error };
+// export function useUserComments(user_id: string, board_type: string, emotion: string) {
+//   const { data, isSuccess, error } = useQuery(['userComments', { user_id, board_type, emotion }], () =>
+//     getUserComments( user_id, board_type, emotion ),
+//   );
+//   return { data, isSuccess, error };
+// }
+export function useUserComments(userId: string, boardType: string, emotion: string) {
+  const { data, isSuccess, error } = useQuery(['userComments', userId, boardType, emotion], () =>
+    getUserComments(userId, boardType, emotion),
+  );
+  return { data, isSuccess, error };
 }
+// export function useDeleteUserComment() {
+//   const queryClient = useQueryClient();
+//   return useMutation(deleteUserComment, {
+//     onSuccess: () => {
+//       queryClient.invalidateQueries(['userComments']);
+//     },
+//   });
+// }
