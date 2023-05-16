@@ -29,6 +29,10 @@ export default function RecommendList() {
   };
   console.log('버튼 클릭:', emotion);
 
+  if (posts == undefined) {
+    return <div> 포스트 없음.</div>;
+  }
+
   return (
     <div style={{ marginTop: '2%' }}>
       <FormControl>
@@ -60,7 +64,7 @@ export default function RecommendList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts?.map((posts, index) => (
+            {posts.map((posts, index) => (
               <TableRow key={posts.data.id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>{posts.data.emotion}</TableCell>

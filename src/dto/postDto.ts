@@ -4,7 +4,7 @@ export interface PostDto {
   title: string;
   content: string;
   author: string;
-  board_type: string;
+  boardType: string;
   emotion: number;
   created_at: number;
   bookmarksCnt: number;

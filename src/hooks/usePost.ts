@@ -2,14 +2,8 @@ import { fetchPost, fetchPosts } from '@http/posts';
 import { useQuery } from '@tanstack/react-query';
 
 //전체 게시물 조회
-export function usePosts(board_type: string, emotion: string) {
-  const {
-    data: posts,
-    isLoading,
-    error,
-  } = useQuery(['posts', { board_type, emotion }], () => fetchPosts({ board_type, emotion }));
-
-  return { posts, isLoading, error };
+export function usePosts(boardType: string, emotion: string) {
+  return useQuery(['posts', { boardType, emotion }], () => fetchPosts({ boardType, emotion }));
 }
 
 //특정 게시물 조회
