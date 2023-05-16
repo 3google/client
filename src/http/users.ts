@@ -28,7 +28,7 @@ export const updateProfile = async (nickname: string, profileImage: File) => {
   formData.append('nickname', nickname);
   formData.append('profileImage', profileImage);
 
-  const response = await apiClient.patch('/users', formData, {
+  const response = await apiClient.patch('/users/account', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

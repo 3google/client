@@ -17,12 +17,12 @@ export default function Board() {
 
   // const { fetchedPosts, refetch } = useUserPosts();
   //help me! 코치님, board_type와 emotion은 설정을 어떻게 해야 할까요
-  const { data: fetchedPosts, isLoading, error } = useUserPosts(board_type, emotion);
-  useEffect(() => {
-    if (fetchedPosts) {
-      setPosts(fetchedPosts);
-    }
-  }, [fetchedPosts]);
+  // const { data: fetchedPosts, isLoading, error } = useUserPosts(board_type, emotion);
+  // useEffect(() => {
+  //   if (fetchedPosts) {
+  //     setPosts(fetchedPosts);
+  //   }
+  // }, [fetchedPosts]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -78,48 +78,50 @@ export default function Board() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-              const currentIndex = page * rowsPerPage + index + 1;
-              return (
-                <TableRow key={row.id} hover>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {currentIndex}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.nickname}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.emotion}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.content}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.commentsCnt}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.bookmarksCnt}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {row.created_at}
-                  </TableCell>
-                  <TableCell align="center" style={{ textAlign: 'center' }}>
-                    <Tooltip
-                      title="게시글 삭제"
-                      color="error"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeletePost(row.id);
-                      }}
-                    >
-                      <IconButton>
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {posts
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map(({ id, nickname, emotion, content, commentsCnt, bookmarksCnt, created_at }, index) => {
+                const currentIndex = page * rowsPerPage + index + 1;
+                return (
+                  <TableRow key={id} hover>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {currentIndex}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {nickname}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {emotion}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {content}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {commentsCnt}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {bookmarksCnt}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      {created_at}
+                    </TableCell>
+                    <TableCell align="center" style={{ textAlign: 'center' }}>
+                      <Tooltip
+                        title="게시글 삭제"
+                        color="error"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeletePost(id);
+                        }}
+                      >
+                        <IconButton>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
