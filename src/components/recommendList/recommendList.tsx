@@ -16,10 +16,10 @@ import Link from 'next/link';
 import { BOARD_TYPE } from '@common/constants';
 
 export default function RecommendList() {
-  const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
-  //TODO: 🍎 emotion.emotion이라고 하면 여기서 에러는 안나지만 undefined로 전달됨
-  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion.emotion);
-  console.log('해당 posts들이 들어오고있어요', posts);
+  const [emotion, setEmotion] = useState('HAPPINESS'); //HAPPINESS라고 디폴트값
+  //TODO: 🍎
+  const { data: posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion);
+  console.log('해당 posts들이 들어오고있어요', posts); //들어옴
 
   //감정 카테고리가 바뀔 때마다
   const handleEmotionChange = (e: any) => {

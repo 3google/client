@@ -25,7 +25,7 @@ export default function PublicList() {
   };
 
   //TODO: 🍎이부분도 recommendList.tsx와 같은 문제
-  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
+  const { data: posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
   console.log('해당 posts들이 들어오고있어요', posts);
 
   if (posts == undefined) {
