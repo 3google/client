@@ -40,9 +40,9 @@ function SimpleDialog(props: SimpleDialogProps) {
     //TODO:선택한 값을 저장하기
   };
 
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
+  // const handleListItemClick = (value: string) => {
+  //   onClose(value);
+  // };
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -50,13 +50,13 @@ function SimpleDialog(props: SimpleDialogProps) {
       <List sx={{ pt: 0 }}>
         {bookmarkCategory.map((bookmarkCategory) => (
           <ListItem disableGutters>
-            <ListItemButton onClick={() => handleListItemClick(bookmarkCategory)} key={bookmarkCategory}>
+            <ListItemButton onClick={() => onClose(bookmarkCategory)} key={bookmarkCategory}>
               <ListItemText primary={bookmarkCategory} />
             </ListItemButton>
           </ListItem>
         ))}
         <ListItem disableGutters>
-          <ListItemButton autoFocus onClick={() => handleListItemClick('addBookmarkCategory')}>
+          <ListItemButton autoFocus onClick={() => onClose('addBookmarkCategory')}>
             <ListItemAvatar>
               <Avatar>
                 <AddIcon />
@@ -93,7 +93,7 @@ export default function Post({
     console.log(value); //선택한 그룹이 콘솔에 찍힘
   };
 
-  const hadleClickDelete = async () => {
+  const handleClickDelete = async () => {
     if (window.confirm('해당 게시물을 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.')) {
       //TODO: 게시글 삭제api요청
       // await deletePost({post.id});
@@ -101,18 +101,22 @@ export default function Post({
       router.push('/recommend-board');
     }
   };
-  const hadleClickUpdate = () => {
+  const handleClickUpdate = () => {
     // alert('게시물을 수정하시겠습니까?');
     router.push(`/recommend-board/edit-post`);
   };
+
+  if (post === undefined || !post) {
+    return <div>게시물이 존재하지 않습니다</div>;
+  }
 
   return (
     <div>
       <PostContainer>
         <Image src="/red-cross.png" alt="빨간십자가처방전" width={100} height={100} />
 
-        <h2>{post?.title}</h2>
-        <div>{post?.author}</div>
+        <h2>{post.data.title}</h2>
+        <div>{post.data.author}</div>
 
         <div className="button-container">
           <Tooltip title="북마크 저장">
@@ -124,18 +128,18 @@ export default function Post({
           <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
           <Tooltip title="게시물 수정">
             <IconButton>
-              <EditIcon onClick={hadleClickUpdate} />
+              <EditIcon onClick={handleClickUpdate} />
             </IconButton>
           </Tooltip>
           <Tooltip title="게시물 삭제">
             <IconButton>
-              <DeleteIcon onClick={hadleClickDelete} />
+              <DeleteIcon onClick={handleClickDelete} />
             </IconButton>
           </Tooltip>
         </div>
         <Text height={'300px'}>
           <h3>내용</h3>
-          <div className="text"> {post?.content}</div>
+          <div className="text"> {post.data.content}</div>
         </Text>
         <CommentsBox />
       </PostContainer>

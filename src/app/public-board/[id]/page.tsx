@@ -10,10 +10,19 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { usePost } from '@hooks/usePost';
 
-export default function Post({ params, searchParams }: { params: { id: number }; searchParams?: { [key: string]: string | string[] | undefined } }) {
+export default function Post({
+  params,
+  searchParams,
+}: {
+  params: { id: number };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   console.log(params); //=================={id: '4'}이런식으로 찍힘 -> 서버에 연결하면 뜰것같음
   const { post } = usePost(params.id);
   // console.log(post);
+  if (post === undefined) {
+    return <div>게시물이 존재하지 않습니다</div>;
+  }
   //
   //
   return (
@@ -21,8 +30,8 @@ export default function Post({ params, searchParams }: { params: { id: number };
       <PostContainer>
         <Image src="/red-cross.png" alt="빨간십자가처방전" width={100} height={100} />
         <div>
-          <h2>{post?.title}</h2>
-          {post?.author}
+          <h2>{post.data.title}</h2>
+          {post.data.author}
           <div className="button-container">
             <Tooltip
               title="북마크 저장"
@@ -41,7 +50,7 @@ export default function Post({ params, searchParams }: { params: { id: number };
         </div>
         <Text height={'200px'}>
           <h3>텍스트</h3>
-          <div className="text">{post?.content}</div>
+          <div className="text">{post.data.content}</div>
         </Text>
         <AiText />
         <CommentsBox />

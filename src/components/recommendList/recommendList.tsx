@@ -17,6 +17,9 @@ import { BOARD_TYPE } from '@common/constants';
 
 export default function RecommendList() {
   const [emotion, setEmotion] = useState({ emotion: 'HAPPINESS' }); //HAPPINESS라고 디폴트값
+  //TODO: 🍎 emotion.emotion이라고 하면 여기서 에러는 안나지만 undefined로 전달됨
+  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion.emotion);
+  console.log('해당 posts들이 들어오고있어요', posts);
 
   //감정 카테고리가 바뀔 때마다
   const handleEmotionChange = (e: any) => {
@@ -26,9 +29,9 @@ export default function RecommendList() {
   };
   console.log('버튼 클릭:', emotion);
 
-  //TODO: 🍎emotion-> 에러나는데 이렇게 해야 emotion전달되고 개발자도구 보면 url에 알맞게 들어와요,,(왜,,) emotion.emotion이라고 해야 에러 안남
-  const { posts } = usePosts(BOARD_TYPE.RECOMMEND, emotion);
-  console.log('해당 posts들이 들어오고있어요', posts);
+  if (posts == undefined) {
+    return <div> 포스트 없음.</div>;
+  }
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -61,7 +64,7 @@ export default function RecommendList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts?.map((posts, index) => (
+            {posts.map((posts, index) => (
               <TableRow key={posts.data.id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>{posts.data.emotion}</TableCell>

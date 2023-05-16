@@ -24,9 +24,13 @@ export default function PublicList() {
     console.log('버튼 클릭:', emotion); //감정 카테고리를 바꿀때마다 콘솔로 확인
   };
 
-  //TODO: 이부분도 recommendList.tsx와 같은 문제
-  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion);
+  //TODO: 🍎이부분도 recommendList.tsx와 같은 문제
+  const { posts } = usePosts(BOARD_TYPE.PUBLIC, emotion.emotion);
   console.log('해당 posts들이 들어오고있어요', posts);
+
+  if (posts == undefined) {
+    return <div> 포스트 없음.</div>;
+  }
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -59,7 +63,7 @@ export default function PublicList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts?.map((posts, index) => (
+            {posts.map((posts, index) => (
               <TableRow key={posts.data.id} hover>
                 <TableCell style={{ textAlign: 'center' }}>{index + 1}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>{posts.data.emotion}</TableCell>
