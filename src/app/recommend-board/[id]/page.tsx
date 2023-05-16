@@ -22,53 +22,49 @@ import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from 'next/navigation';
 import { deletePost } from '@http/posts';
 
-export interface SimpleDialogProps {
-  open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
-}
+// export interface SimpleDialogProps {
+//   open: boolean;
+//   selectedValue: string;
+//   onClose: (value: string) => void;
+// }
 
-//TODO:나의 북마크 카테고리 api로 가져오기
-const bookmarkCategory = ['내 북마크1', '내 북마크2'];
+// //나의 북마크 카테고리 api로 가져오기
+// const bookmarkCategory = ['내 북마크1', '내 북마크2'];
 
-//북마크 누르면 뜨는 모달창 컴포넌트!
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
+// //북마크 누르면 뜨는 모달창 컴포넌트!
+// function SimpleDialog(props: SimpleDialogProps) {
+//   const { onClose, selectedValue, open } = props;
 
-  const handleClose = () => {
-    onClose(selectedValue);
-    //TODO:선택한 값을 저장하기
-  };
+//   const handleClose = () => {
+//     onClose(selectedValue);
+//     //선택한 값을 저장하기
+//   };
 
-  // const handleListItemClick = (value: string) => {
-  //   onClose(value);
-  // };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>나의 북마크 그룹을 선택해주세요!</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        {bookmarkCategory.map((bookmarkCategory) => (
-          <ListItem disableGutters>
-            <ListItemButton onClick={() => onClose(bookmarkCategory)} key={bookmarkCategory}>
-              <ListItemText primary={bookmarkCategory} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-        <ListItem disableGutters>
-          <ListItemButton autoFocus onClick={() => onClose('addBookmarkCategory')}>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="그룹 추가하기" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Dialog>
-  );
-}
+//   return (
+//     <Dialog onClose={handleClose} open={open}>
+//       <DialogTitle>나의 북마크 그룹을 선택해주세요!</DialogTitle>
+//       <List sx={{ pt: 0 }}>
+//         {bookmarkCategory.map((bookmarkCategory) => (
+//           <ListItem disableGutters>
+//             <ListItemButton onClick={() => onClose(bookmarkCategory)} key={bookmarkCategory}>
+//               <ListItemText primary={bookmarkCategory} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//         <ListItem disableGutters>
+//           <ListItemButton autoFocus onClick={() => onClose('addBookmarkCategory')}>
+//             <ListItemAvatar>
+//               <Avatar>
+//                 <AddIcon />
+//               </Avatar>
+//             </ListItemAvatar>
+//             <ListItemText primary="그룹 추가하기" />
+//           </ListItemButton>
+//         </ListItem>
+//       </List>
+//     </Dialog>
+//   );
+// }
 
 export default function Post({
   params,
@@ -82,15 +78,21 @@ export default function Post({
   console.log('post', post);
   const router = useRouter();
 
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(bookmarkCategory[1]);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
-    console.log(value); //선택한 그룹이 콘솔에 찍힘
+  // const [open, setOpen] = React.useState(false);
+  // const [selectedValue, setSelectedValue] = React.useState(bookmarkCategory[1]);
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = (value: string) => {
+  //   setOpen(false);
+  //   setSelectedValue(value);
+  //   console.log(value); //선택한 그룹이 콘솔에 찍힘
+  // };
+
+  //TODO: 누르면 바로 그냥 추가되게 변경
+  const handleClickBookmark = async () => {
+    // await 북마크 추가
+    alert('북마크에 추가되었습니다.');
   };
 
   const handleClickDelete = async () => {
@@ -121,11 +123,11 @@ export default function Post({
         <div className="button-container">
           <Tooltip title="북마크 저장">
             <IconButton>
-              <BookmarkBorderIcon onClick={handleClickOpen} />
+              <BookmarkBorderIcon onClick={handleClickBookmark} />
               {/* <BookmarkIcon /> */}
             </IconButton>
           </Tooltip>
-          <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+          {/* <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} /> */}
           <Tooltip title="게시물 수정">
             <IconButton>
               <EditIcon onClick={handleClickUpdate} />

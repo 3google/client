@@ -7,6 +7,7 @@ import { SERVER_URL } from '../../common/constants';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { apiClient } from '@http/apiClient';
+import DefaultProfileImage from '/public/profile-img.png';
 
 export const Navigation = () => {
   const router = useRouter();
@@ -67,7 +68,7 @@ export const Navigation = () => {
           </Link>
           <div className="dropdown">
             <Image
-              src={user.profileImg}
+              src={user.profileImg ?? DefaultProfileImage}
               className="nav-user-profile-dropbtn"
               width={50}
               height={50}
