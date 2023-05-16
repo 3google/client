@@ -1,3 +1,4 @@
+'use Client';
 import React, { useState, useEffect } from 'react';
 import { useGetMyComments } from '@hooks/useGetPost';
 import { deleteMyComment } from '@http/mypage/myComments';
@@ -6,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-// TODO 댓글 내용이 화면에 보이는게 좋겠다
+// WAIT 백엔드 아직 준비 안됨
 interface Row {
   id: number;
   date: string;

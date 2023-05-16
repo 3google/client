@@ -1,10 +1,17 @@
 'use client';
 import * as React from 'react';
 import Tabs from '@mui/base/Tabs';
-import { AdminInfoContainer, Avatar, AdminInfoText, StyledTabsList, StyledTab, StyledTabPanel } from '../../styles/admin.styled';
-import Users from '../../components/admin/users';
-import Contents from '../../components/admin/contents';
-import Comments from '../../components/admin/comments';
+import {
+  AdminInfoContainer,
+  Avatar,
+  AdminInfoText,
+  StyledTabsList,
+  StyledTab,
+  StyledTabPanel,
+} from '@styles/admin.styled';
+import Users from '@components/admin/users';
+import Contents from '@components/admin/contents';
+import Comments from '@components/admin/comments';
 
 interface AdminInfo {
   name: string;
@@ -46,7 +53,7 @@ export default function AdminPage() {
         <input type="file" ref={imageRef} accept="image/*" style={{ display: 'none' }} onChange={handleChangeFile} />
         <Avatar src={profileImage as string} onClick={handleAvatarClick} />
         <AdminInfoText>
-          <h2>{userInfo.name}</h2>
+          <div>{userInfo.name}</div>
         </AdminInfoText>
       </AdminInfoContainer>
       <Tabs defaultValue={1}>

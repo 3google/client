@@ -5,19 +5,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { useUserComments } from '@hooks/useAdmin';
-import { deleteUSerComment } from '@http/admin/admin';
+import { deleteUserComment } from '@http/admin/admin';
 import { AdminDto } from '@dto/adminDto';
-
+import { BOARD_TYPE } from '@common/constants';
 //TODO 댓글 내용은 어디서 불러와야 하지?
+//TODO 백엔드 준비되면 테스트 해보자..아직 완성은 아닌듯
+import { Link } from 'react-router-dom';
 
 export default function Comments() {
   const [posts, setPosts] = useState<AdminDto[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-  const { comments, isLoading, error } = useUserComments('board_type_value', 'emotion_value');
+  // const { comments, isLoading, error } = useUserComments('board_type_value', 'emotion_value');
+  const { data: comments, isSuccess, error } = useUserComments('user_id_value', 'board_type_value', 'emotion_value');
   const handleDeleteComment = async (id: string) => {
     try {
-      await deleteUSerComment(id);
+      await deleteUserComment(id);
       alert('댓글이 삭제되었습니다.');
     } catch (error) {
       alert('댓글 삭제에 실패했습니다. 다시 시도해 주세요.');
@@ -79,7 +82,7 @@ export default function Comments() {
                     {row.title}
                   </TableCell>
                   <TableCell align="center" style={{ textAlign: 'center' }}>
-                    {/* {row.comment} */}
+                    {row.comment}
                   </TableCell>
                   <TableCell align="center" style={{ textAlign: 'center' }}>
                     <Tooltip
@@ -102,7 +105,6 @@ export default function Comments() {
         </Table>
       </TableContainer>
       <StyledTablePagination
-        // component="div"
         count={posts.length}
         page={page}
         onPageChange={handleChangePage}

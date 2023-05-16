@@ -18,7 +18,12 @@ export const useUpdateProfile = () => {
 };
 
 // 마이페이지 프로필 이미지, 닉네임, 소셜 조회
+// export const useUserProfile = () => {
+//   const query = useQuery(['userProfile'], getUserProfile);
+//   return query;
+// };
+
 export const useUserProfile = () => {
-  const query = useQuery(['userProfile'], getUserProfile);
-  return query;
+  const { data: user } = useQuery(['userProfile'], getUserProfile);
+  return user;
 };

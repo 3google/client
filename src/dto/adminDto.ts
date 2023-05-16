@@ -7,4 +7,5 @@ export interface AdminDto {
   created_at: string;
   deleted_at: string;
   title: string;
+  comment: string;
 }
