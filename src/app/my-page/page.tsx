@@ -54,7 +54,7 @@ export default function MyPage() {
         });
         console.log('프로필 이미지 업데이트 완료');
       }
-
+      //
       // 닉네임 업데이트가 필요한 경우
       if (inputRef.current.value !== user?.nickname) {
         await updateNickname(inputRef.current.value);
