@@ -7,7 +7,7 @@ import { deleteUser } from '@http/users';
 import { useRouter } from 'next/navigation';
 
 // 회원탈퇴 API 완료 -> 탈퇴 안됨 ㅠㅠ -> 탈퇴완료!
-
+//TODO 회원탈퇴,..저는 되는데 지원님이 테스트하면 안되요..
 interface AccountDeleteProps {
   open: boolean;
   handleClose: () => void;

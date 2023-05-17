@@ -4,10 +4,15 @@ import { UserResponseDto } from '@dto/responseDto';
 
 export async function fetchUser() {
   const { data } = await apiClient.get<UserResponseDto>('/users/mypage');
-  console.log('data', data);
   // if ()
   return data.data;
 }
+// 마이페이지 프로필 이미지, 닉네임, 소셜 조회
+export const getUserProfile = async () => {
+  const response = await apiClient.get('/users/mypage');
+  console.log(response.data);
+  return response.data;
+};
 
 // HERE 회원탈퇴
 export const deleteUser = async () => {
@@ -20,25 +25,24 @@ export const deleteUser = async () => {
   }
 };
 
-// WAIT 1-프로필 업데이트
-// nickname과 profileImage를 받아 FormData 객체를 생성하고, 이를 사용해 서버에 PUT 요청
+// WAIT 프로필 이미지
+// profileImage를 받아 FormData 객체를 생성하고, 이를 사용해 서버에 PUT 요청
 // Content-Type 헤더를 multipart/form-data로 설정
-export const updateProfile = async (nickname: string, profileImage: File) => {
+export const updateImgProfile = async (profileImage: File) => {
   const formData = new FormData();
-  formData.append('nickname', nickname);
   formData.append('profileImage', profileImage);
 
-  const response = await apiClient.patch('/users/account', formData, {
+  const response = await apiClient.post('/users/account/profileImage', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+  console.log(response.data);
   return response.data;
 };
 
-// 마이페이지 프로필 이미지, 닉네임, 소셜 조회
-export const getUserProfile = async () => {
-  const response = await apiClient.get('/users/mypage');
-  console.log(response.data);
+//프로필 닉네임 조회
+export const updateNickname = async (nickname: string) => {
+  const response = await apiClient.patch('/users/account/nickname', { nickname });
   return response.data;
 };

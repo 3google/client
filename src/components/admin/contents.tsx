@@ -7,17 +7,20 @@ import Tooltip from '@mui/material/Tooltip';
 import { PostDto } from '@dto/postDto';
 import { deletePost } from '@http/admin/admin';
 import { useUserPosts } from '@hooks/useAdmin';
+import { BOARD_TYPE } from '@common/constants';
 
 export default function Board() {
   const [posts, setPosts] = useState<PostDto[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-
+  const [boardType, setBoardType] = useState<keyof typeof BOARD_TYPE>();
+  const [emotion, setEmotion] = useState<string>();
+  // public recommend
   //TODO 5/15~
 
   // const { fetchedPosts, refetch } = useUserPosts();
   //help me! 코치님, board_type와 emotion은 설정을 어떻게 해야 할까요
-  // const { data: fetchedPosts, isLoading, error } = useUserPosts(board_type, emotion);
+  const { data: fetchedPosts, isLoading, error } = useUserPosts({ boardType, emotion });
   // useEffect(() => {
   //   if (fetchedPosts) {
   //     setPosts(fetchedPosts);

@@ -6,3 +6,8 @@ export const BOARD_TYPE = {
   PUBLIC: 'PUBLIC',
   PRIVATE: 'PRIVATE',
 } as const;
+
+export const SOCIAL_TYPE = {
+  KAKAO: 'KAKAO',
+  NAVER: 'NAVER',
+} as const;

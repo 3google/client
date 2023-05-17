@@ -1,4 +1,4 @@
-import { PostResponseDto } from '@dto/responseDto';
+import { PostResponseDto, ResponseDto } from '@dto/responseDto';
 import { apiClient } from './apiClient';
 
 //게시판 전체 조회
@@ -6,9 +6,10 @@ export async function fetchPosts({ board_type, emotion }: { board_type: string; 
   console.log('board_type:', board_type);
   console.log('emotion:', emotion);
 
-  const { data: posts } = await apiClient.get<PostResponseDto[]>(`/posts?board_type=${board_type}&emotion=${emotion}`);
-  // console.log(posts);
-  return posts;
+  const {
+    data: { data },
+  } = await apiClient.get<ResponseDto<PostResponseDto[]>>(`/posts?boardType=${board_type}&emotion=${emotion}`);
+  return data;
 }
 
 //특정 게시물 조회

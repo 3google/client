@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import Link from 'next/link';
 
 // WAIT 백엔드 아직 준비 안됨
 interface Row {
@@ -20,6 +21,7 @@ export default function MyComments() {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const { data: fetchedComments, refetch } = useGetMyComments();
+  const visibleRows = comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   useEffect(() => {
     if (fetchedComments && fetchedComments.data) {
@@ -44,7 +46,6 @@ export default function MyComments() {
       console.error('Failed to delete the comment:', error);
     }
   };
-  const visibleRows = comments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -54,8 +55,8 @@ export default function MyComments() {
             <TableRow>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>No</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>작성일자</TableCell>
-              <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>감정</TableCell>
-              <TableCell style={{ fontWeight: 'bold', textAlign: 'center' }}>제목</TableCell>
+              {/* <TableCell style={{ fontWeight: 'bold', textAlign: 'left' }}>감정</TableCell> */}
+              <TableCell style={{ fontWeight: 'bold', textAlign: 'center' }}>댓글</TableCell>
               <TableCell style={{ fontWeight: 'bold', textAlign: 'right' }}></TableCell>
             </TableRow>
           </TableHead>
@@ -66,9 +67,11 @@ export default function MyComments() {
                 <TableRow key={row.id} hover>
                   <TableCell style={{ textAlign: 'left' }}>{currentIndex}</TableCell>
                   <TableCell style={{ textAlign: 'left' }}>{row.date}</TableCell>
-                  <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell>
+                  {/* <TableCell style={{ textAlign: 'left' }}>{row.emotion}</TableCell> */}
                   <TableCell style={{ textAlign: 'center' }}>
-                    {row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}
+                    <Link href={`/public-board/${row.id}`}>
+                      {row.content.length > 40 ? row.content.slice(0, 40) + '...' : row.content}
+                    </Link>
                   </TableCell>
                   <TableCell style={{ textAlign: 'right' }}>
                     <Tooltip

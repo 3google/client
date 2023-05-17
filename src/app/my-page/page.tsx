@@ -17,13 +17,11 @@ import AccountDelete from '@components/my-page/accountDelete';
 import Contents from '@components/my-page/myContents';
 import Comments from '@components/my-page/myComments';
 import Bookmark from '@components/my-page/myBookmark';
-import { useUpdateProfile, useUserProfile } from '@hooks/useUserProfile';
-import { useUser } from '@hooks/useUser';
+import { useUserProfile, useUpdateProfileImg, useUpdateNickname } from '@hooks/useUserProfile';
+import { SOCIAL_TYPE } from '@common/constants';
 
-// help me! 코치님, renderSocial 함수를 설정하였지만 소셜 로그인의 이미지를 받아오지 못하는것 같아요 ㅠㅠ) 도와주세욥
-// 코치님, 내가 작성한 게시판을 조회하여 클릭하게 되면 게시판의 상세페이지로 넘어가게 하려고 합니다. 마이페이지의 게시판에서 어떻게 연결해야 할까요? 감이 안옵니다 ㅠㅠ)
-
-// TODO 코드 에러 잡기
+// help me! 코드 작동 O, 수정하고 리프래쉬하면 수정한거 사라짐, 네비게이션 사진 안바뀜
+// TODO 프론트에서 이미지, 닉네임 변경되어 완료까지 뜨는데,,백엔드에서 변경이 되지 않음,, console 400 error 발생
 export default function MyPage() {
   const [value, setValue] = React.useState(0);
   const imageRef = React.useRef<HTMLInputElement>(null);
@@ -32,62 +30,50 @@ export default function MyPage() {
 
   // 백엔드에서 social 정보 string으로 받아옴
   // 사용자 정보가 로드되면 해당 정보를 사용하여 상태를 설정
-  // TODO 프로필 ㄹ이미지가 안 따라와...
-  const { user } = useUser();
-  const [nickname, setNickname] = useState(user?.nickname ?? '길동씨');
-  const [profileImg, setProfileImg] = useState(user?.profileImg ?? '/profile-img.png');
-  const [social, setSocial] = useState(user?.social ?? '');
+  const { user } = useUserProfile();
+  const [nickname, setNickname] = useState<string>();
+  const [profileImg, setProfileImg] = useState<string>();
+  const [platform, setPlatform] = useState<keyof typeof SOCIAL_TYPE>();
 
-  // 프로필 업데이트
-  const updateProfileMutation = useUpdateProfile();
+  React.useEffect(() => {
+    if (!user) return;
+    setNickname(user?.nickname ?? '길동씨');
+    setProfileImg(user?.profileImg ?? '/profile-img.png');
+    setPlatform(user?.platform);
+  }, [user]);
 
-  // 소셜 로그인 이미지를 렌더링하는 함수
-  const renderSocial = (social: string) => {
-    if (!social) return null;
-    if (social === 'KAKAO') {
-      return <img src="/kakao-icon.png" alt="Kakao" width="60" height="30" />;
-    } else if (social === 'NAVER') {
-      return <img src="/naver-icon.png" alt="Naver" width="60" height="30" />;
-    } else {
-      return null;
-    }
-  };
-
-  // 유저 새 프로필 이미지를 선택하면 호출되는 이벤트 핸들러, FileReader를 사용해 선택된 이미지 파일을 읽고 프리뷰를 표시
-  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          setProfileImg(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // 사용자가 프로필 변경 사항을 저장하려고 할 때 호출되는 이벤트 핸들러
-  // updateProfileMutation.mutateAsync를 호출하여 프로필 업데이트 요청을 보냄
-  // updateProfileMutation.mutateAsync: React Query에서 제공하는 기능, 비동기적으로 mutation을 실행하는 메서드,
-  // mutation: 서버의 데이터를 변경
+  const { mutate: updateNickname } = useUpdateNickname();
+  const { mutate: updateProfileImg, isLoading: isUpdating } = useUpdateProfileImg();
   const handleCompleteClick = async () => {
-    if (inputRef.current && imageRef.current?.files?.length) {
-      const newNickname = inputRef.current?.value ?? nickname;
-      const newProfileImg = imageRef.current.files[0] ?? null;
-      try {
-        await updateProfileMutation.mutateAsync({
-          nickname: newNickname,
-          profileImg: newProfileImg,
+    if (!inputRef.current || !nickname) return;
+    try {
+      // 프로필 이미지 업데이트가 필요한 경우
+      if (imageRef.current?.files?.[0]) {
+        await updateProfileImg({
+          profileImg: imageRef.current.files[0],
         });
-        setIsEditing(false);
-        setNickname(newNickname);
-        console.log('수정완료');
-      } catch (error) {
-        console.error(error);
-        alert('프로필 업데이트에 실패했습니다.');
+        console.log('프로필 이미지 업데이트 완료');
       }
+
+      // 닉네임 업데이트가 필요한 경우
+      if (inputRef.current.value !== user?.nickname) {
+        await updateNickname(inputRef.current.value);
+        console.log('닉네임 업데이트 완료');
+      }
+
+      // 프로필 업데이트가 성공하면 isEditing을 false로 설정하여 수정 모드를 종료
+      alert('프로필 수정이 완료되었습니다.');
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating profile:', error);
     }
+  };
+
+  // 이미지 변경 이벤트를 처리하는 함수
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (!files) return;
+    setProfileImg(URL.createObjectURL(files[0]));
   };
 
   // modal
@@ -139,13 +125,13 @@ export default function MyPage() {
               style={{ padding: '5px', borderRadius: '5px', border: '1px solid gray', fontSize: '14px' }}
             />
           ) : (
-            // 수정 중이 아닐 때 h2 요소
             <div>{nickname}</div>
           )}
           {/* 수정 버튼 */}
           {isEditing ? (
-            <Button onClick={handleCompleteClick}>
-              <EditIcon color="action" />
+            <Button onClick={handleCompleteClick} disabled={isUpdating}>
+              {isUpdating ? 'Updating...' : <EditIcon color="action" />}
+              {/* <EditIcon color="action" /> */}
             </Button>
           ) : (
             <Button style={{ margin: '-10px' }} onClick={handleEditClick}>
@@ -153,8 +139,11 @@ export default function MyPage() {
             </Button>
           )}
         </UserInfoText>
-        {/* 로그인 이미지 */}
-        <div>{renderSocial(social)}</div>
+        {platform && SOCIAL_TYPE.KAKAO ? (
+          <img src="/kakao-icon.png" alt="Kakao" width="60" height="30" />
+        ) : (
+          <img src="/naver-icon.png" alt="Naver" width="60" height="30" />
+        )}
       </UserInfoContainer>
       <Tabs value={value} onChange={handleChange}>
         <StyledTabsList>

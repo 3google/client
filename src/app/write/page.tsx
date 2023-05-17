@@ -37,6 +37,8 @@ export default function Write() {
   const [saveModalInputValue, setSaveModalInputValue] = useState('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [shareModalInputValue, setShareModalInputValue] = useState('');
+  const [selectedDataIndex, setSelectedDataIndex] = useState<number>();
+
   // 모달 열기/닫기 핸들러
   const handleSaveModalOpen = () => {
     setSaveModalOpen(true);
@@ -74,6 +76,27 @@ export default function Write() {
     }, 1000); // 1초 후에 답변 출력
   };
 
+  const handleClickSaveEmotion = (selectedIndex: number) => {
+    setSelectedDataIndex(selectedIndex);
+    handleSaveModalOpen();
+  };
+  console.log('selectedDataIndex', selectedDataIndex);
+  const handleSaveEmotion = () => {
+    if (!selectedDataIndex) return;
+
+    const myText = messages[selectedDataIndex - 1];
+    const aiText = messages[selectedDataIndex];
+    const title = saveModalInputValue;
+    console.log({
+      myText,
+      aiText,
+      title,
+    });
+    // axios post 연결 (서버 규격에 맞게 만들어주세요.)
+    // axios....finally {
+    //   handleSaveModalClose()
+    // }
+  };
   return (
     <BodyBox>
       <ChatContainer>
@@ -87,10 +110,10 @@ export default function Write() {
                     {message.text}
                   </MessageText>
                   {/* 질문자의 메시지가 아닌 경우에만 버튼 컨테이너 렌더링 */}
-                  {!message.isUser && (
+                  {!message.isUser && index !== 0 && (
                     <ButtonsContainer>
                       <Tooltip title="저장하기">
-                        <Button size="small" onClick={handleSaveModalOpen}>
+                        <Button size="small" onClick={() => handleClickSaveEmotion(index)}>
                           <SaveAltIcon color="action" />
                         </Button>
                       </Tooltip>
@@ -127,6 +150,7 @@ export default function Write() {
         onClose={handleSaveModalClose}
         value={saveModalInputValue}
         onChange={handleSaveModalInputChange}
+        onSave={handleSaveEmotion}
       />
       <ShareModal
         open={shareModalOpen}

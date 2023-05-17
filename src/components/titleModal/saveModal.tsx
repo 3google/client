@@ -7,9 +7,10 @@ interface SaveModalProps {
   onClose: () => void;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSave: () => void;
 }
 
-export const SaveModal: React.FC<SaveModalProps> = ({ open, onClose, value, onChange }) => {
+export const SaveModal: React.FC<SaveModalProps> = ({ open, onClose, value, onChange, onSave }) => {
   return (
     <ModalStyledDialog open={open} onClose={onClose}>
       <DialogTitle>처방전 제목</DialogTitle>
@@ -28,7 +29,7 @@ export const SaveModal: React.FC<SaveModalProps> = ({ open, onClose, value, onCh
           취소
         </Button>
         <Button
-          onClick={onClose}
+          onClick={onSave}
           disabled={!value}
           style={value ? { backgroundColor: '#673ab7', color: 'white' } : { backgroundColor: 'white', color: 'gray' }}
         >

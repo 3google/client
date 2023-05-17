@@ -4,10 +4,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import BookmarkEditIcon from '@mui/icons-material/Edit';
 
-// help me! 코치님 북마크에 카테고리를 추가하고 수정, 삭제하는 코드를 구현하고 싶은데 참고할만한 자료가 있을까요?
+//TODO 태아불애 북마크 조회, 해제 하는 것만 진행하기로함
 interface Row {
   id: number;
   date: string;
@@ -16,22 +14,11 @@ interface Row {
   bookmarked: boolean;
 }
 
-const rows: Row[] = [
-  {
-    id: 1,
-    date: '2023-01-01',
-    emotion: '슬픔',
-    title: '게시글제목',
-    bookmarked: false,
-  },
-];
-
 export default function Bookmark() {
-  const [posts, setPosts] = useState<Row[]>(rows);
+  const [bookmark, setBookmark] = useState<Row[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [editedTitle, setEditedTitle] = useState<string>('');
+  const visibleRows = bookmark.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -43,24 +30,9 @@ export default function Bookmark() {
   };
 
   const handleDeletePost = (id: number) => {
-    const updatedPosts = posts.filter((row) => row.id !== id);
-    setPosts(updatedPosts);
+    const updatedPosts = bookmark.filter((row) => row.id !== id);
+    setBookmark(updatedPosts);
   };
-
-  const handleBookmark = (id: number) => {
-    setPosts(posts.map((post) => (post.id === id ? { ...post, bookmarked: !post.bookmarked } : post)));
-  };
-
-  const handleEdit = (id: number) => {
-    setEditingId(id);
-  };
-
-  const handleSave = (id: number) => {
-    setPosts(posts.map((post) => (post.id === id ? { ...post, title: editedTitle } : post)));
-    setEditingId(null);
-  };
-
-  const visibleRows = posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length;
 
   return (
     <div style={{ marginTop: '2%' }}>
@@ -76,7 +48,7 @@ export default function Bookmark() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+            {bookmark.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               const currentIndex = page * rowsPerPage + index + 1;
               return (
                 <TableRow key={row.id} hover>
@@ -98,28 +70,6 @@ export default function Bookmark() {
                         <BookmarkRemoveIcon />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip
-                      title="북마크 추가"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleBookmark(row.id);
-                      }}
-                    >
-                      <IconButton>
-                        <BookmarkAddIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip
-                      title="북마크 수정"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(row.id);
-                      }}
-                    >
-                      <IconButton>
-                        <BookmarkEditIcon />
-                      </IconButton>
-                    </Tooltip>
                   </TableCell>
                 </TableRow>
               );
@@ -128,7 +78,7 @@ export default function Bookmark() {
         </Table>
       </TableContainer>
       <TablePagination
-        count={posts.length}
+        count={bookmark.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

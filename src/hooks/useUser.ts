@@ -22,9 +22,3 @@ export function useUser() {
 
   return { user };
 }
-//TODO 마이 컨텐츠
-// export function useMyContents() {
-//   const { data: myContents, isLoading, error } = useQuery(['myContents'], fetchMyContents);
-
-//   return { myContents, isLoading, error };
-// }

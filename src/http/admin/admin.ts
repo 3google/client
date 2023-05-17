@@ -1,18 +1,27 @@
 import { apiClient } from '../apiClient';
 import { AdminDto } from '@dto/adminDto';
 
-// 어드민 게시판 조회
-// export async function fetchUserPosts({ board_type, emotion }: { board_type: string; emotion: string }) {
-//   const { data: posts } = await apiClient.get<AdminDto[]>(`/posts?board_type=${board_type}&emotion=${emotion}`);
-//   console.log(posts);
-//   return posts;
-// }
+const removeEmptyKey = (data: Record<any, any>) => {
+  const newObj = Object.entries(data).reduce((acc: Record<any, any>, [key, value]) => {
+    if (typeof value === 'number' || typeof value === 'boolean') throw Error();
+
+    let result;
+
+    value ? (result = { ...acc, [key]: value }) : (result = acc);
+
+    return result;
+  }, {});
+  return Object.keys(newObj).length === 0 ? null : newObj;
+};
+
 // 유저 게시글 조회
-export async function fetchUserPosts({ board_type, emotion }: { board_type: string; emotion: string }) {
-  const { data: posts } = await apiClient.get<AdminDto[]>(`/posts`, { params: { board_type, emotion } });
+export async function fetchUserPosts({ boardType, emotion }: { boardType?: string; emotion?: string }) {
+  const params = removeEmptyKey({ boardType, emotion });
+  const { data: posts } = await apiClient.get<AdminDto[]>(`/posts`, params ? { params } : {});
   console.log(posts);
   return posts;
 }
+
 // 유저 게시글 삭제 ??
 export const deletePost = async (id: string) => {
   const response = await apiClient.delete(`/admin/posts/${id}`);
@@ -35,23 +44,7 @@ export const deleteUser = async (id: string) => {
   const response = await apiClient.delete(`/admin/users/${id}`);
   return response.data;
 };
-///TODO 백엔드랑 맞춰봐야함
-// 유저가 작성한 댓글 조회
-// export async function getUserComments({
-//   user_id,
-//   board_type,
-//   emotion,
-// }: {
-//   user_id: string;
-//   board_type: string;
-//   emotion: string;
-// }) {
-//   const { data: comments } = await apiClient.get<AdminDto[]>(
-//     `/comments?user_id=${user_id}&board_type=${board_type}&emotion=${emotion}`,
-//   );
-//   // console.log(response.data);
-//   return comments;
-// }
+
 export const getUserComments = async (userId: string, boardType: string, emotion: string) => {
   const response = await apiClient.get(`/comments/?user_id=${userId}&board_type=${boardType}&emotion=${emotion}`);
   return response.data;
@@ -61,8 +54,3 @@ export const deleteUserComment = async (id: string) => {
   const response = await apiClient.delete(`/comments/${id}`);
   return response.data;
 };
-
-export async function fetchPosts({ board_type, emotion }: { board_type: string; emotion: string }) {
-  console.log('board_type', board_type);
-  console.log('emotion', emotion);
-}

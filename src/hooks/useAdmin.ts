@@ -1,20 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchUserPosts, getUserPost, deleteUser, getUserComments, deleteUserComment } from '@http/admin/admin';
 
-export function useUserPosts(board_type: string, emotion: string) {
-  return useQuery(['posts', { board_type, emotion }], () => fetchUserPosts({ board_type, emotion }));
+export function useUserPosts({ boardType, emotion }: { boardType?: string; emotion?: string }) {
+  return useQuery(['posts', { boardType, emotion }], () => fetchUserPosts({ boardType, emotion }));
 }
-// 유저 게시글 조회
-// export function useUserPosts(board_type: string, emotion: string) {
-//   const {
-//     data: posts,
-//     isLoading,
-//     error,
-//   } = useQuery(['posts', { board_type, emotion }], () => fetchUserPosts({ board_type, emotion }));
-
-//   return { posts, isLoading, error };
-// }
-
 // ! 유저조회
 export function useUserPost() {
   const { data, isSuccess } = useQuery(['userPost'], getUserPost);
