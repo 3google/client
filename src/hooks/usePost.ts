@@ -1,6 +1,5 @@
 import { fetchPost, fetchPosts } from '@http/posts';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 
 //전체 게시물 조회
 export function usePosts(board_type: string, emotion: string) {

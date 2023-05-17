@@ -22,53 +22,49 @@ import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from 'next/navigation';
 import { deletePost } from '@http/posts';
 
-export interface SimpleDialogProps {
-  open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
-}
+// export interface SimpleDialogProps {
+//   open: boolean;
+//   selectedValue: string;
+//   onClose: (value: string) => void;
+// }
 
-//TODO:나의 북마크 카테고리 api로 가져오기
-const bookmarkCategory = ['내 북마크1', '내 북마크2'];
+// //나의 북마크 카테고리 api로 가져오기
+// const bookmarkCategory = ['내 북마크1', '내 북마크2'];
 
-//북마크 누르면 뜨는 모달창 컴포넌트!
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
+// //북마크 누르면 뜨는 모달창 컴포넌트!
+// function SimpleDialog(props: SimpleDialogProps) {
+//   const { onClose, selectedValue, open } = props;
 
-  const handleClose = () => {
-    onClose(selectedValue);
-    //TODO:선택한 값을 저장하기
-  };
+//   const handleClose = () => {
+//     onClose(selectedValue);
+//     //선택한 값을 저장하기
+//   };
 
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>나의 북마크 그룹을 선택해주세요!</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        {bookmarkCategory.map((bookmarkCategory) => (
-          <ListItem disableGutters>
-            <ListItemButton onClick={() => handleListItemClick(bookmarkCategory)} key={bookmarkCategory}>
-              <ListItemText primary={bookmarkCategory} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-        <ListItem disableGutters>
-          <ListItemButton autoFocus onClick={() => handleListItemClick('addBookmarkCategory')}>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="그룹 추가하기" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Dialog>
-  );
-}
+//   return (
+//     <Dialog onClose={handleClose} open={open}>
+//       <DialogTitle>나의 북마크 그룹을 선택해주세요!</DialogTitle>
+//       <List sx={{ pt: 0 }}>
+//         {bookmarkCategory.map((bookmarkCategory) => (
+//           <ListItem disableGutters>
+//             <ListItemButton onClick={() => onClose(bookmarkCategory)} key={bookmarkCategory}>
+//               <ListItemText primary={bookmarkCategory} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//         <ListItem disableGutters>
+//           <ListItemButton autoFocus onClick={() => onClose('addBookmarkCategory')}>
+//             <ListItemAvatar>
+//               <Avatar>
+//                 <AddIcon />
+//               </Avatar>
+//             </ListItemAvatar>
+//             <ListItemText primary="그룹 추가하기" />
+//           </ListItemButton>
+//         </ListItem>
+//       </List>
+//     </Dialog>
+//   );
+// }
 
 export default function Post({
   params,
@@ -82,18 +78,24 @@ export default function Post({
   console.log('post', post);
   const router = useRouter();
 
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(bookmarkCategory[1]);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
-    console.log(value); //선택한 그룹이 콘솔에 찍힘
+  // const [open, setOpen] = React.useState(false);
+  // const [selectedValue, setSelectedValue] = React.useState(bookmarkCategory[1]);
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = (value: string) => {
+  //   setOpen(false);
+  //   setSelectedValue(value);
+  //   console.log(value); //선택한 그룹이 콘솔에 찍힘
+  // };
+
+  //TODO: 누르면 바로 그냥 추가되게 변경
+  const handleClickBookmark = async () => {
+    // await 북마크 추가
+    alert('북마크에 추가되었습니다.');
   };
 
-  const hadleClickDelete = async () => {
+  const handleClickDelete = async () => {
     if (window.confirm('해당 게시물을 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.')) {
       //TODO: 게시글 삭제api요청
       // await deletePost({post.id});
@@ -101,41 +103,45 @@ export default function Post({
       router.push('/recommend-board');
     }
   };
-  const hadleClickUpdate = () => {
+  const handleClickUpdate = () => {
     // alert('게시물을 수정하시겠습니까?');
     router.push(`/recommend-board/edit-post`);
   };
+
+  if (post === undefined || !post) {
+    return <div>게시물이 존재하지 않습니다</div>;
+  }
 
   return (
     <div>
       <PostContainer>
         <Image src="/red-cross.png" alt="빨간십자가처방전" width={100} height={100} />
 
-        <h2>{post?.title}</h2>
-        <div>{post?.author}</div>
+        <h2>{post.data.title}</h2>
+        <div>{post.data.author}</div>
 
         <div className="button-container">
           <Tooltip title="북마크 저장">
             <IconButton>
-              <BookmarkBorderIcon onClick={handleClickOpen} />
+              <BookmarkBorderIcon onClick={handleClickBookmark} />
               {/* <BookmarkIcon /> */}
             </IconButton>
           </Tooltip>
-          <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+          {/* <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} /> */}
           <Tooltip title="게시물 수정">
             <IconButton>
-              <EditIcon onClick={hadleClickUpdate} />
+              <EditIcon onClick={handleClickUpdate} />
             </IconButton>
           </Tooltip>
           <Tooltip title="게시물 삭제">
             <IconButton>
-              <DeleteIcon onClick={hadleClickDelete} />
+              <DeleteIcon onClick={handleClickDelete} />
             </IconButton>
           </Tooltip>
         </div>
         <Text height={'300px'}>
           <h3>내용</h3>
-          <div className="text"> {post?.content}</div>
+          <div className="text"> {post.data.content}</div>
         </Text>
         <CommentsBox />
       </PostContainer>
